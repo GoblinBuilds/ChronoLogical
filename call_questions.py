@@ -19,7 +19,7 @@ def main():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            read_question()
+            display_question()
         elif choice == "2":
             break
         else:
