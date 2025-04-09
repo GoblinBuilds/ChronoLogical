@@ -13,7 +13,7 @@ def generate_a_start_timeline():
     append the starting year into the list: timeline_list
 
     return:
-    int: the starting year in the timeline
+    int: the starting year in the timelines
     """
     starting_year = randint(1,2025)
     timeline_list.append(starting_year)
