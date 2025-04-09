@@ -38,7 +38,7 @@ def get_combined_timeline_list():
 
     return sorted(combined_timeline, key=lambda e: e["date"])
 
-def is_valid_placement(combined_timeline, entry, index):
+def check_valid_placement(combined_timeline, entry, index):
     """
     Checks if a new entry can be placed at the specified index in the list,
     based on the date value of the entry and the surrounding elements in the list. It checks:
@@ -113,7 +113,7 @@ def get_user_input(combined_timeline):
 
     return input(f"Choose a position, from index 0 to {len(combined_timeline)} to place the date (For example if you want to place it in 1st position write 0). Write: 'lock' to lock the timeline, or 'quit' to quit: ").strip().lower()
 
-def handle_lock():
+def lock_unlocked_list():
     """
     Handles the locking of the timeline if there are lockable objects.
     
@@ -147,11 +147,11 @@ def handle_user_input(user_input, combined_timeline, current_entry):
         print("bay bay")
         return False
     elif user_input == 'lock':
-        return handle_lock()
+        return lock_unlocked_list()
     elif user_input.isdigit():
         index = int(user_input)
         if 0 <= index <= len(combined_timeline):
-            if is_valid_placement(combined_timeline, current_entry, index):
+            if check_valid_placement(combined_timeline, current_entry, index):
                 UNLOCKED_LIST.append(current_entry)
                 print("Correct placement!")
             else:
@@ -207,4 +207,5 @@ def main():
             break
         else:
             print("Invalid choice, try again.")
+
 main()
