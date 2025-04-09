@@ -1,0 +1,156 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background-color: black;
+    position: relative;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.timeline {
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+    width: 100%;
+    height: 15px; 
+    background-color: rgb(155, 155, 155); 
+}
+
+.card_container {
+    position: absolute;
+    bottom: calc(20%);
+    left: 50%;
+    display: flex;
+    gap: 60px;
+    transform: translateX(-50%);
+}
+
+.card {
+    width: 150px;
+    height: 200px;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    padding: 10px;
+    text-align: center;
+    border: solid 3px rgb(104, 104, 104);
+}
+
+.card h2 {
+    margin: 0;
+    font-size: 2em;
+}
+
+.card p {
+    margin: 5px 0 0;
+    font-size: 1em;
+}
+
+.card:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.2);
+}
+
+.middle_card {
+    position: absolute;
+    top: 37%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.question_header {
+    position: absolute;
+    top: 5%;
+    color: white;
+    font-size: 5em;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
+}
+
+.menu_container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.menu_button {
+    background-color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+.dropdown_menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown_menu a:hover {
+    background-color: #ddd;
+}
+
+.stats_container {
+    position: absolute;
+    bottom: 10%;
+    color: white;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+@media only screen and (max-width: 1280px) {
+    body {
+        font-size: 14px; 
+    }
+
+    .question_header {
+        font-size: 3em; 
+    }
+
+    .card {
+        width: 110px; 
+        height: 150px; 
+    }
+
+    .score_container {
+        font-size: 1.2em; 
+        width: 70%; 
+    }
+
+    .card_container {
+        bottom: calc(22%); 
+        left: 50%;
+        gap: 35px;
+    }
+    .middle_card {
+        position: absolute;
+        top: 33%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

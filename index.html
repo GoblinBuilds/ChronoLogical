@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChronoLogical</title>
+    <link href="style.css" rel="stylesheet" />
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("dropdown_menu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="menu_container">
+        <button class="menu_button" onclick="toggleMenu()">Menu button</button>
+        <div class="dropdown_menu" id="dropdown_menu">
+            <a href="#">Option 1</a>
+            <a href="#">Option 2</a>
+            <a href="#">Option 3</a>
+        </div>
+    </div>
+
+    <h1 class="question_header">Question to be answerd?</h1>
+    <div class="timeline"></div>
+    <div class="card_container">
+        <div class="card">
+            <h2>1969</h2>
+            <p>This might be question 11?</p>
+        </div>
+        <div class="card">
+            <h2>1989</h2>
+            <p>This might be question 2?</p>
+        </div>
+        <div class="card">
+            <h2>2001</h2>
+            <p>This might be question 3?</p>
+        </div>
+    </div>
+    <div class="card middle_card">
+        <p>Answer card</p>
+    </div>
+    <div class="stats_container">
+        <span>Score: 123123</span>
+        <span>3/3 Lives</span>
+    </div>
+</body>
+</html>
