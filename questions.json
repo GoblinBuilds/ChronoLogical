@@ -1,22 +1,18 @@
 [
-    {
-        "year": 2000,
-        "question": "When did the first phone with a camera release?"
-    },
-    {
-        "year": 2005,
-        "question": "When did power rangers lost galaxy release?"
-    },
-    {
-        "year": 2010,
-        "question": "When did the samsung galaxy s3 release?"
-    },
-    {
-        "year": 2014,
-        "question": "When did monster inc release?"
-    },
-    {
-        "year": 2004,
-        "question": "When did Ipod first launch?"
-    }
-]
+    { "ID": "Q1", "date": 1776, "question": "When was the Declaration of Independence signed?" },
+    { "ID": "Q2", "date": 1945, "question": "When did World War II end?" },
+    { "ID": "Q3", "date": 1066, "question": "When was the Battle of Hastings?" },
+    { "ID": "Q4", "date": 2001, "question": "When did 9/11 happen?" },
+    { "ID": "Q5", "date": 1492, "question": "When did Columbus reach the Americas?" },
+    { "ID": "Q6", "date": 1776, "question": "When was the United States founded?" },
+    { "ID": "S1", "date": 1523, "question": "When did Gustav Vasa become King of Sweden?" },
+    { "ID": "S2", "date": 1809, "question": "When did Sweden adopt a new constitution limiting royal power?" },
+    { "ID": "S3", "date": 1632, "question": "When did King Gustavus Adolphus die in the Battle of Lützen?" },
+    { "ID": "S4", "date": 1905, "question": "When did the union between Sweden and Norway dissolve?" },
+    { "ID": "S5", "date": 1718, "question": "When was King Charles XII of Sweden killed?" },
+    { "ID": "S6", "date": 1995, "question": "When did Sweden join the European Union?" },
+    { "ID": "S7", "date": 1986, "question": "When was Swedish Prime Minister Olof Palme assassinated?" },
+    { "ID": "S8", "date": 1520, "question": "When did the Stockholm Bloodbath occur?" },
+    { "ID": "S9", "date": 1944, "question": "When did Sweden grant asylum to Danish Jews during WWII?" },
+    { "ID": "S10", "date": 1897, "question": "When was the Stockholm World's Fair held?" }
+  ]
