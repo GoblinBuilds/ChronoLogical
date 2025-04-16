@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ChronoLogical</title>
+        <link href="static/style.css" rel="stylesheet" />
+        <script>
+            function toggleMenu() {
+                var menu = document.getElementById("dropdown_menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            }
+        </script>
+
+        {% block head %} {% endblock %}
+    </head>
+    <body>
+        {% block body %} {% endblock %}
+    </body>
+</html>
