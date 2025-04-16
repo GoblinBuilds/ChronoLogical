@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
 
@@ -6,6 +6,9 @@ app = Flask(__name__)
 def index():
     """
     Route handler for the home page.
+
+    Args:
+        None
 
     Returns:
         A rendered HTML template for the index page.
