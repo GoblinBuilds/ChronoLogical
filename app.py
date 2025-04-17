@@ -1,4 +1,7 @@
 from flask import Flask, render_template, url_for
+# url_for is used in base.html to generate URLs for static files
+
+from game_logic import *
 
 app = Flask(__name__)
 
