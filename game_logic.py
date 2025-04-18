@@ -71,19 +71,26 @@ def print_question(current_entry):
         print(f"\n Question: {current_entry['question']}")
         # print(f" date to place: {current_entry['date']}")
 
-def get_available_questions(all_questions, old_questions):
+def get_available_questions(all_questions, old_questions, category=None):
     """
     Filters the list of all questions to return only those that haven't been used.
     
     Args:
         all_questions (list): List of all available questions.
         old_questions: IDs of questions already used.
-    
+        category (str): Filter by category, if needed, manual input needed.
     Returns:
         list: A list of available questions.
     """
 
-    return [entry for entry in all_questions if entry["ID"] not in old_questions]
+    filtered_questions = [entry for entry in all_questions if entry["ID"] not in old_questions]
+    
+    if category:
+        filtered_questions = [entry for entry in filtered_questions if entry.get("category", "").lower() == category.lower()]
+    
+    return filtered_questions
+
+
 
 def display_question_and_timeline(current_entry, combined_timeline):
     """
@@ -214,6 +221,60 @@ def game_logic():
         if not handle_user_input(user_input, combined_timeline, current_entry):
             break
 
+
+def game_logic_with_categories():
+    """
+    Runs the main game loop for categories.
+    Allows different categories to be selected.
+    """
+    old_questions = set()
+    all_questions = read_question()  
+
+    while True:
+
+        available = get_available_questions(all_questions, old_questions, category=None)
+        duplicate = set()
+        print("\nAvailable categories:")
+        for entry in available:
+            if entry["category"] not in duplicate:
+                print(entry["category"])
+                duplicate.add(entry["category"])
+        category = input("Choose a category(or write 'quit' to return to menu): ").lower()
+        if category == "sport":
+            available = get_available_questions(all_questions, old_questions, category="Sport")
+            game_logic_for_categories(available, old_questions)
+
+        elif category == "history":
+            available = get_available_questions(all_questions, old_questions, category="History")
+            game_logic_for_categories(available, old_questions)
+
+        elif category == "quit":
+            print("bay bay")
+            return main()
+
+
+def game_logic_for_categories(available, old_questions):
+
+    """
+    Runs the main game loop for categories.
+    """
+
+    while True:   
+        if not available:
+            print("\nThere's no questions left. Add more!")
+            break
+
+        current_entry = random.choice(available)
+        old_questions.add(current_entry["ID"])
+
+        combined_timeline = get_combined_timeline_list()
+        display_question_and_timeline(current_entry, combined_timeline)
+
+        user_input = get_user_input(combined_timeline)
+        
+        if not handle_user_input(user_input, combined_timeline, current_entry):
+            break
+
 def main():
     """
     This is the main function that runs the program and display the menu.
@@ -222,13 +283,16 @@ def main():
     while True:
         print("*"*15)
         print("1. Display a question")
-        print("2. Exit")
+        print("2. Choose a category")
+        print("3. Exit")
 
         choice = input("Enter your choice: ")
 
         if choice == "1":
             game_logic()
         elif choice == "2":
+            game_logic_with_categories()
+        elif choice == "3":
             break
         else:
             print("Invalid choice, try again.")
