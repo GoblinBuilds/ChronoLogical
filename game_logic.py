@@ -163,7 +163,6 @@ def handle_user_input(user_input, combined_timeline, current_entry):
     
     return True
 
-count = 0 #counter of lifeline
 
 def lifeline():
     """
@@ -173,18 +172,21 @@ def lifeline():
         None
 
     Returns:
-        One return used return to main function to restart the game.
+        None
     """
-    global count #global variable to keep track of the number of lifelines used
+    if not hasattr(lifeline, "count"):
+        lifeline.count = 0
 
-    if count < 2:
+    if lifeline.count < 2:
         print("The date doesn't fit at that position.")
-        count += 1
-        print(f"You have 3/{3 - count} lifelines left.")
+        lifeline.count += 1
+        print(f"You have 3/{3 - lifeline.count} lifelines left.")
     else:
         print("\nYou have no lifelines left. Game Over.")
         print("Going back to menu.")
         main()
+
+lifeline.count = 0
     
 def game_logic():
     """
