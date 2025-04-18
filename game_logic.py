@@ -214,40 +214,41 @@ def game_logic_with_categories():
             if entry["category"] not in duplicate:
                 print(entry["category"])
                 duplicate.add(entry["category"])
-        category = input("Choose a category: ").lower()
+        category = input("Choose a category(or write 'quit' to return to menu): ").lower()
         if category == "sport":
             available = get_available_questions(all_questions, old_questions, category="Sport")
+            game_logic_for_categories(available, old_questions)
 
-            if not available:
-                print("\nThere's no questions left. Add more!")
-                break 
-            current_entry = random.choice(available)
-            old_questions.add(current_entry["ID"])
-
-            combined_timeline = get_combined_timeline_list()
-            display_question_and_timeline(current_entry, combined_timeline)
-
-            user_input = get_user_input(combined_timeline)
-
-            if not handle_user_input(user_input, combined_timeline, current_entry):
-                break
         elif category == "history":
             available = get_available_questions(all_questions, old_questions, category="History")
+            game_logic_for_categories(available, old_questions)
 
-            if not available:
-                print("\nThere's no questions left. Add more!")
-                break 
-            current_entry = random.choice(available)
-            old_questions.add(current_entry["ID"])
+        elif category == "quit":
+            print("bay bay")
+            return main()
 
-            combined_timeline = get_combined_timeline_list()
-            display_question_and_timeline(current_entry, combined_timeline)
 
-            user_input = get_user_input(combined_timeline)            
-      
-            if not handle_user_input(user_input, combined_timeline, current_entry):
-                break
+def game_logic_for_categories(available, old_questions):
 
+    """
+    Runs the main game loop for categories.
+    """
+
+    while True:   
+        if not available:
+            print("\nThere's no questions left. Add more!")
+            break
+
+        current_entry = random.choice(available)
+        old_questions.add(current_entry["ID"])
+
+        combined_timeline = get_combined_timeline_list()
+        display_question_and_timeline(current_entry, combined_timeline)
+
+        user_input = get_user_input(combined_timeline)
+        
+        if not handle_user_input(user_input, combined_timeline, current_entry):
+            break
 
 def main():
     """
