@@ -177,13 +177,14 @@ def lifeline():
     """
     global count #global variable to keep track of the number of lifelines used
 
-    if count < 3:
+    if count < 2:
         print("The date doesn't fit at that position.")
         count += 1
         print(f"You have 3/{3 - count} lifelines left.")
-        if count == 3:
-            print("You have no lifelines left.")
-            return main()
+    else:
+        print("\nYou have no lifelines left. Game Over.")
+        print("Going back to menu.")
+        main()
     
 def game_logic():
     """
