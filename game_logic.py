@@ -155,7 +155,7 @@ def handle_user_input(user_input, combined_timeline, current_entry):
                 UNLOCKED_LIST.append(current_entry)
                 print("Correct placement!")
             else:
-                print("The date doesn't fit at that position.")
+                lifeline()
         else:
             print("Please enter a number between 0 and the length of the timeline.")
     else:
@@ -163,6 +163,31 @@ def handle_user_input(user_input, combined_timeline, current_entry):
     
     return True
 
+
+def lifeline():
+    """
+    This function handles the life of the player and end the game if the player has no lifelines left.
+    
+    Args:
+        None
+
+    Returns:
+        None
+    """
+    if not hasattr(lifeline, "count"):
+        lifeline.count = 0
+
+    if lifeline.count < 2:
+        print("The date doesn't fit at that position.")
+        lifeline.count += 1
+        print(f"You have 3/{3 - lifeline.count} lifelines left.")
+    else:
+        print("\nYou have no lifelines left. Game Over.")
+        print("Going back to menu.")
+        main()
+
+lifeline.count = 0
+    
 def game_logic():
     """
     Runs the main game loop
