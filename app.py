@@ -17,10 +17,7 @@ def index():
         A rendered HTML template for the index page.
         And displays a question from the available questions.
     """
-    old_questions = set()
-    all_questions = read_question() 
-    current_entry = get_available_questions(all_questions, old_questions)
-    return render_template('index.html', available_question = print_question(current_entry))
+    return render_template('index.html')
 
 
 if __name__ == "__main__":
