@@ -202,6 +202,9 @@ def handle_user_input(user_input, combined_timeline, current_entry):
     
     return True
 
+"""
+HÄR SKA EN FUNKTION SOM KOLLAR HUR MÅNGA KORT SOM EXISTERAR I TIDSLINJEN OCH PRINTAR UT SUMMAN I POÄNG (SCORE)
+"""
 
 def lifeline():
     """
