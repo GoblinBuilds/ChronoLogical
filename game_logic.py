@@ -78,7 +78,7 @@ def check_valid_placement(combined_timeline, entry, index):
     - If the list is empty: its is considered valid.
     - If the index is 0: the entry's date must be less than or equal to the date of the first element.
     - If the index is at the end of the list: the entry date must be greater than or equal to the date of the last element.
-    - If the index is in the middle of the list: the entry date must be between the dates sorrunding elements.
+    - If the index is in the middle of the list: the entry date must be between the dates surrounding elements.
 
     Args:
         combined_timeline (list): A list of dictionaries, checks values at date.
@@ -205,7 +205,7 @@ def handle_user_input(user_input, combined_timeline, current_entry):
 
 def lifeline():
     """
-    This function handles the life of the player and end the game if the player has no lifelines left.
+    This function handles the life of the player and end the game if the player has no lives left.
     
     Args:
         None
@@ -219,9 +219,9 @@ def lifeline():
     if lifeline.count < 2:
         print("The date doesn't fit at that position.")
         lifeline.count += 1
-        print(f"You have 3/{3 - lifeline.count} lifelines left.")
+        print(f"You have 3/{3 - lifeline.count} lives left.")
     else:
-        print("\nYou have no lifelines left. Game Over.")
+        print("\nYou have no lives left. Game Over.")
         print("Going back to menu.")
         main()
 
@@ -239,7 +239,7 @@ def game_logic():
         available = get_available_questions(all_questions, old_questions)
         
         if not available:
-            print("\nThere's no questions left. Add more! And you win i guess?")
+            print("\nThere're no questions left. And you win I guess?")
             break
 
         current_entry = random.choice(available)
@@ -293,7 +293,7 @@ def game_logic_for_categories(available, old_questions):
 
     while True:   
         if not available:
-            print("\nThere's no questions left. Add more!")
+            print("\nThere're no questions left.")
             break
 
         current_entry = random.choice(available)
