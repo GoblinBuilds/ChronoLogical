@@ -1,6 +1,37 @@
 import json
 import random
 
+
+#######################################################
+"""Test modules!"""
+# def read_question(): #Test Regular values
+#     return [
+#         {"ID": 1, "date": 0, "question": "When was year 0?", "category": "History"},
+#         {"ID": 2, "date": 1000, "question": "When was year 1000?", "category": "History"},
+#         {"ID": 3, "date": 2000, "question": "When was year 2000?", "category": "History"},
+#         {"ID": 4, "date": 3000, "question": "When was year 3000?", "category": "Sport"},
+#     ]
+
+# def read_question(): #Test Negative values
+#     return [
+#         {"ID": 1, "date": -1, "question": "When was year -1?", "category": "History"},
+#         {"ID": 2, "date": -1000, "question": "When was year -1000?", "category": "History"},
+#         {"ID": 3, "date": 2000, "question": "When was year 2000?", "category": "History"},
+#         {"ID": 4, "date": 0, "question": "When was year 0?", "category": "History"},
+#     ]
+
+# def read_question(): #Test big numbers, and same numbers
+#     return [
+#         {"ID": 1, "date": -999999999999999, "question": "When was year -999999999999999?", "category": "History"},
+#         {"ID": 2, "date": 999999999999999, "question": "When was year 999999999999999?", "category": "History"},
+#         {"ID": 3, "date": 2000, "question": "When was year 2000?", "category": "History"},
+#         {"ID": 4, "date": 2000, "question": "When was year 2000 again?", "category": "History"},
+#         {"ID": 5, "date": 0, "question": "When was year 0?", "category": "History"},
+#         {"ID": 6, "date": 0, "question": "When was year 0?", "category": "History"},
+#     ]
+"""End of Test modules!"""
+######################################################
+
 def read_question():
     """
     This function reads a JSON file and returns the data as a list.
@@ -17,6 +48,7 @@ def read_question():
         return data
     except FileNotFoundError:
         print("File not found. Please check the file path.")
+
 
 #Global variables to store lists.
 UNLOCKED_LIST = []
@@ -207,7 +239,7 @@ def game_logic():
         available = get_available_questions(all_questions, old_questions)
         
         if not available:
-            print("\nThere's no questions left. Add more!")
+            print("\nThere's no questions left. Add more! And you win i guess?")
             break
 
         current_entry = random.choice(available)

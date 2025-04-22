@@ -4,7 +4,8 @@ ChronoLogical programming camp
 # Github
 https://github.com/GoblinBuilds/ChronoLogical
 
-# To start simply run the program with terminal.
+# To start simply run the program game_logic with terminal.
+# To run frontend run app.py and click the IP adress that shows up in terminal 
 
 # V1.0 Can now run a basic version or the game in terminal. 
 
@@ -18,3 +19,12 @@ https://github.com/GoblinBuilds/ChronoLogical
     Categories
 
     Flask connection
+
+
+# Testing:
+    There are test data at start och game_logic file. Just comment out the read_questions() functions you dont want to run
+
+    You can run pytest to check valid inputs quickly(theres not alot of inputs so it wont show alot). 
+        pip install pytest # install the testmodule
+        python -m pytest # Run this i terminal and it will test all available inputs
+        python -m pytest --html=report.html #For a html report
