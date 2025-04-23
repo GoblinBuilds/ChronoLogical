@@ -20,6 +20,23 @@ https://github.com/GoblinBuilds/ChronoLogical
 
     Flask connection
 
+-------------------------------------------------------------
+
+# to fix
+    Fix issue where lives decrease in the wrong order
+
+    Add prompt for invalid input instead of showing an error message
+
+    Ensure typing lock gives a new question as expected
+
+    Suppress error messages when input is incorrect
+
+    Reset answers properly when restarting the game after lives run out
+
+    Clear saved answers when the player types quit
+
+    Fix bug where typing exit requires entering the command twice to actually quit the game
+
 
 # Testing:
     There are test data at start och game_logic file. Just comment out the read_questions() functions you dont want to run
