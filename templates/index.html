@@ -5,7 +5,7 @@
 
 {% block body %}
 <div class="menu_container">
-    <button class="menu_button" onclick="toggleMenu()">{Menu button}</button>
+    <button class="menu_button" onclick="toggleMenu()">Menu button</button>
     <div class="dropdown_menu" id="dropdown_menu">
         <a href="#">Option 1</a>
         <a href="#">Option 2</a>
@@ -13,7 +13,8 @@
     </div>
 </div>
 
-<h1 class="question_header">Question to be answered?</h1>
+<h1 class="question_header"> {{ question }}</h1>
+
 <div class="timeline"></div>
 <div class="card_container">
     <div class="card">
@@ -34,6 +35,6 @@
 </div>
 <div class="stats_container">
     <span>Score: 123123</span>
-    <span>3/3 Lives</span>
+    <span>Lives</span>
 </div>
 {% endblock %}
