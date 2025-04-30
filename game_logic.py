@@ -104,7 +104,7 @@ def print_question(current_entry):
         print(f"\n Question: {current_entry['question']}")
         # print(f" date to place: {current_entry['date']}")
 
-def get_available_questions(all_questions, old_questions, category=None):
+def get_available_questions(all_questions, old_questions, category=True):
     """
     Filters the list of all questions to return only those that haven't been used.
     
@@ -119,7 +119,7 @@ def get_available_questions(all_questions, old_questions, category=None):
     filtered_questions = [entry for entry in all_questions if entry["ID"] not in old_questions]
     
     if category:
-        filtered_questions = [entry for entry in filtered_questions if entry.get("category", "").lower() == category.lower()]
+        filtered_questions = [entry for entry in filtered_questions if entry.get("category", "").lower()]
     
     return filtered_questions
 
@@ -138,7 +138,9 @@ def display_question_and_timeline(current_entry, combined_timeline):
     """
 
     print_question(current_entry)
-    print(f"\nTimeline: {[entry['date'] for entry in combined_timeline]}")
+    print(f"\nUnlocked Timeline: {[entry['date'] for entry in UNLOCKED_LIST]}")
+    locked_dates = [entry['date'] for sublist in LOCKED_LIST for entry in sublist]
+    print(f"\nLocked Timeline: {locked_dates}")
 
 def get_user_input(combined_timeline):
     """
@@ -151,7 +153,7 @@ def get_user_input(combined_timeline):
         str: The user's input: either index, lock, or quit
     """
 
-    return input(f"Choose a position, from index 0 to {len(combined_timeline)} to place the date (For example if you want to place it in 1st position write 0). Write: 'lock' to lock the timeline, or 'quit' to quit: ").strip().lower()
+    return input(f"\nChoose a position, from index 0 to {len(combined_timeline)} to place the date (For example if you want to place it in 1st position write 0). Write: 'lock' to lock the timeline, or 'quit' to quit: ").strip().lower()
 
 def lock_unlocked_list():
     """
@@ -164,6 +166,9 @@ def lock_unlocked_list():
     if UNLOCKED_LIST:
         LOCKED_LIST.append(UNLOCKED_LIST.copy())
         UNLOCKED_LIST.clear()
+        sorted_locked = sorted([entry for sublist in LOCKED_LIST for entry in sublist], key=lambda e: e["date"])
+        LOCKED_LIST.clear()
+        LOCKED_LIST.append(sorted_locked)
         print("Timeline locked!")
         return True
     else:
@@ -185,7 +190,8 @@ def handle_user_input(user_input, combined_timeline, current_entry):
 
     if user_input == 'quit':
         print("bay bay")
-        return False
+        reset_data()
+        return main()
     elif user_input == 'lock':
         return lock_unlocked_list()
     elif user_input.isdigit():
@@ -193,6 +199,7 @@ def handle_user_input(user_input, combined_timeline, current_entry):
         if 0 <= index <= len(combined_timeline):
             if check_valid_placement(combined_timeline, current_entry, index):
                 UNLOCKED_LIST.append(current_entry)
+                UNLOCKED_LIST.sort(key=lambda e: e["date"])
                 print("Correct placement!")
             else:
                 lifeline()
@@ -214,46 +221,27 @@ def lifeline():
     Returns:
         None
     """
+
+    
+
     if not hasattr(lifeline, "count"):
         lifeline.count = 0
 
     if lifeline.count < 2:
-        print("The date doesn't fit at that position.")
+        message = "The date doesn't fit at that position."
+        print(message)
         lifeline.count += 1
-        print(f"You have 3/{3 - lifeline.count} lives left.")
+        print(f"You have {3 - lifeline.count}/3 lives left.")
+        UNLOCKED_LIST.clear()
+        print("You have lost your cards.")
+            
     else:
         print("\nYou have no lives left. Game Over.")
         print("Going back to menu.")
-        main()
+        reset_data()
+        return main()
 
 lifeline.count = 0
-    
-def game_logic():
-    """
-    Runs the main game loop
-    """
-
-    old_questions = set()
-    all_questions = read_question()  
-
-    while True:
-        available = get_available_questions(all_questions, old_questions)
-        
-        if not available:
-            print("\nThere're no questions left. And you win I guess?")
-            break
-
-        current_entry = random.choice(available)
-        old_questions.add(current_entry["ID"])
-
-        combined_timeline = get_combined_timeline_list()
-        display_question_and_timeline(current_entry, combined_timeline)
-
-        user_input = get_user_input(combined_timeline)
-        
-        if not handle_user_input(user_input, combined_timeline, current_entry):
-            break
-
 
 def game_logic_with_categories():
     """
@@ -265,25 +253,49 @@ def game_logic_with_categories():
 
     while True:
 
-        available = get_available_questions(all_questions, old_questions, category=None)
+        available = get_available_questions(all_questions, old_questions, category=True)
         duplicate = set()
+
         print("\nAvailable categories:")
+
         for entry in available:
             if entry["category"] not in duplicate:
                 print(entry["category"])
                 duplicate.add(entry["category"])
-        category = input("Choose a category(or write 'quit' to return to menu): ").lower()
-        if category == "sport":
-            available = get_available_questions(all_questions, old_questions, category="Sport")
+
+        category = input("Choose a category(or write 'quit' to return to menu), if you want to play with all category then type 'all': ").lower()
+        
+
+        if category == "all":
+            
+            available = get_available_questions(all_questions, old_questions, category=True)
+            random_entry = random.choice(available)
+            LOCKED_LIST.append([random_entry])
             game_logic_for_categories(available, old_questions)
+
+        elif category == "sport":
+            available = get_available_questions(all_questions, old_questions, category="Sport")
+            sport_entries = [entry for entry in all_questions if entry['category'].lower() == 'sport']
+            random_sport_entry = random.choice(sport_entries)
+            LOCKED_LIST.append([random_sport_entry])
+            game_logic_for_categories(available, old_questions)
+            
 
         elif category == "history":
             available = get_available_questions(all_questions, old_questions, category="History")
+            history_entries = [entry for entry in all_questions if entry['category'].lower() == 'history']
+            random_history_entry = random.choice(history_entries)
+            LOCKED_LIST.append([random_history_entry])
             game_logic_for_categories(available, old_questions)
 
         elif category == "quit":
             print("bay bay")
-            return main()
+            reset_data()
+            break
+
+        else:
+            print("Invalid category. Please try again.")
+            continue
 
 
 def game_logic_for_categories(available, old_questions):
@@ -308,6 +320,11 @@ def game_logic_for_categories(available, old_questions):
         if not handle_user_input(user_input, combined_timeline, current_entry):
             break
 
+
+def reset_data():
+   UNLOCKED_LIST.clear()
+   LOCKED_LIST.clear()
+
 def main():
     """
     This is the main function that runs the program and display the menu.
@@ -315,17 +332,14 @@ def main():
 
     while True:
         print("*"*15)
-        print("1. Display a question")
-        print("2. Choose a category")
-        print("3. Exit")
+        print("1. Choose a category")
+        print("2. Exit")
 
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            game_logic()
-        elif choice == "2":
             game_logic_with_categories()
-        elif choice == "3":
+        elif choice == "2":
             break
         else:
             print("Invalid choice, try again.")
