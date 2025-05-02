@@ -1,0 +1,44 @@
+<!-- templates/question.html -->
+{% extends "base.html" %}
+{% block head %}
+    
+{% endblock %}
+
+{% block body %}
+  <div class="menu_container">
+    <button class="menu_button" onclick="toggleMenu()">Menu button</button>
+    <div class="dropdown_menu" id="dropdown_menu">
+        <a href="#">Option 1</a>
+        <a href="#">Option 2</a>
+        <a href="#">Option 3</a>
+    </div>
+  </div>
+  <h2 class = "question_header">{{ next_question.question }}</h2>
+
+  <form method = "post">
+    <label for = "index">Placera vid index (0–{{ max_index }}):</label>
+    <input type = "number" name="index" id="index" min="0" max="{{ max_index }}">
+    <div class = "actions">
+      <button type = "submit" name = "action" value = "place">Placera</button>
+      <button type = "submit" name = "action" value = "lock">Lås</button>
+      <button type = "submit" name = "action" value = "quit">Avsluta</button>
+    </div>
+  </form>
+
+  <div class="timelines">
+    <p><strong>Unlocked:</strong> {{ unlocked }}</p>
+    <div class="timeline"></div>
+    <p><strong>Locked:</strong> {{ locked }}</p>
+  </div>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for msg in messages %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
+
+{% endblock %}

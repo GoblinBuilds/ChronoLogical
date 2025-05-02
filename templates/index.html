@@ -4,37 +4,32 @@
 {% endblock %}
 
 {% block body %}
-<div class="menu_container">
+  <div class="menu_container">
     <button class="menu_button" onclick="toggleMenu()">Menu button</button>
     <div class="dropdown_menu" id="dropdown_menu">
         <a href="#">Option 1</a>
         <a href="#">Option 2</a>
         <a href="#">Option 3</a>
     </div>
-</div>
+  </div>
+  <h1>Välj kategori</h1>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class = "flashes">
+        {% for msg in messages %}
+          <li>{{ msg }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
 
-<h1 class="question_header"> {{ question }}</h1>
-
-<div class="timeline"></div>
-<div class="card_container">
-    <div class="card">
-        <h2>1969</h2>
-        <p>This might be question 11?</p>
-    </div>
-    <div class="card">
-        <h2>1989</h2>
-        <p>This might be question 2?</p>
-    </div>
-    <div class="card">
-        <h2>2001</h2>
-        <p>This might be question 3?</p>
-    </div>
-</div>
-<div class="card middle_card">
-    <p>Answer card</p>
-</div>
-<div class="stats_container">
-    <span>Score: 123123</span>
-    <span>Lives</span>
-</div>
+  <form method = "post">
+    <h2 class = "question_header" for = "category">Kategori:</h2>
+    <select name = "category" id = "category">
+      {% for cat in categories %}
+        <option value = "{{ cat }}">{{ cat }}</option>
+      {% endfor %}
+    </select>
+    <button type = "submit">Starta spel</button>
+  </form>
 {% endblock %}

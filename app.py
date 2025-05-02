@@ -1,51 +1,74 @@
-from flask import Flask, render_template, url_for
-# url_for is used in base.html to generate URLs for static files
-
-from game_logic import print_question, get_available_questions, read_question, lifeline
+from flask import Flask, render_template, request, redirect, url_for, session, flash, json
 import random
+from flask import session
 
 app = Flask(__name__)
+app.secret_key = 'dev'
 
-def print_a_question_from_file():
+def load_questions(filename='questions.json'):
     """
-    Selects and returns a random available question from a file.
-
-    Reads all questions from a file, filters out questions that have already been asked,
-    and randomly selects one from the remaining available questions. If no questions are available,
-    a message is printed to inform the user. The selected question's ID is added to the set of
-    previously asked questions to avoid repetition.
-
-    Returns:
-        str: The text of the selected question.
+    This function reads a JSON file and returns the data as a list.
+    If the file is not found, print an error message.
+        Args:
+            None
+        Returns:
+            A list of questions from the JSON file.
     """
-    old_questions = set()
-    all_questions = read_question()
+
+    try:
+        with open(filename, 'r') as file:
+            questions = json.load(file)
+            return questions
+    except FileNotFoundError:
+        print("Error: questions.json not found.")
+        return []
+    except json.JSONDecodeError:
+        print("Error: JSON file is malformed.")
+        return []
     
-    available = get_available_questions(all_questions, old_questions)
-        
-    if not available:
-        print("\nThere's no questions left. Add more! And you win i guess?")
+QUESTIONS = load_questions('questions.json')
 
-    current_entry = random.choice(available)
-    old_questions.add(current_entry["ID"])
-    return current_entry["question"]
+def get_session_list(key):
+    """Retrieve a value from the session by key."""
+    return session.get(key)
 
-@app.route('/', methods=['GET'])
+def set_session_list(key, value):
+    """Set a value in the session for the given key."""
+    session[key] = value
+
+def init_session(category):
+    """Initialize the session with a selected category and clear all previous data."""
+    session.clear()
+    session['category'] = category
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    """
-    Route handler for the home page.
+    """Function to render index.html and allow users to select a desired caregory of questions"""
+    if request.method == 'POST':
+        category = request.form.get('category')
+        init_session(category)
+        return redirect(url_for('question'))
 
-    Args:
-        None
+    categories = ['all'] + sorted({question['category'] for question in QUESTIONS}, key=str.lower)
 
-    Returns:
-        A rendered HTML template for the index page.
-        And displays a question from the available questions.
-    """
-    question = print_a_question_from_file()
-
-    return render_template('index.html', question = question)
+    return render_template('index.html', categories=categories)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route('/question', methods=['GET', 'POST'])
+def question():
+    """Main game function so far only renders a question and added check if available but timeline not implemented so it wont do anything"""
+    if request.method == 'POST':
+
+        current_id = session.get('current_id')
+
+        next_question = next((question for question in QUESTIONS if question['ID'] == current_id))
+
+    available = [question for question in QUESTIONS if question['ID'] not in session.get('old_questions', []) and (session['category'] == 'all' or question['category'].lower()==session['category'].lower())]
+
+    next_question = random.choice(available)
+    session['current_id'] = next_question['ID']
+
+    return render_template('question.html', next_question = next_question)
+
+if __name__ == '__main__':
+    app.run(debug=False, use_reloader=False, use_debugger=False)
