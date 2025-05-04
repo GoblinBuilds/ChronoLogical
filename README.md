@@ -55,6 +55,8 @@ https://github.com/GoblinBuilds/ChronoLogical
 
     Lose unlocked answers on wrong answer
 
+    Show current lives
+
     Categories
 
     Lives
