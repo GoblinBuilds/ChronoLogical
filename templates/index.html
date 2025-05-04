@@ -16,12 +16,12 @@
   {% endwith %}
 
   <form method="post">
-    <h2 class="question_header" for="category">Kategori:</h2>
+    <h2 class="question_header" for="category">Category:</h2>
     <select name="category" id="category">
       {% for cat in categories %}
         <option value="{{ cat }}">{{ cat }}</option>
       {% endfor %}
     </select>
-    <button classi="post_button" type="submit">Starta spel</button>
+    <button classi="post_button" type="submit">Start game</button>
   </form>
 {% endblock %}
