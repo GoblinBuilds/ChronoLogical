@@ -82,10 +82,10 @@ def game():
             if session.get('unlocked'):
                 session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
                 session['unlocked'] = []
-                flash('Tidslinjen låst!')
+                flash('The timeline is locked!')
 
             else:
-                flash('Inget att låsa.')
+                flash("There's nothing to lock.")
 
         if action == 'place':
             input_index = int(request.form.get('index', -1))
@@ -94,20 +94,20 @@ def game():
 
                 if valid_placement:
                     session['unlocked'] = sorted(session.get('unlocked', []) + [next_question], key=lambda e: e['date'])
-                    flash('Rätt placering!')
+                    flash('Correct placement!')
                 else:
                     session['lifeline_count'] = session.get('lifeline_count', 0) + 1
                     session['unlocked'] = []
                     lives_left = 3 - session['lifeline_count']
 
                     if lives_left > 0:
-                        flash(f'Fel placering! Du har {lives_left} liv kvar.')
+                        flash(f'Wrong placement! You have {lives_left} life(s) left.')
                     else:
                         session.clear()
                         return redirect(url_for('index'))
                     
             else:
-                flash('Ogiltigt index.')
+                flash('Invalid index.')
 
         if action in ('place', 'lock') and current_id:
             old = session.get('old_questions', [])
@@ -118,7 +118,7 @@ def game():
 
     available = [question for question in QUESTIONS if question['ID'] not in session.get('old_questions', []) and (session['category'] == 'all' or question['category'].lower() == session['category'].lower())]
     if not available:
-        flash('Inga fler frågor kvar!')
+        flash("There's no more questions available!")
         session.clear()
         return redirect(url_for('index'))
 
