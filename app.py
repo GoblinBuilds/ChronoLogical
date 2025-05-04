@@ -39,10 +39,11 @@ def init_session(category):
     session['unlocked'] = []
     session['locked'] = []
     session['lifeline_count'] = 0
+    session['old_questions'] = []
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    """Function to render index.html and allow users to select a desired caregory of questions"""
+    """Function to render index.html and allow users to select a desired caregory of questions."""
     if request.method == 'POST':
         category = request.form.get('category')
         init_session(category)
@@ -55,13 +56,15 @@ def index():
 @app.route('/game', methods=['GET', 'POST'])
 def game():
     """Main route for the game logic.
-        Presents player with questions one after another when player does a input
-        Handles player input 
+        Presents player with questions one after another when player does a input.
+        Handles player input: 
         Players can: 
-            'place' to place a questionin relation to the timeline throug inputing a value representing a index
-            'lock' to lock their current timelin
-            'quit' to return to the index 
+            'place' to place a questionin relation to the timeline throug inputing a value representing a index.
+            'lock' to lock their current timeline.
+            'quit' to return to the index.
 
+            When a question is answered through 'place' or if the timeline is locked the question is added to a list tracking what questions have already been shown
+            prevening it from appering several times.
         Renders game.html template
     """
     if request.method == 'POST':
@@ -84,7 +87,6 @@ def game():
             else:
                 flash('Inget att låsa.')
 
-
         if action == 'place':
             input_index = int(request.form.get('index', -1))
             if 0 <= input_index <= len(timeline):
@@ -93,7 +95,6 @@ def game():
                 if valid_placement:
                     session['unlocked'] = sorted(session.get('unlocked', []) + [next_question], key=lambda e: e['date'])
                     flash('Rätt placering!')
-
                 else:
                     session['lifeline_count'] = session.get('lifeline_count', 0) + 1
                     session['unlocked'] = []
@@ -101,7 +102,6 @@ def game():
 
                     if lives_left > 0:
                         flash(f'Fel placering! Du har {lives_left} liv kvar.')
-
                     else:
                         session.clear()
                         return redirect(url_for('index'))
@@ -109,9 +109,14 @@ def game():
             else:
                 flash('Ogiltigt index.')
 
+        if action in ('place', 'lock') and current_id:
+            old = session.get('old_questions', [])
+            old.append(current_id)
+            session['old_questions'] = old
+
         return redirect(url_for('game'))
 
-    available = [question for question in QUESTIONS if question['ID'] and (session['category'] == 'all' or question['category'].lower() == session['category'].lower())]
+    available = [question for question in QUESTIONS if question['ID'] not in session.get('old_questions', []) and (session['category'] == 'all' or question['category'].lower() == session['category'].lower())]
     if not available:
         flash('Inga fler frågor kvar!')
         session.clear()
