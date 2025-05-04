@@ -15,6 +15,8 @@ https://github.com/GoblinBuilds/ChronoLogical
 
     Score
 
+        Leaderboard
+
     Menus
 
     Db connection
