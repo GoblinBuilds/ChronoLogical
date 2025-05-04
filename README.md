@@ -30,6 +30,8 @@ https://github.com/GoblinBuilds/ChronoLogical
     Timelines show previous questions as cards
 
         Drag and drop
+    
+    Refaktorera koden för bättre coupling och cohesion
 
 -------------------------------------------------------------
 
