@@ -19,6 +19,8 @@ https://github.com/GoblinBuilds/ChronoLogical
 
     Menus
 
+        Pop-up window
+
     Db connection
 
         More questions
