@@ -15,6 +15,18 @@
         {% block head %} {% endblock %}
     </head>
     <body>
-        {% block body %} {% endblock %}
+        <div id="container">
+            <span class="left_edge"></span>
+            <span class="right_edge"></span>
+            <div class="menu_container">
+                <button class="menu_button" onclick="toggleMenu()">Menu button</button>
+                <div class="dropdown_menu" id ="dropdown_menu">
+                    <a href="#">Option 1</a>
+                    <a href="#">Option 2</a>
+                    <a href="#">Option 3</a>
+                </div>
+              </div>
+            {% block body %} {% endblock %}
+        </div>
     </body>
 </html>

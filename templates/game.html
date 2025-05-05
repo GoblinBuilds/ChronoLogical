@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block head %}
+    
+{% endblock %}
+
+{% block body %}
+  <h2 class ="question_header">{{ next_question.question }}</h2>
+
+  <form method="post">
+    <label for="index">Placera vid index (0–{{ max_index }}):</label>
+    <input type="number" name="index" id="index" min="0" max="{{ max_index }}">
+    <div class="actions">
+      <button class="post_button" type="submit" name="action" value="place">Place</button>
+      <button class="post_button" type="submit" name="action" value="lock">Lock</button>
+      <button class="post_button" type="submit" name="action" value="quit">End Game</button>
+    </div>
+  </form>
+
+  <div class="timelines">
+    <div id="unlocked_timeline">
+      <p><strong>Unlocked:</strong> {{ unlocked }}</p>
+    </div>
+    <div class="timeline"></div>
+    <div id="locked_timeline">
+      <p><strong>Locked:</strong> {{ locked }}</p>
+    </div>
+  </div>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for msg in messages %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
+
+{% endblock %}
