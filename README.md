@@ -19,7 +19,7 @@ https://github.com/GoblinBuilds/ChronoLogical
 
     Menus
 
-        Pop-up window
+        Pop-up window - DONE(Just need to fix some css for it) - Leonard
 
     Db connection
 
@@ -27,7 +27,7 @@ https://github.com/GoblinBuilds/ChronoLogical
 
     10 answers for win
 
-        win screen
+        win screen - DONE(Almost, missing a win screen but condition is there) - Leonard
 
     Stages?
 

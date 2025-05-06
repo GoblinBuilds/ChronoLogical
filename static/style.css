@@ -180,6 +180,24 @@ body {
     justify-content: space-between;
     width: 50%;
 }
+
+.card_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #222;
+    color: white;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 @media only screen and (max-width: 1240px) {
     body {
         font-size: 14px; 

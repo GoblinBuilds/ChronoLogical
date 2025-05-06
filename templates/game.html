@@ -18,10 +18,30 @@
   <div class="timelines">
     <div id="unlocked_timeline">
       <p><strong>Unlocked:</strong> {{ unlocked }}</p>
+      <h3>Unlocked Timeline</h3>
+      <div class="card_container">
+        {% for entry in unlocked %}
+        <div class="card">
+          <p><strong>Date:</strong> {{ entry.date }}</p>
+          <p><strong>Question:</strong> {{ entry.question }}</p>
+        </div>
+        {% endfor %}
+      </div>
     </div>
+
     <div class="timeline"></div>
+
     <div id="locked_timeline">
       <p><strong>Locked:</strong> {{ locked }}</p>
+      <h3>Locked Timeline</h3>
+      <div class="card_container">
+        {% for entry in locked %}
+        <div class="card">
+          <p><strong>Date:</strong> {{ entry.date }}</p>
+          <p><strong>Question:</strong> {{ entry.question }}</p>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 
