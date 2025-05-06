@@ -38,11 +38,9 @@
 
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-          <div id="flash-overlay" onclick="dismissFlash(event)">
+          <div id="flash-overlay">
             <ul class="flashes">
-            <span class="flash-close" onclick="removeFlash()">×</span>
               {% for msg in messages %}
-                <li><p>Error:</p></li>
                 <li>{{ msg }}</li>
               {% endfor %}
             </ul>

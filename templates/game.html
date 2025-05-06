@@ -14,10 +14,9 @@
       <button class="post_button" type="submit" name="action" value="quit">End Game</button>
     </div>
   </form>
-
-  <div class="timelines">
+  <div class="timeline_container">
     <div id="unlocked_timeline">
-      <h3>Unlocked Timeline</h3>
+      <!-- <h3>Unlocked Timeline</h3> -->
       <div class="unlocked_card_container">
         {% for entry in unlocked %}
         <div class="card">
@@ -28,10 +27,9 @@
       </div>
     </div>
 
-    <div class="timeline"></div>
-
+    <hr class="timeline"></hr>
     <div id="locked_timeline">
-      <h3>Locked Timeline</h3>
+      <!-- <h3>Locked Timeline</h3> -->
       <div class="locked_card_container">
         {% for entry in locked %}
         <div class="card">

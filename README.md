@@ -55,24 +55,33 @@ https://github.com/GoblinBuilds/ChronoLogical
 
 # Fixed
 
-    Flask connection (Chayatip)
+    Base game logic:
+        Check valid index position (Gustav)
+        Sort timeline (Gustav)
+        Append answers to timeline (Gustav)
 
-    Lose unlocked answers on wrong answer (Leonard)
+    Flask connection:
+        Render questions from json (Chayatip) 
+        Sessions and actions (Gustav)
+        Translate game logic to flask (Gustav)
 
-    Show current lives (Leonard)
+    Features:
 
-    Categories (Leonard)
+        Lose unlocked answers on wrong answer (Leonard)
 
-    Lives (Leonard)
+        Categories (Leonard)
 
-    Fix issue where lives decrease in the wrong order (Leonard)
+        Lives (Leonard)
 
-    Add prompt for invalid input instead of showing an error message (Leonard)
+    Bugfixes:
 
-    Ensure typing lock gives a new question as expected (Leonard)
+        Fix issue where lives decrease in the wrong order (Leonard)
 
-    Clear saved answers when the player types quit (Leonard)
+        Add prompt for invalid input instead of showing an error message (Leonard)
 
-    Fix bug where typing exit requires entering the command twice to actually quit the game
-(Leonard)
-    Reset answers properly when restarting the game after lives run out (Leonard)
+        Ensure typing lock gives a new question as expected (Leonard)
+
+        Clear saved answers when the player types quit (Leonard)
+
+        Fix bug where typing exit requires entering the command twice to actually quit the game (Leonard)
+        Reset answers properly when restarting the game after lives run out (Leonard)
