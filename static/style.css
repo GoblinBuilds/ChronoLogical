@@ -149,9 +149,43 @@ body {
     justify-content: space-between;
     width: 50%;
 }
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1240px) {
     body {
         font-size: 14px; 
+        background-color: aqua;
+    }
+
+    .question_header {
+        font-size: 3em; 
+    }
+
+    .card {
+        width: 110px; 
+        height: 150px; 
+    }
+
+    .score_container {
+        font-size: 1.2em; 
+        width: 70%; 
+    }
+
+    .card_container {
+        bottom: calc(22%); 
+        left: 50%;
+        gap: 35px;
+    }
+    .middle_card {
+        position: absolute;
+        top: 33%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media only screen and (max-width: 1680px) {
+    body {
+        font-size: 14px; 
+        background-color: purple;
     }
 
     .question_header {
