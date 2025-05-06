@@ -117,7 +117,7 @@ def game():
             if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 10:
                 flash("Congratulations! You've Won!")
                 session.clear()
-                return redirect(url_for('index'))
+                return redirect(url_for('win_screen'))
         
         if action in ('place', 'lock') and current_id:
             old = session.get('old_questions', [])
@@ -174,6 +174,11 @@ def check_valid_placement(combined_timeline, next_question, index):
         valid = timeline[input_index-1]['date'] <= question_date <= timeline[input_index]['date']
 
     return valid
+
+@app.route('/win_screen', methods=['GET', 'POST'])
+def win_screen():
+    """Function to render win_screen.html."""
+    return render_template('win_screen.html')
 
 if __name__ == '__main__':
     app.run(debug=False, use_reloader=False, use_debugger=False)
