@@ -13,7 +13,7 @@ https://github.com/GoblinBuilds/ChronoLogical
 
     Start with one question placed in timeline
 
-    Score
+    Score - Moa
 
         Leaderboard
 
@@ -21,9 +21,9 @@ https://github.com/GoblinBuilds/ChronoLogical
 
         Pop-up window - DONE(Just need to fix some css for it) - Leonard
 
-    Db connection
+    Db connection - Moa
 
-        More questions
+        More questions - Moa
 
     10 answers for win
 
@@ -31,9 +31,9 @@ https://github.com/GoblinBuilds/ChronoLogical
 
     Stages?
 
-    Timelines show previous questions as cards
+    Timelines show previous questions as cards - Leonard and Chayatip (We made a card)
 
-        Drag and drop
+        Drag and drop - Leonard
     
     Refaktorera koden för bättre coupling och cohesion
 
