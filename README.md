@@ -31,7 +31,7 @@ https://github.com/GoblinBuilds/ChronoLogical
 
     Stages?
 
-    Timelines show previous questions as cards
+    Timelines show previous questions as cards - Leonard and Chayatip
 
         Drag and drop
     
