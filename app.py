@@ -114,8 +114,11 @@ def game():
                     else:
                         session.clear()
                         return redirect(url_for('index'))
-            else:
-                flash('Invalid index.')
+                    
+            if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 10:
+                flash("Congratulations! You've Won!")
+                session.clear()
+                return redirect(url_for('index'))
 
         if action in ('place', 'lock') and current_id:
             old = session.get('old_questions', [])
