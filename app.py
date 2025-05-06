@@ -102,7 +102,6 @@ def game():
                 valid_placement = check_valid_placement(timeline, next_question, input_index)
                 if valid_placement:
                     session['unlocked'] = sorted(session.get('unlocked', []) + [next_question], key=lambda e: e['date'])
-                    flash('Correct placement!')
                 else:
                     session['lifeline_count'] = session.get('lifeline_count', 0) + 1
                     session['unlocked'] = []

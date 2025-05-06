@@ -18,7 +18,7 @@
   <div class="timelines">
     <div id="unlocked_timeline">
       <h3>Unlocked Timeline</h3>
-      <div class="card_container">
+      <div class="unlocked_card_container">
         {% for entry in unlocked %}
         <div class="card">
           <p><strong>Date:</strong> {{ entry.date }}</p>
@@ -32,7 +32,7 @@
 
     <div id="locked_timeline">
       <h3>Locked Timeline</h3>
-      <div class="card_container">
+      <div class="locked_card_container">
         {% for entry in locked %}
         <div class="card">
           <p><strong>Date:</strong> {{ entry.date }}</p>

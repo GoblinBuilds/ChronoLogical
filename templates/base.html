@@ -5,30 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>ChronoLogical</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <script>
-            function toggleMenu() {
-                var menu = document.getElementById("dropdown_menu");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-            }
-            function dismissFlash(event) {
-                const flashes = document.querySelector('.flashes');
-                if (!flashes.contains(event.target)) {
-                document.getElementById('flash-overlay').remove();
-                }
-            }
-            function removeFlash() {
-                const overlay = document.getElementById('flash-overlay');
-                if (overlay) {
-                    overlay.remove();
-                }
-            }
-            // Optional: Auto-dismiss after 5 seconds
-            setTimeout(() => {
-                const overlay = document.getElementById('flash-overlay');
-                if (overlay) overlay.remove();
-            }, 5000);
-
-        </script>
+        <script src="{{ url_for('static', filename='pop_up.js') }}"></script>
 
         {% block head %} {% endblock %}
     </head>
@@ -44,7 +21,7 @@
                     <a href="#">Option 3</a>
                 </div>
             </div>
-            <div class="second_menu">
+            <!-- <div class="second_menu">
                 <button class="menu_button" onclick="openPopup()">Pop Up Menu</button>
                 <div id="myModal" class="modal">
                     <div class="modal-content">
@@ -55,7 +32,7 @@
                         <a href="#">Option 3</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
             {% block body %} {% endblock %}
         </div>
 

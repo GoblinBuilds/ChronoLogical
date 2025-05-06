@@ -181,13 +181,31 @@ body {
     width: 50%;
 }
 
-.card_container {
+.locked_card_container {
+    position: fixed;
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: nowrap;  /* ensures all cards stay in a single row */
     gap: 20px;
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 10px;
+    overflow-x: auto;
+    z-index: 9999;
 }
 
+.unlocked_card_container {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;  /* ensures all cards stay in a single row */
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 10px;
+    overflow-x: auto;
+    z-index: 9999;
+}
 .card {
     background-color: #222;
     color: white;
@@ -197,6 +215,7 @@ body {
     width: 200px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
 }
 @media only screen and (max-width: 1240px) {
     body {
@@ -218,11 +237,7 @@ body {
         width: 70%; 
     }
 
-    .card_container {
-        bottom: calc(22%); 
-        left: 50%;
-        gap: 35px;
-    }
+
     .middle_card {
         position: absolute;
         top: 33%;
@@ -241,21 +256,7 @@ body {
         font-size: 3em; 
     }
 
-    .card {
-        width: 110px; 
-        height: 150px; 
-    }
 
-    .score_container {
-        font-size: 1.2em; 
-        width: 70%; 
-    }
-
-    .card_container {
-        bottom: calc(22%); 
-        left: 50%;
-        gap: 35px;
-    }
     .middle_card {
         position: absolute;
         top: 33%;

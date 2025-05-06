@@ -11,7 +11,7 @@ https://github.com/GoblinBuilds/ChronoLogical
 
 # to do:
 
-    Start with one question placed in timeline
+    Start with one question placed in timeline - Leonard
 
     Score - Moa
 
