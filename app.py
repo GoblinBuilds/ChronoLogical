@@ -89,7 +89,6 @@ def game():
                 session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
                 session['unlocked'] = []
                 flash('The timeline is locked!')
-
             else:
                 flash("There's nothing to lock.")
 
@@ -114,9 +113,12 @@ def game():
                     else:
                         session.clear()
                         return redirect(url_for('index'))
-            else:
-                flash('Invalid index.')
-
+                    
+            if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 10:
+                flash("Congratulations! You've Won!")
+                session.clear()
+                return redirect(url_for('index'))
+        
         if action in ('place', 'lock') and current_id:
             old = session.get('old_questions', [])
             old.append(current_id)
@@ -133,10 +135,11 @@ def game():
     next_question = random.choice(available)
     session['current_id'] = next_question['ID']
     timeline = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
-    locked_dates = [entry['date'] for entry in session.get('locked', [])]
-    unlocked_dates = [entry['date'] for entry in session.get('unlocked', [])]
 
-    return render_template('game.html', next_question = next_question, locked = locked_dates, unlocked = unlocked_dates, max_index = len(timeline))
+    locked = session.get('locked', [])
+    unlocked = session.get('unlocked', [])
+
+    return render_template('game.html', next_question=next_question, locked=locked, unlocked=unlocked, max_index=len(timeline))
 
 def check_valid_placement(combined_timeline, next_question, index):
     """
