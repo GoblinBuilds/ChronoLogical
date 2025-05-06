@@ -5,12 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>ChronoLogical</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <script>
-            function toggleMenu() {
-                var menu = document.getElementById("dropdown_menu");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-            }
-        </script>
+        <script src="{{ url_for('static', filename='pop_up.js') }}"></script>
 
         {% block head %} {% endblock %}
     </head>
@@ -25,7 +20,19 @@
                     <a href="#">Option 2</a>
                     <a href="#">Option 3</a>
                 </div>
-              </div>
+            </div>
+            <div class="second_menu">
+                <button class="menu_button" onclick="openPopup()">Pop Up Menu</button>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closePopup()">&times;</span>
+                        <p>Modal Content</p>
+                        <a href="#">Option 1</a>
+                        <a href="#">Option 2</a>
+                        <a href="#">Option 3</a>
+                    </div>
+                </div>
+            </div>
             {% block body %} {% endblock %}
         </div>
     </body>
