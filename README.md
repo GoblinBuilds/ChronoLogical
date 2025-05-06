@@ -27,7 +27,7 @@ https://github.com/GoblinBuilds/ChronoLogical
 
     10 answers for win
 
-        win screen - DONE(Almost, missing a win screen but condition is there) - Leonard
+        win screen - DONE - Leonard (win condition) and Chayatip (win screen)
 
     Stages?
 
@@ -55,24 +55,24 @@ https://github.com/GoblinBuilds/ChronoLogical
 
 # Fixed
 
-    Flask connection
+    Flask connection (Chayatip)
 
-    Lose unlocked answers on wrong answer
+    Lose unlocked answers on wrong answer (Leonard)
 
-    Show current lives
+    Show current lives (Leonard)
 
-    Categories
+    Categories (Leonard)
 
-    Lives
+    Lives (Leonard)
 
-    Fix issue where lives decrease in the wrong order
+    Fix issue where lives decrease in the wrong order (Leonard)
 
-    Add prompt for invalid input instead of showing an error message
+    Add prompt for invalid input instead of showing an error message (Leonard)
 
-    Ensure typing lock gives a new question as expected
+    Ensure typing lock gives a new question as expected (Leonard)
 
-    Clear saved answers when the player types quit
+    Clear saved answers when the player types quit (Leonard)
 
     Fix bug where typing exit requires entering the command twice to actually quit the game
-
-    Reset answers properly when restarting the game after lives run out
+(Leonard)
+    Reset answers properly when restarting the game after lives run out (Leonard)
