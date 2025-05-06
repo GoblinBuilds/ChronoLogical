@@ -41,6 +41,13 @@ def init_session(category):
     session['lifeline_count'] = 0
     session['old_questions'] = []
 
+    available_questions = [question for question in QUESTIONS if category == 'all' or question['category'].lower() == category.lower()]
+
+    if available_questions:
+        random_question = random.choice(available_questions)
+        session['locked'] = [random_question]
+        session['old_questions'] = [random_question['ID']]
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     """Function to render index.html and allow users to select a desired caregory of questions."""
