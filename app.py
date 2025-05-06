@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, json
 import random
-from flask import session
 
 app = Flask(__name__)
 app.secret_key = 'dev'
@@ -95,10 +94,13 @@ def game():
                 flash("There's nothing to lock.")
 
         if action == 'place':
-            input_index = int(request.form.get('index', -1))
+            user_input = request.form.get('index', -1)
+            input_index = int(user_input) if user_input.isdigit() else -1
+            if input_index == -1:
+                flash('Invalid action.')
+                return redirect(url_for('game'))
             if 0 <= input_index <= len(timeline):
                 valid_placement = check_valid_placement(timeline, next_question, input_index)
-
                 if valid_placement:
                     session['unlocked'] = sorted(session.get('unlocked', []) + [next_question], key=lambda e: e['date'])
                     flash('Correct placement!')
@@ -112,7 +114,6 @@ def game():
                     else:
                         session.clear()
                         return redirect(url_for('index'))
-                    
             else:
                 flash('Invalid index.')
 
