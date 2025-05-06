@@ -10,6 +10,37 @@ body {
     overflow: hidden;
 
 }
+
+#flash-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flashes {
+    background-color: white;
+    padding: 40px;
+    border: 1px solid black;
+    font-size: 2em;
+    color: #000;
+    z-index: 9999;
+    list-style: none;
+    text-align: center;
+  }
+
+  .flash-close {
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 10000;
+  }
+  
 #container {
     position: fixed;
     top: 4%;

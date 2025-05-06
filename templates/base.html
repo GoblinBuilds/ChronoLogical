@@ -10,6 +10,24 @@
                 var menu = document.getElementById("dropdown_menu");
                 menu.style.display = menu.style.display === "block" ? "none" : "block";
             }
+            function dismissFlash(event) {
+                const flashes = document.querySelector('.flashes');
+                if (!flashes.contains(event.target)) {
+                document.getElementById('flash-overlay').remove();
+                }
+            }
+            function removeFlash() {
+                const overlay = document.getElementById('flash-overlay');
+                if (overlay) {
+                    overlay.remove();
+                }
+            }
+            // Optional: Auto-dismiss after 5 seconds
+            setTimeout(() => {
+                const overlay = document.getElementById('flash-overlay');
+                if (overlay) overlay.remove();
+            }, 5000);
+
         </script>
 
         {% block head %} {% endblock %}
@@ -28,5 +46,19 @@
               </div>
             {% block body %} {% endblock %}
         </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div id="flash-overlay" onclick="dismissFlash(event)">
+            <ul class="flashes">
+            <span class="flash-close" onclick="removeFlash()">×</span>
+              {% for msg in messages %}
+                <li><p>Error:</p></li>
+                <li>{{ msg }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
     </body>
 </html>

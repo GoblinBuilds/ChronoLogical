@@ -5,15 +5,6 @@
 
 {% block body %}
   <h1>Choose Category</h1>
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul class = "flashes">
-        {% for msg in messages %}
-          <li>{{ msg }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
 
   <form method="post">
     <h2 class="question_header" for="category">Category:</h2>
