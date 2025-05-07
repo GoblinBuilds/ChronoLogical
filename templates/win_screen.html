@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% block head %}
-    
 {% endblock %}
-{% block body %} 
-    <h1>Congratulation!</h1>
-    <button><a href="{{ url_for('index') }}">Play again</a></button>
+
+{% block body %}
+  <h2 class="question_header">Congratulation?</h2>
+
+  <form method="post">
+    <button class="post_button" type="submit" name="action" value="continue">Continue</button>
+    <button class="post_button" type="submit" name="action" value="restart">Restart</button>
+  </form>
 {% endblock %}

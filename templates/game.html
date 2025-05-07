@@ -3,7 +3,26 @@
 {% endblock %}
 
 {% block body %}
-  <h2 class ="question_header">{{ next_question.question }}</h2>
+  <h3>Stage: {{ session.stage }}</h3>
+  <h2 class="question_header">
+    {% if next_question.category == 'Song' %}
+      Guess the year of the song!
+    {% else %}
+      {{ next_question.question }}
+    {% endif %}
+  </h2>
+
+  {% if song_embed_url %}
+    <div class="spotify-player">
+      <iframe style="border-radius:12px" 
+              src="{{ song_embed_url }}" 
+              width="100%" height="80" 
+              frameborder="0" allowtransparency="true" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+              loading="lazy">
+      </iframe>
+    </div>
+  {% endif %}
 
   <form method="post">
     <label for="index">Placera vid index (0–{{ max_index }}):</label>
@@ -14,32 +33,30 @@
       <button class="post_button" type="submit" name="action" value="quit">End Game</button>
     </div>
   </form>
+
   <div class="timeline_container">
     <div id="unlocked_timeline">
-      <!-- <h3>Unlocked Timeline</h3> -->
       <div class="unlocked_card_container">
         {% for entry in unlocked %}
-        <div class="card">
-          <p><strong>Date:</strong> {{ entry.date }}</p>
-          <p><strong>Question:</strong> {{ entry.question }}</p>
-        </div>
+          <div class="card">
+            <p><strong>Date:</strong> {{ entry.date }}</p>
+            <p><strong>Question:</strong> {{ entry.question }}</p>
+          </div>
         {% endfor %}
       </div>
     </div>
 
     <hr class="timeline"></hr>
+
     <div id="locked_timeline">
-      <!-- <h3>Locked Timeline</h3> -->
       <div class="locked_card_container">
         {% for entry in locked %}
-        <div class="card">
-          <p><strong>Date:</strong> {{ entry.date }}</p>
-          <p><strong>Question:</strong> {{ entry.question }}</p>
-        </div>
+          <div class="card">
+            <p><strong>Date:</strong> {{ entry.date }}</p>
+            <p><strong>Question:</strong> {{ entry.question }}</p>
+          </div>
         {% endfor %}
       </div>
     </div>
   </div>
-
-
 {% endblock %}
