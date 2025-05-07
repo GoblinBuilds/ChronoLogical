@@ -34,28 +34,31 @@ def set_session_list(key, value):
 def init_session(category):
     """Initialize the session with a selected category and clear all previous data."""
     session.clear()
-    session['category'] = category
+    session['categories'] = category
     session['unlocked'] = []
     session['locked'] = []
     session['lifeline_count'] = 0
     session['old_questions'] = []
 
-    available_questions = [question for question in QUESTIONS if category == 'all' or question['category'].lower() == category.lower()]
+    available_questions = [question for question in QUESTIONS if question['category'] in category]
 
     if available_questions:
         random_question = random.choice(available_questions)
         session['locked'] = [random_question]
         session['old_questions'] = [random_question['ID']]
+    else:
+        flash("No questions available in the selected category. Please select a different category.")
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     """Function to render index.html and allow users to select a desired caregory of questions."""
     if request.method == 'POST':
-        category = request.form.get('category')
-        init_session(category)
+        category_list = request.form.getlist('category')
+        """category = [cat for cat in category_list if cat["category"] in category_list]"""
+        init_session(category_list)
         return redirect(url_for('game'))
 
-    categories = ['all'] + sorted({question['category'] for question in QUESTIONS}, key = str.lower)
+    categories = sorted({question['category'] for question in QUESTIONS}, key = str.lower)
     return render_template('index.html', categories = categories)
 
 
@@ -125,7 +128,8 @@ def game():
 
         return redirect(url_for('game'))
 
-    available = [question for question in QUESTIONS if question['ID'] not in session.get('old_questions', []) and (session['category'] == 'all' or question['category'].lower() == session['category'].lower())]
+    selected = session.get('categories', [])
+    available = [question for question in QUESTIONS if question['ID'] not in session.get('old_questions', []) and (question['category'] in selected)]
     if not available:
         flash("There's no more questions available!")
         session.clear()
