@@ -9,7 +9,7 @@
   <form method="post">
     <h2 class="question_header" for="category">Category:</h2>
     {% for cat in categories %}
-      <input type="checkbox" name="{{ cat }}" value="{{ cat }}" checked>
+      <input type="checkbox" name="category" value="{{ cat }}" checked>
       <label for="{{ cat }}">{{ cat }} </label><br>
     {% endfor %}
     </select>

@@ -54,6 +54,9 @@ def index():
     """Function to render index.html and allow users to select a desired caregory of questions."""
     if request.method == 'POST':
         category_list = request.form.getlist('category')
+        if not category_list:
+            flash("Please select at least one category.")
+            return redirect(url_for('index'))
         """category = [cat for cat in category_list if cat["category"] in category_list]"""
         init_session(category_list)
         return redirect(url_for('game'))
