@@ -175,7 +175,12 @@ body {
 
 .card:hover {
     transform: scale(1.1) translateY(-5px); /* slightly larger and lifted */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* stronger shadow for depth */
+    box-shadow: 0 8px 16px rgba(63, 1, 52, 52); /* stronger shadow for depth */
+}
+
+#locked_timeline{
+    margin-top: 40px;
+    margin-bottom: 0px;
 }
 
 .locked_card_container {
@@ -186,7 +191,7 @@ body {
     gap: 20px;
     justify-content: center;
     min-height: 160px; 
-    padding: 10px;
+    padding: 5px;
     overflow-x: auto;
     z-index: 9999;
 }
@@ -203,9 +208,6 @@ body {
     overflow-x: auto;
     z-index: 9999;
 }
-
-
-
 
 @media only screen and (max-width: 1240px) {
     body {
