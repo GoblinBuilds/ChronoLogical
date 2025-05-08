@@ -39,13 +39,15 @@ def init_session(category):
     session['locked'] = []
     session['lifeline_count'] = 0
     session['old_questions'] = []
+    session['stage'] = 1 
+    session['score'] = 000 
 
     available_questions = [question for question in QUESTIONS if question['category'] in category]
 
     if available_questions:
         random_question = random.choice(available_questions)
         session['locked'] = [random_question]
-        session['old_questions'] = [random_question['ID']]
+        # session['old_questions'] = [random_question['ID']]
     else:
         flash("No questions available in the selected category. Please select a different category.")
 
@@ -119,9 +121,9 @@ def game():
                         session.clear()
                         return redirect(url_for('index'))
                     
-            if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 10:
+            if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 2:
                 flash("Congratulations! You've Won!")
-                session.clear()
+                # session.clear()
                 return redirect(url_for('win_screen'))
         
         if action in ('place', 'lock') and current_id:
@@ -135,17 +137,32 @@ def game():
     available = [question for question in QUESTIONS if question['ID'] not in session.get('old_questions', []) and (question['category'] in selected)]
     if not available:
         flash("There's no more questions available!")
-        session.clear()
         return redirect(url_for('index'))
 
     next_question = random.choice(available)
+    song_embed_url = None  # Always define before use
+
+    if next_question["category"] == "Song":
+        song_url = next_question["question"]
+        print("Song question URL:", next_question["question"])  # DEBUG
+        if "/track/" in song_url:
+            try:
+                track_id = song_url.split("/track/")[1].split("?")[0]
+                song_embed_url = f"https://open.spotify.com/embed/track/{track_id}"
+                # next_question["question"] = "Guess the year of this song!"
+            except IndexError:
+                song_embed_url = None  
+        else:
+            song_embed_url = None 
+
     session['current_id'] = next_question['ID']
     timeline = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
 
     locked = session.get('locked', [])
     unlocked = session.get('unlocked', [])
+    score = session.get('score', [])
 
-    return render_template('game.html', next_question=next_question, locked=locked, unlocked=unlocked, max_index=len(timeline))
+    return render_template('game.html', next_question=next_question, song_embed_url=song_embed_url, locked=locked, unlocked=unlocked, score=score, max_index=len(timeline))
 
 def check_valid_placement(combined_timeline, next_question, index):
     """
@@ -183,8 +200,36 @@ def check_valid_placement(combined_timeline, next_question, index):
 
 @app.route('/win_screen', methods=['GET', 'POST'])
 def win_screen():
-    """Function to render win_screen.html."""
+    if request.method == 'POST':
+        action = request.form.get('action')
+        if action == 'continue':
+            # Preserve old questions and score while advancing the stage
+            old_questions = session.get('old_questions', [])
+            score = session.get('score', 0)
+            stage = session.get('stage', 1)
+
+            # Reset the timeline-related data (unlocked, locked, etc.)
+            session['unlocked'] = []
+            session['locked'] = []
+            session['lifeline_count'] = 0  # Reset lifeline count for the new stage
+
+            # Increment stage for the next level
+            session['stage'] = stage + 1
+
+            # Reassign the preserved values back into the session
+            session['old_questions'] = old_questions  # Ensure previous questions are not reused
+            session['score'] = score  # Keep the score intact
+
+            # Optionally, you could also reset the score if you want to start fresh each stage
+            # session['score'] = 0  # Uncomment if you want to reset the score at each stage.
+
+            return redirect(url_for('game'))  # Continue to the next stage of the game
+
+        elif action == 'restart':
+            return redirect(url_for('index'))  # Restart the game and clear everything
+    
     return render_template('win_screen.html')
+
 
 if __name__ == '__main__':
     app.run(debug=False, use_reloader=False, use_debugger=False)
