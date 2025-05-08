@@ -25,11 +25,13 @@ https://github.com/GoblinBuilds/ChronoLogical
 
         More questions - Moa
 
-    10 answers for win
+    X answers for win 
 
         win screen - DONE - Leonard (win condition) and Chayatip (win screen)
 
-    Stages?
+    Stages (Gustav)
+
+        1 card remains on new stage
 
     Timelines show previous questions as cards - Leonard and Chayatip (We made a card)
 
