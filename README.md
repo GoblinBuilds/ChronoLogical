@@ -11,7 +11,6 @@ https://github.com/GoblinBuilds/ChronoLogical
 
 # to do:
 
-    Start with one question placed in timeline - Leonard
 
     Score - Moa
 
@@ -25,13 +24,9 @@ https://github.com/GoblinBuilds/ChronoLogical
 
         More questions - Moa
 
-    10 answers for win
+    Stages - Gustav
 
-        win screen - DONE - Leonard (win condition) and Chayatip (win screen)
-
-    Stages?
-
-    Timelines show previous questions as cards - Leonard and Chayatip (We made a card)
+   Card
 
         Drag and drop - Leonard
     
@@ -55,6 +50,15 @@ https://github.com/GoblinBuilds/ChronoLogical
 
 # Fixed
 
+    10 answers for win:
+        Win condition (Leonard)
+        win screen (Chayatip)
+
+    Card:
+         Timelines show previous questions as cards (Leonard and Chayatip)
+         Animation (Chayatip)
+         Start with one question (Card) placed in the timeline (Leonard)
+        
     Base game logic:
         Check valid index position (Gustav)
         Sort timeline (Gustav)
