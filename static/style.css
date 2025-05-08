@@ -185,7 +185,7 @@ body {
     flex-wrap: nowrap;  
     gap: 20px;
     justify-content: center;
-    min-height: 170px; 
+    min-height: 160px; 
     padding: 5px;
     padding-top: 10px;
     overflow-x: auto;
