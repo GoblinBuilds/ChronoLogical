@@ -172,10 +172,16 @@ body {
     max-width: 100px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* smooth animation */
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }
 .card:hover {
     transform: scale(1) translateY(-2px); /* slightly larger and lifted */
     box-shadow: 15px 10px 3px rgb(168, 168, 168); /* stronger shadow for depth */ 
+}
+
+.card:active {
+    transform: perspective(800px) rotateX(5deg) rotateY(-5deg);
 }
 
 .locked_card_container {
