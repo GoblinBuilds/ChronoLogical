@@ -66,6 +66,7 @@ body {
     align-items: center;
     flex-direction: column;
     width: 96%; 
+    padding-bottom: 20px;
 }
   /* Styling for the container box */
     #container::before {
@@ -194,6 +195,7 @@ body {
     min-height: 190px; 
     padding: 5px;
     padding-top: 10px;
+    padding-bottom: 20px;
     overflow-x: auto;
     z-index: 9999;
 }
