@@ -186,6 +186,17 @@ body {
     transform: perspective(800px) rotateX(5deg) rotateY(-5deg);
 }
 
+.date{
+    font-size: 2em;
+    color: #000;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.answered_question{
+    font-family: "Interstate", sans-serif;
+}
+
 .locked_card_container {
     width: 100%;
     display: flex;

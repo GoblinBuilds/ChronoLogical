@@ -20,8 +20,8 @@
       <div class="unlocked_card_container">
         {% for entry in unlocked %}
         <div class="card">
-          <p><strong>Date:</strong> {{ entry.date }}</p>
-          <p><strong>Question:</strong> {{ entry.question }}</p>
+          <p class="date"><strong>{{ entry.date }}</strong> </p>
+          <p class="answered_question">{{ entry.question }}</p>
         </div>
         {% endfor %}
       </div>
@@ -33,8 +33,8 @@
       <div class="locked_card_container">
         {% for entry in locked %}
         <div class="card">
-          <p><strong>Date:</strong> {{ entry.date }}</p>
-          <p><strong>Question:</strong> {{ entry.question }}</p>
+          <p class="date"><strong>{{ entry.date }}</strong> </p>
+          <p class="answered_question">{{ entry.question }}</p>
         </div>
         {% endfor %}
       </div>
