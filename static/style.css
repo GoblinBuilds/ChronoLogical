@@ -176,6 +176,7 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* smooth animation */
     transform-style: preserve-3d;
     perspective: 1000px;
+    min-height: 150px;
 }
 .card:hover {
     transform: scale(1) translateY(-2px) rotateZ(1deg); /* slightly larger and lifted */
@@ -219,7 +220,9 @@ body {
     flex-wrap: nowrap;  
     gap: 20px;
     justify-content: center; 
-    padding: 10px;
+    padding: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     min-height: 160px;
     overflow-x: auto;
     z-index: 9999;
