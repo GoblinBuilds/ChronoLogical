@@ -9,5 +9,9 @@
     { "ID": "L4", "date": 2008, "question": "When did Usain Bolt set the world record for the 100m sprint?", "category": "Sport" },
     { "ID": "L5", "date": 2016, "question": "When did the Summer Olympics take place in Rio de Janeiro?", "category": "Sport" },
     { "ID": "L8", "date": 1984, "question": "When did the Summer Olympics take place in Los Angeles?", "category": "Sport" },
-    { "ID": "L9", "date": 2000, "question": "When did the Summer Olympics take place in Sydney?", "category": "Sport" }
+    { "ID": "L9", "date": 2000, "question": "When did the Summer Olympics take place in Sydney?", "category": "Sport" },
+    { "ID": "S9", "date": 1998, "question": "https://open.spotify.com/track/0IVkP59yJ9GFF6B7IrvrxA?si=wxjehkDAToaZqP4PTkcUDA", "category": "Song" },
+    { "ID": "S8", "date": 1966, "question": "https://open.spotify.com/track/0bGiTPrxCIFs7lZS9knvRS?si=P3TfTDOKQeGNIO1wrJ2yUw%0A", "category": "Song" },
+    { "ID": "S7", "date": 2022, "question": "https://open.spotify.com/track/1o8Z7GD1CeOaVBEyuzu4HO?si=he1gf4GGTA6_iiFEqWWbpA", "category": "Song" },
+    { "ID": "S6", "date": 2023, "question": "https://open.spotify.com/track/6A6yKpsgFr4gIKd7gsfHhm?si=VEfWNR3xTt-lgjgGJfY0YA", "category": "Song" }
   ]
