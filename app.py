@@ -1,27 +1,56 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, json
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import random
+from dotenv import load_dotenv
+import psycopg2
+import os
 
 app = Flask(__name__)
 app.secret_key = 'dev'
 
-def load_questions(filename='questions.json'):
+load_dotenv()  # Load environment variables from .env file
+
+def load_questions(table_name='questions'):
     """
-    This function reads a JSON file and returns the data as a list.
-    If the file is not found, print an error message.
-        Args:
-            None
-        Returns:
-            A list of questions from the JSON file.
+    Fetches all rows from the specified table in the PostgreSQL database.
+    If the database connection fails, it returns an empty list.
+    
+    Args:
+        table_name (str): The name of the table to fetch questions from.
+    
+    Returns:
+        list: A list of questions from the database.
     """
     try:
-        with open(filename, 'r') as file:
-            questions = json.load(file)
-            return questions
-    except FileNotFoundError:
-        print("Error: questions.json not found.")
+        conn = psycopg2.connect(
+            dbname=os.getenv("DB_NAME"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            host=os.getenv("DB_HOST"),
+            port=os.getenv("DB_PORT")
+        )
+        cursor = conn.cursor()
+        # Dynamically query the specified table
+        query = f"SELECT question_id, date, question, category FROM {table_name}"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        # Convert rows to a list of dictionaries
+        questions = [
+            {"question_id": row[0], "date": row[1], "question": row[2], "category": row[3]}
+            for row in rows
+        ]
+        return questions
+    except Exception as e:
+        print(f"Error: {e}")
         return []
     
-QUESTIONS = load_questions('questions.json')
+# # Example usage
+# if __name__ == "__main__":
+#     questions = load_questions('questions')
+#     print(questions)
+
+QUESTIONS = load_questions('questions')
 
 def get_session_list(key):
     """Retrieve a value from the session by key."""
@@ -47,7 +76,7 @@ def init_session(category):
     if available_questions:
         random_question = random.choice(available_questions)
         session['locked'] = [random_question]
-        # session['old_questions'] = [random_question['ID']]
+        # session['old_questions'] = [random_question['question_id']]
     else:
         flash("No questions available in the selected category. Please select a different category.")
 
@@ -85,7 +114,7 @@ def game():
         action = request.form.get('action')
         current_id = session.get('current_id')
 
-        next_question = next((question for question in QUESTIONS if question['ID'] == current_id))
+        next_question = next((question for question in QUESTIONS if question['question_id'] == current_id))
         timeline = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
 
         if action == 'quit':
@@ -134,7 +163,7 @@ def game():
         return redirect(url_for('game'))
 
     selected = session.get('categories', [])
-    available = [question for question in QUESTIONS if question['ID'] not in session.get('old_questions', []) and (question['category'] in selected)]
+    available = [question for question in QUESTIONS if question['question_id'] not in session.get('old_questions', []) and (question['category'] in selected)]
     if not available:
         flash("There's no more questions available!")
         return redirect(url_for('index'))
@@ -154,7 +183,7 @@ def game():
         else:
             song_embed_url = None 
 
-    session['current_id'] = next_question['ID']
+    session['current_id'] = next_question['question_id']
     timeline = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
 
     locked = session.get('locked', [])
