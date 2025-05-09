@@ -176,7 +176,7 @@ body {
     perspective: 1000px;
 }
 .card:hover {
-    transform: scale(1) translateY(-2px); /* slightly larger and lifted */
+    transform: scale(1) translateY(-2px) rotateZ(1deg); /* slightly larger and lifted */
     box-shadow: 15px 10px 3px rgb(168, 168, 168); /* stronger shadow for depth */ 
 }
 
