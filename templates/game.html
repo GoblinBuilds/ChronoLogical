@@ -6,7 +6,7 @@
   <h2 class ="question_header">{{ next_question.question }}</h2>
 
   <form method="post">
-    <label for="index">Placera vid index (0–{{ max_index }}):</label>
+    <label for="index">Place at index (0–{{ max_index }}):</label>
     <input type="number" name="index" id="index" min="0" max="{{ max_index }}">
     <div class="actions">
       <button class="post_button" type="submit" name="action" value="place">Place</button>
