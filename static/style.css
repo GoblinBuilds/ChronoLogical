@@ -162,8 +162,8 @@ body {
 
 .card {
     background-color: #ffffff;
-    background-image: url(img/texture_card_linen_white.jpg);
-    background-size: cover;
+    background-image: url(img/white-construction-paper-texture-2496301314.jpg);
+    background-size: cover transparent 40%;
     color: rgb(0, 0, 0);
     border: 1px solid #fff;
     z-index: 9999;
