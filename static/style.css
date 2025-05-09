@@ -66,6 +66,7 @@ body {
     align-items: center;
     flex-direction: column;
     width: 96%; 
+    padding-bottom: 20px;
 }
   /* Styling for the container box */
     #container::before {
@@ -146,6 +147,7 @@ body {
     text-align: center;
     width: 80%;
     min-height: 3em;
+    margin-bottom: 10px;
 }
 
 .timeline_container{
@@ -157,25 +159,43 @@ body {
     border: none;
     border-top: 10px solid white;
     width: 100%;
-    margin: 10px 0;
+    margin: 0px 0;
 }
 
 .card {
     background-color: #ffffff;
+    background-image: url(img/white-construction-paper-texture-2496301314.jpg);
+    background-size: cover transparent 40%;
     color: rgb(0, 0, 0);
-    border: 1px solid #fff;
+    border: 3px solid #838282;
     z-index: 9999;
     border-radius: 6px;
     padding: 15px;
     max-width: 100px;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* smooth animation */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    min-height: 150px;
+}
+.card:hover {
+    transform: scale(1) translateY(-2px) rotateZ(1deg); /* slightly larger and lifted */
+    box-shadow: 15px 10px 3px rgb(168, 168, 168); /* stronger shadow for depth */ 
 }
 
-.card:hover {
-    transform: scale(1.1) translateY(-5px); /* slightly larger and lifted */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* stronger shadow for depth */
+.card:active {
+    transform: perspective(800px) rotateX(5deg) rotateY(-5deg);
+}
+
+.date{
+    font-size: 2em;
+    color: #000;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.answered_question{
+    font-family: "Interstate", sans-serif;
 }
 
 .locked_card_container {
@@ -185,8 +205,10 @@ body {
     flex-wrap: nowrap;  
     gap: 20px;
     justify-content: center;
-    min-height: 160px; 
-    padding: 10px;
+    min-height: 190px; 
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 20px;
     overflow-x: auto;
     z-index: 9999;
 }
@@ -198,7 +220,9 @@ body {
     flex-wrap: nowrap;  
     gap: 20px;
     justify-content: center; 
-    padding: 10px;
+    padding: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     min-height: 160px;
     overflow-x: auto;
     z-index: 9999;
@@ -239,7 +263,7 @@ body {
 @media only screen and (max-width: 1680px) {
     body {
         font-size: 14px; 
-        background-color: purple;
+        background-color: rgb(0, 0, 0);
     }
 
     .question_header {

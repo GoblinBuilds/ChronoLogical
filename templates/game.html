@@ -25,7 +25,7 @@
   {% endif %}
 
   <form method="post">
-    <label for="index">Placera vid index (0–{{ max_index }}):</label>
+    <label for="index">Place at index (0–{{ max_index }}):</label>
     <input type="number" name="index" id="index" min="0" max="{{ max_index }}">
     <div class="actions">
       <button class="post_button" type="submit" name="action" value="place">Place</button>
@@ -38,10 +38,12 @@
     <div id="unlocked_timeline">
       <div class="unlocked_card_container">
         {% for entry in unlocked %}
-          <div class="card">
-            <p><strong>Date:</strong> {{ entry.date }}</p>
-            <p><strong>Question:</strong> {{ entry.question }}</p>
-          </div>
+
+        <div class="card">
+          <p class="date"><strong>{{ entry.date }}</strong> </p>
+          <p class="answered_question">{{ entry.question }}</p>
+        </div>
+
         {% endfor %}
       </div>
     </div>
@@ -51,10 +53,12 @@
     <div id="locked_timeline">
       <div class="locked_card_container">
         {% for entry in locked %}
-          <div class="card">
-            <p><strong>Date:</strong> {{ entry.date }}</p>
-            <p><strong>Question:</strong> {{ entry.question }}</p>
-          </div>
+
+        <div class="card">
+          <p class="date"><strong>{{ entry.date }}</strong> </p>
+          <p class="answered_question">{{ entry.question }}</p>
+        </div>
+
         {% endfor %}
       </div>
     </div>
