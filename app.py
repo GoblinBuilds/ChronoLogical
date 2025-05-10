@@ -1,13 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import random
-from dotenv import load_dotenv
 import psycopg2
-import os
 
 app = Flask(__name__)
 app.secret_key = 'dev'
 
-load_dotenv()  # Load environment variables from .env file
 
 def load_questions(table_name='questions'):
     """
@@ -21,12 +18,13 @@ def load_questions(table_name='questions'):
         list: A list of questions from the database.
     """
     try:
+         # Hardcoded database connection details
         conn = psycopg2.connect(
-            dbname=os.getenv("DB_NAME"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-            host=os.getenv("DB_HOST"),
-            port=os.getenv("DB_PORT")
+            dbname="aq3524",
+            user="aq3524",
+            password="abc123",
+            host="pgserver.mau.se",
+            port="5432"
         )
         cursor = conn.cursor()
         # Dynamically query the specified table
