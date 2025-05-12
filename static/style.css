@@ -228,6 +228,20 @@ body {
     z-index: 9999;
 }
 
+#gameover_img{
+    background-image: url(img/shatter_6.webp);
+    background-position: left center; /* move image to the left */
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 50%;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    margin-right: 700px;
+    background-position: -200px center; /* shifts image 100px further left */
+    opacity: 0.4;
+}
+
 @media only screen and (max-width: 1240px) {
     body {
         font-size: 14px; 
