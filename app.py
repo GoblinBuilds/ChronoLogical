@@ -146,7 +146,7 @@ def game():
                         flash(f'Wrong placement! You have {lives_left} life(s) left.')
                     else:
                         session.clear()
-                        return redirect(url_for('index'))
+                        return redirect(url_for('gameover'))
                     
             if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 5:
                 flash("Congratulations! You've Won!")
@@ -249,6 +249,15 @@ def win_screen():
     
     return render_template('win_screen.html')
 
+@app.route('/gameover', methods=['GET', 'POST'])
+def gameover():
+    """Function to render gameover.html and allow users to restart the game."""
+    if request.method == 'POST':
+        action = request.form.get('action')
+        if action == 'try_again':
+            return redirect(url_for('index')) 
+         
+    return render_template('gameover.html')
 
 if __name__ == '__main__':
     app.run(debug=False, use_reloader=False, use_debugger=False)

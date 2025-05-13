@@ -42,6 +42,12 @@ https://github.com/GoblinBuilds/ChronoLogical
     Lose a lifeline when lock - Chayatip
     Start with +2 cards in stage 2 - Chayatip
     
+    Gameover screen - Chayatip
+
+    Lost a lifeline when lock a card - Chayatip
+
+    Starting cards in different stages - Chayatip
+
     Refaktorera koden för bättre coupling och cohesion
 
 -------------------------------------------------------------
