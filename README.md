@@ -37,6 +37,10 @@ https://github.com/GoblinBuilds/ChronoLogical
 
 
         Drag and drop - Leonard
+
+    Gameover screen - Chayatip
+    Lose a lifeline when lock - Chayatip
+    Start with +2 cards in stage 2 - Chayatip
     
     Refaktorera koden för bättre coupling och cohesion
 
