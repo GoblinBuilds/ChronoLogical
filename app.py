@@ -101,7 +101,7 @@ def game():
         Handles player input: 
         Players can: 
             'place' to place a questionin relation to the timeline throug inputing a value representing a index.
-            'lock' to lock their current timeline.
+            'lock' to lock their current timeline. This action decrease a lifeline.
             'quit' to return to the index.
 
             When a question is answered through 'place' or if the timeline is locked the question is added to a list tracking what questions have already been shown
