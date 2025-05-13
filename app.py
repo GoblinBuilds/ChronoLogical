@@ -123,7 +123,14 @@ def game():
             if session.get('unlocked'):
                 session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
                 session['unlocked'] = []
+                session['lifeline_count'] = session.get('lifeline_count', 0) + 1
+                lives_left = 3 - session['lifeline_count']
                 flash('The timeline is locked!')
+                if lives_left > 0:
+                    flash(f'You have {lives_left} life(s) left.')
+                else:
+                    session.clear()
+                    return redirect(url_for('index'))
             else:
                 flash("There's nothing to lock.")
 
