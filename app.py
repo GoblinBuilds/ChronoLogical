@@ -233,6 +233,10 @@ def check_valid_placement(combined_timeline, next_question, index):
 
 @app.route('/win_screen', methods=['GET', 'POST'])
 def win_screen():
+    """This function renders win_screen.html. Actions POST in the HTML-file are:
+    - continue: continue the game to the next stage.
+    - restart: restart the game.
+    """
     if request.method == 'POST':
         action = request.form.get('action')
         if action == 'continue':
