@@ -60,8 +60,7 @@ https://github.com/GoblinBuilds/ChronoLogical
 
 
 # Fixed
-    Lose a lifeline when lock (but not when answered incorrectly) - Chayatip
-    Not load a new question when lock - Chayatip
+    Lose a lifeline when lock - but not when answered incorrectly (Chayatip)
     
     10 answers for win:
         Win condition (Leonard)
@@ -102,3 +101,5 @@ https://github.com/GoblinBuilds/ChronoLogical
 
         Fix bug where typing exit requires entering the command twice to actually quit the game (Leonard)
         Reset answers properly when restarting the game after lives run out (Leonard)
+
+        Not load a new question when lock (Chayatip)
