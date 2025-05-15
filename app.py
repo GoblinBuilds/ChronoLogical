@@ -156,17 +156,9 @@ def game():
                     # Allow new questions to be loaded
                     session.pop('current_id', None) 
                 else:
-                    session['lifeline_count'] = session.get('lifeline_count', 0) + 1
                     session['unlocked'] = []
-                    # Allow new questions to be loaded
                     session.pop('current_id', None)
-                    lives_left = 3 - session['lifeline_count']
-
-                    if lives_left > 0:
-                        flash(f'Wrong placement! You have {lives_left} life(s) left.')
-                    else:
-                        session.clear()
-                        return redirect(url_for('index'))
+                    flash('Wrong answer, lost unlocked timeline.')
                     
             if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 5:
                 flash("Congratulations! You've Won!")
@@ -190,7 +182,7 @@ def game():
     
     song_embed_url = None  
 
-    if next_question["category"] == "Song":
+    if next_question["category"] == "Music & Soundbites":
         song_url = next_question["question"]
         if "/track/" in song_url:
             try:
