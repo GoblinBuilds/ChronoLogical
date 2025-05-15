@@ -39,7 +39,6 @@ https://github.com/GoblinBuilds/ChronoLogical
         Drag and drop - Leonard
 
     Gameover screen - Chayatip
-    Lose a lifeline when lock - Chayatip
     Start with +2 cards in stage 2 - Chayatip
     
     Refaktorera koden för bättre coupling och cohesion
@@ -61,7 +60,9 @@ https://github.com/GoblinBuilds/ChronoLogical
 
 
 # Fixed
-
+    Lose a lifeline when lock (but not when answered incorrectly) - Chayatip
+    Not load a new question when lock - Chayatip
+    
     10 answers for win:
         Win condition (Leonard)
         win screen (Chayatip)
