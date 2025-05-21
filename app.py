@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, json
 import random
 import psycopg2
 
@@ -43,12 +43,17 @@ def load_questions(table_name='questions'):
         print(f"Error: {e}")
         return []
     
-# # Example usage
-# if __name__ == "__main__":
-#     questions = load_questions('questions')
-#     print(questions)
-
 QUESTIONS = load_questions('questions')
+
+
+# def load_questions(filename='questions.json'):
+#     try:
+#         with open(filename, 'r') as file:
+#             questions = json.load(file)
+#             return questions
+#     except FileNotFoundError:
+#         print("Error: questions.json not found.")
+# QUESTIONS = load_questions('questions.json')
 
 def get_session_list(key):
     """Retrieve a value from the session by key."""
