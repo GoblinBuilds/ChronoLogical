@@ -1,51 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ChronoLogical</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <script src="{{ url_for('static', filename='pop_up.js') }}"></script>
 
-        {% block head %} {% endblock %}
-    </head>
-    <body>
-        <div id="container">
-            <span class="left_edge"></span>
-            <span class="right_edge"></span>
-            <div class="menu_container">
-                <button class="menu_button" onclick="toggleMenu()">Menu button</button>
-                <div class="dropdown_menu" id ="dropdown_menu">
-                    <a href="#">Option 1</a>
-                    <a href="#">Option 2</a>
-                    <a href="#">Option 3</a>
-                </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoLogical</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='pop_up.js') }}"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  {% block head %} {% endblock %}
+</head>
+
+<body>
+  <div id="container">
+    <span class="left_edge"></span>
+    <span class="right_edge"></span>
+    <div class="menu_container">
+      <button class="menu_button" onclick="openModal()">Open Modal</button>
+      <div id="modalOverlay" class="overlay" style="display: none;">
+        <div class="modal">
+          <h2 class="modal_header"><i class="fas fa-book-open"></i> Welcome to the Tutorial</h2>
+
+          <div class="tutorial_step">
+            <i class="fas fa-mouse-pointer icon"></i>
+            <div>
+              <h3>Header 1</h3>
+              <p>Use the menu to choose a game mode. Click on the button to begin.</p>
             </div>
-            <!-- <div class="second_menu">
-                <button class="menu_button" onclick="openPopup()">Pop Up Menu</button>
-                <div id="myModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close" onclick="closePopup()">&times;</span>
-                        <p>Modal Content</p>
-                        <a href="#">Option 1</a>
-                        <a href="#">Option 2</a>
-                        <a href="#">Option 3</a>
-                    </div>
-                </div>
-            </div> -->
-            {% block body %} {% endblock %}
-        </div>
-
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <div id="flash-overlay">
-            <ul class="flashes">
-              {% for msg in messages %}
-                <li>{{ msg }}</li>
-              {% endfor %}
-            </ul>
           </div>
-        {% endif %}
-      {% endwith %}
-    </body>
+
+          <div class="tutorial_step">
+            <i class="fas fa-hourglass-half icon"></i>
+            <div>
+              <h3>Header 2</h3>
+              <p>Use the menu to choose a game mode. Click on the button to begin.</p>
+            </div>
+          </div>
+
+          <div class="tutorial_step">
+            <i class="fas fa-lightbulb icon"></i>
+            <div>
+              <h3>Header 3</h3>
+              <p>Use the menu to choose a game mode. Click on the button to begin.</p>
+            </div>
+          </div>
+          <div class="modal_footer">
+            <button onclick="closeModal()">Got it!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% block body %} {% endblock %}
+  </div>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div id="flash-overlay">
+    <ul class="flashes">
+      {% for msg in messages %}
+      <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  {% endwith %}
+</body>
+
 </html>

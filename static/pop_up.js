@@ -1,10 +1,10 @@
-function openPopup() {
-    document.getElementById('myModal').style.display = 'block';
-  }
+function openModal() {
+  document.getElementById('modalOverlay').style.display = 'flex';
+}
 
-  function closePopup() {
-    document.getElementById('myModal').style.display = 'none';
-  }
+function closeModal() {
+  document.getElementById('modalOverlay').style.display = 'none';
+}
 
   function toggleMenu() {
     var menu = document.getElementById("dropdown_menu");
