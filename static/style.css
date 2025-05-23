@@ -1,56 +1,25 @@
 html {
     font-family: Arial, Helvetica, sans-serif;
 }
+
 body {
     background-color: rgb(0, 0, 0);
     color: #fff;
     position: relative;
     margin: 0;
     height: 100vh;
-    overflow: scroll    ;
+    overflow: scroll;
 }
+
 /* Flash messages styling*/
-
-/* pop-up style */
-/* #flash-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 9998;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .flashes {
-    background-color: white;
-    padding: 40px;
-    border: 1px solid black;
-    font-size: 2em;
-    color: #000;
-    z-index: 9999;
-    list-style: none;
-    text-align: center;
-  }
-
-  .flash-close {
-    font-size: 1.5em;
-    cursor: pointer;
-    z-index: 10000;
-  } */
-
-
-  .flashes {
+.flashes {
     color: #ffffff;
     z-index: 9999;
     list-style: none;
     text-align: right;
     padding-right: 3%;
     padding-top: 2%;
-  }
+}
 
 /* Main Container for content*/
 #container {
@@ -65,11 +34,12 @@ body {
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    width: 96%; 
+    width: 96%;
     padding-bottom: 20px;
 }
-  /* Styling for the container box */
-    #container::before {
+
+/* Styling for the container box */
+#container::before {
     content: '';
     position: absolute;
     top: 0;
@@ -77,9 +47,9 @@ body {
     width: 20vw;
     height: 2px;
     background-color: white;
-    }
+}
 
-    #container::after {
+#container::after {
     content: '';
     position: absolute;
     top: 0;
@@ -87,26 +57,25 @@ body {
     width: 20vw;
     height: 2px;
     background-color: white;
-    }
+}
 
-    .left_edge {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 2px;
-        height: 10vh;
-        background-color: white;
-    }
+.left_edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 10vh;
+    background-color: white;
+}
 
-    .right_edge {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 2px;
-        height: 10vh; 
-        background-color: white;
-    }
-
+.right_edge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 10vh;
+    background-color: white;
+}
 
 /* Styling for the game content */
 .menu_container {
@@ -122,14 +91,16 @@ body {
     color: #fff;
     cursor: pointer;
 }
-.post_button{
+
+.post_button {
     background-color: rgb(0, 0, 0);
     border: solid 1px #fff;
     padding: 10px 15px;
     color: #fff;
     cursor: pointer;
-    
+
 }
+
 .dropdown_menu {
     display: none;
     position: absolute;
@@ -150,7 +121,7 @@ body {
     margin-bottom: 10px;
 }
 
-.timeline_container{
+.timeline_container {
     width: 90%;
     position: relative;
 }
@@ -173,28 +144,29 @@ body {
     padding: 15px;
     max-width: 100px;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* smooth animation */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     transform-style: preserve-3d;
     perspective: 1000px;
     min-height: 150px;
 }
+
 .card:hover {
-    transform: scale(1) translateY(-2px) rotateZ(1deg); /* slightly larger and lifted */
-    box-shadow: 15px 10px 3px rgb(168, 168, 168); /* stronger shadow for depth */ 
+    transform: scale(1) translateY(-2px) rotateZ(1deg);
+    box-shadow: 15px 10px 3px rgb(168, 168, 168);
 }
 
 .card:active {
     transform: perspective(800px) rotateX(5deg) rotateY(-5deg);
 }
 
-.date{
+.date {
     font-size: 2em;
     color: #000;
     margin-top: 5px;
     margin-bottom: 0;
 }
 
-.answered_question{
+.answered_question {
     font-family: "Interstate", sans-serif;
 }
 
@@ -202,10 +174,10 @@ body {
     width: 100%;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;  
+    flex-wrap: nowrap;
     gap: 20px;
     justify-content: center;
-    min-height: 190px; 
+    min-height: 190px;
     padding: 5px;
     padding-top: 10px;
     padding-bottom: 20px;
@@ -217,9 +189,9 @@ body {
     width: 100%;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;  
+    flex-wrap: nowrap;
     gap: 20px;
-    justify-content: center; 
+    justify-content: center;
     padding: 5px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -227,14 +199,16 @@ body {
     overflow-x: auto;
     z-index: 9999;
 }
-.player_statistics{
+
+.player_statistics {
     display: flex;
     flex-direction: row;
     gap: 10%;
     width: 60%;
     justify-content: center;
 }
-.player_statistics h3{
+
+.player_statistics h3 {
     border-top: 2px white solid;
     margin-top: 0;
     padding-top: 1%;
@@ -251,8 +225,8 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 10000;
-  }
-  
+}
+
 .modal {
     width: 40vw;
     height: 80vh;
@@ -260,11 +234,11 @@ body {
     border-radius: 12px;
     padding: 20px;
     overflow-y: auto;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-  }
-  
+}
+
 .modal_header {
     font-size: 1.5rem;
     margin-bottom: 20px;
@@ -272,37 +246,37 @@ body {
     align-items: center;
     gap: 10px;
     color: #525252;
-  }
-  
+}
+
 .tutorial_step {
     display: flex;
     align-items: flex-start;
     margin-bottom: 20px;
     gap: 15px;
-  }
-  
+}
+
 .tutorial_step h3 {
     margin: 0 0 5px 0;
     font-size: 1.em;
     color: #525252;
-  }
-  
+}
+
 .tutorial_step p {
     margin: 0;
     font-size: 1em;
     color: #525252;
-  }
-  
+}
+
 .icon {
     font-size: 1.8em;
     color: #525252;
-  }
-  
+}
+
 .modal_footer {
     margin-top: auto;
     text-align: right;
-  }
-  
+}
+
 .modal_footer button {
     padding: 10px 20px;
     border: none;
@@ -310,31 +284,31 @@ body {
     color: white;
     font-size: 1rem;
     cursor: pointer;
-  }
-  
+}
+
 .modal_footer button:hover {
     background-color: #525252;
-  }
-  
+}
+
 
 @media only screen and (max-width: 1240px) {
     body {
-        font-size: 14px; 
+        font-size: 14px;
         background-color: aqua;
     }
 
     .question_header {
-        font-size: 3em; 
+        font-size: 3em;
     }
 
     .card {
-        width: 110px; 
-        height: 150px; 
+        width: 110px;
+        height: 150px;
     }
 
     .score_container {
-        font-size: 1.2em; 
-        width: 70%; 
+        font-size: 1.2em;
+        width: 70%;
     }
 
 
@@ -348,12 +322,12 @@ body {
 
 @media only screen and (max-width: 1680px) {
     body {
-        font-size: 14px; 
+        font-size: 14px;
         background-color: rgb(0, 0, 0);
     }
 
     .question_header {
-        font-size: 3em; 
+        font-size: 3em;
     }
 
 
