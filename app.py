@@ -125,14 +125,7 @@ def game():
         
         timeline = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
 
-        if action == 'quit':
-            return action_quit()
-        elif action == 'lock':
-            return action_lock()
-        elif action == 'place':
-            return action_place(timeline, next_question, current_id)
-        else:
-            flash('Invalid action.')
+        action_buttons(timeline, next_question, current_id)
 
         return redirect(url_for('game'))
 
@@ -203,6 +196,7 @@ def check_valid_placement(combined_timeline, next_question, index):
         valid = timeline[input_index-1]['date'] <= question_date <= timeline[input_index]['date']
 
     return valid
+
 def action_quit():
     session.clear()
     return redirect(url_for('index'))
@@ -247,6 +241,19 @@ def action_place(timeline, next_question, current_id):
                 # session.clear()
                 return redirect(url_for('win_screen'))
         return redirect(url_for('game'))
+
+def action_buttons(timeline, next_question, current_id):
+    """Handles the action buttons in the game."""
+    action = request.form.get('action')
+    if action == 'quit':
+        return action_quit()
+    elif action == 'lock':
+        return action_lock()
+    elif action == 'place':
+        return action_place(timeline, next_question, current_id)
+    else:
+        flash('Invalid action.')
+    return redirect(url_for('game'))
 
 @app.route('/win_screen', methods=['GET', 'POST'])
 def win_screen():
