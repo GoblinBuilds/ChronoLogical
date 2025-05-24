@@ -82,7 +82,7 @@ def init_session(category):
         # session['old_questions'] = [random_question['question_id']]
     else:
         flash("No questions available in the selected category. Please select a different category.")
-
+        
 @app.route('/', methods=['GET', 'POST'])
 def index():
     """Function to render index.html and allow users to select a desired caregory of questions."""
@@ -100,6 +100,7 @@ def index():
 
 
 @app.route('/game', methods=['GET', 'POST'])
+
 def game():
     """Main route for the game logic.
         Presents player with questions one after another when player does a input.
@@ -125,50 +126,13 @@ def game():
         timeline = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
 
         if action == 'quit':
-            session.clear()
-            return redirect(url_for('index'))
-
-        if action == 'lock':
-            if session.get('unlocked'):
-                session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
-                session['unlocked'] = []
-                session['lifeline_count'] = session.get('lifeline_count', 0) + 1
-                lives_left = 3 - session['lifeline_count']
-                flash('The timeline is locked!')
-                if lives_left > 0:
-                    flash(f'You have {lives_left} life(s) left.')
-                else:
-                    session.clear()
-                    return redirect(url_for('index'))
-
-            else:
-                flash("There's nothing to lock.")
-
-        if action == 'place':
-            user_input = request.form.get('index', -1)
-            input_index = int(user_input) if user_input.isdigit() else -1
-            if input_index == -1:
-                flash('Invalid action.')
-                return redirect(url_for('game'))
-            
-            if 0 <= input_index <= len(timeline):
-                valid_placement = check_valid_placement(timeline, next_question, input_index)
-                if valid_placement:
-                    session['unlocked'] = sorted(session.get('unlocked', []) + [next_question], key=lambda e: e['date'])
-                    old = session.get('old_questions', [])
-                    old.append(current_id)
-                    session['old_questions'] = old
-                    # Allow new questions to be loaded
-                    session.pop('current_id', None) 
-                else:
-                    session['unlocked'] = []
-                    session.pop('current_id', None)
-                    flash('Wrong answer, lost unlocked timeline.')
-                    
-            if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 5:
-                flash("Congratulations! You've Won!")
-                # session.clear()
-                return redirect(url_for('win_screen'))
+            return action_quit()
+        elif action == 'lock':
+            return action_lock()
+        elif action == 'place':
+            return action_place(timeline, next_question, current_id)
+        else:
+            flash('Invalid action.')
 
         return redirect(url_for('game'))
 
@@ -239,6 +203,50 @@ def check_valid_placement(combined_timeline, next_question, index):
         valid = timeline[input_index-1]['date'] <= question_date <= timeline[input_index]['date']
 
     return valid
+def action_quit():
+    session.clear()
+    return redirect(url_for('index'))
+
+def action_lock():
+    if session.get('unlocked'):
+                session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
+                session['unlocked'] = []
+                session['lifeline_count'] = session.get('lifeline_count', 0) + 1
+                lives_left = 3 - session['lifeline_count']
+                flash('The timeline is locked!')
+                if lives_left > 0:
+                    flash(f'You have {lives_left} life(s) left.')
+                else:
+                    session.clear()
+                    return redirect(url_for('index'))
+    return redirect(url_for('game'))
+
+def action_place(timeline, next_question, current_id):
+    user_input = request.form.get('index', -1)
+    input_index = int(user_input) if user_input.isdigit() else -1
+    if input_index == -1:
+        flash('Invalid action.')
+        return redirect(url_for('game'))
+            
+    if 0 <= input_index <= len(timeline):
+        valid_placement = check_valid_placement(timeline, next_question, input_index)
+        if valid_placement:
+            session['unlocked'] = sorted(session.get('unlocked', []) + [next_question], key=lambda e: e['date'])
+            old = session.get('old_questions', [])
+            old.append(current_id)
+            session['old_questions'] = old
+            # Allow new questions to be loaded
+            session.pop('current_id', None) 
+        else:
+            session['unlocked'] = []
+            session.pop('current_id', None)
+            flash('Wrong answer, lost unlocked timeline.')
+
+        if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 5:
+                flash("Congratulations! You've Won!")
+                # session.clear()
+                return redirect(url_for('win_screen'))
+        return redirect(url_for('game'))
 
 @app.route('/win_screen', methods=['GET', 'POST'])
 def win_screen():
