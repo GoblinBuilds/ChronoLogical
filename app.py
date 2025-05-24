@@ -115,7 +115,6 @@ def game():
         Renders game.html template
     """
     if request.method == 'POST':
-        action = request.form.get('action')
         current_id = session.get('current_id')
 
         if current_id:
@@ -198,10 +197,24 @@ def check_valid_placement(combined_timeline, next_question, index):
     return valid
 
 def action_quit():
+    """
+    Handles the quit action by clearing the session and redirecting to the index.
+
+    returns:
+        redirect: index.html.
+    """
     session.clear()
     return redirect(url_for('index'))
 
 def action_lock():
+    """
+    Handles the lock action by locking the current timeline and updating the session.
+    If the timeline is already locked, increase the lifeline count and check if the player has lost all lives.
+    If the player has no lives left, clear the session and redirect to the index.
+
+    returns:
+        redirect: game.html or index.html.
+    """
     if session.get('unlocked'):
                 session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
                 session['unlocked'] = []
@@ -216,6 +229,17 @@ def action_lock():
     return redirect(url_for('game'))
 
 def action_place(timeline, next_question, current_id):
+    """
+    Handles the placement of a question in the timeline based on user input.
+    The function checks if the placement is valid and updates the session accordingly.
+    - Valid placement: add the question to the unlocked timeline and updates the old questions.
+    - Invalid placement: clear the unlocked timeline and shows an error message.
+    - Placing 5 questions: redirect to the win screen.
+    - Invalid input index: show an error message.
+
+    returns:
+        redirect: game.html or win_screen.html.
+    """
     user_input = request.form.get('index', -1)
     input_index = int(user_input) if user_input.isdigit() else -1
     if input_index == -1:
@@ -243,7 +267,12 @@ def action_place(timeline, next_question, current_id):
         return redirect(url_for('game'))
 
 def action_buttons(timeline, next_question, current_id):
-    """Handles the action buttons in the game."""
+    """
+    Handles the action buttons in the game.
+
+    Returns:
+        redirect: game.html.
+    """
     action = request.form.get('action')
     if action == 'quit':
         return action_quit()
