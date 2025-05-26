@@ -141,19 +141,7 @@ def game():
     else:
         next_question = next((question for question in QUESTIONS if question['question_id'] == session['current_id']), None)
     
-    song_embed_url = None  
-
-    if next_question["category"] == "Music & Soundbites":
-        song_url = next_question["question"]
-        if "/track/" in song_url:
-            try:
-                track_id = song_url.split("/track/")[1].split("?")[0]
-                song_embed_url = f"https://open.spotify.com/embed/track/{track_id}"
-                # next_question["question"] = "Guess the year of this song!"
-            except IndexError:
-                song_embed_url = None  
-        else:
-            song_embed_url = None 
+    song_embed_url = song_url(next_question)  
 
     timeline = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
     locked = session.get('locked', [])
@@ -283,6 +271,25 @@ def action_buttons(timeline, next_question, current_id):
     else:
         flash('Invalid action.')
     return redirect(url_for('game'))
+
+def song_url(next_question):
+    """
+    Extracts the song URL from the next question if the category is 'Music & Soundbites'.
+    
+    return: None
+    """
+    if next_question["category"] == "Music & Soundbites":
+        song_url = next_question["question"]
+        if "/track/" in song_url:
+            try:
+                track_id = song_url.split("/track/")[1].split("?")[0]
+                return f"https://open.spotify.com/embed/track/{track_id}"
+                # next_question["question"] = "Guess the year of this song!"
+            except IndexError:
+                return None  
+        else:
+            return None 
+    return None
 
 @app.route('/win_screen', methods=['GET', 'POST'])
 def win_screen():
