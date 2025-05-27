@@ -130,7 +130,7 @@ def game():
     
     song_embed_url = song_url(next_question)  
 
-    timeline = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
+    timeline = sorted_timeline()
     locked = session.get('locked', [])
     unlocked = session.get('unlocked', [])
     score = session.get('score', [])
