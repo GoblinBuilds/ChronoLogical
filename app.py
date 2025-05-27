@@ -1,59 +1,59 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, json
 import random
-import psycopg2
+# import psycopg2
 
 app = Flask(__name__)
 app.secret_key = 'dev'
 
 
-def load_questions(table_name='questions'):
-    """
-    Fetches all rows from the specified table in the PostgreSQL database.
-    If the database connection fails, it returns an empty list.
+# def load_questions(table_name='questions'):
+#     """
+#     Fetches all rows from the specified table in the PostgreSQL database.
+#     If the database connection fails, it returns an empty list.
     
-    Args:
-        table_name (str): The name of the table to fetch questions from.
+#     Args:
+#         table_name (str): The name of the table to fetch questions from.
     
-    Returns:
-        list: A list of questions from the database.
-    """
-    try:
-         # Hardcoded database connection details
-        conn = psycopg2.connect(
-            dbname="aq3524",
-            user="aq3524",
-            password="abc123",
-            host="pgserver.mau.se",
-            port="5432"
-        )
-        cursor = conn.cursor()
-        # Dynamically query the specified table
-        query = f"SELECT question_id, date, question, category FROM {table_name}"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        cursor.close()
-        conn.close()
-        # Convert rows to a list of dictionaries
-        questions = [
-            {"question_id": row[0], "date": row[1], "question": row[2], "category": row[3]}
-            for row in rows
-        ]
-        return questions
-    except Exception as e:
-        print(f"Error: {e}")
-        return []
-    
-QUESTIONS = load_questions('questions')
-
-
-# def load_questions(filename='questions.json'):
+#     Returns:
+#         list: A list of questions from the database.
+#     """
 #     try:
-#         with open(filename, 'r') as file:
-#             questions = json.load(file)
-#             return questions
-#     except FileNotFoundError:
-#         print("Error: questions.json not found.")
-# QUESTIONS = load_questions('questions.json')
+#          # Hardcoded database connection details
+#         conn = psycopg2.connect(
+#             dbname="aq3524",
+#             user="aq3524",
+#             password="abc123",
+#             host="pgserver.mau.se",
+#             port="5432"
+#         )
+#         cursor = conn.cursor()
+#         # Dynamically query the specified table
+#         query = f"SELECT question_id, date, question, category FROM {table_name}"
+#         cursor.execute(query)
+#         rows = cursor.fetchall()
+#         cursor.close()
+#         conn.close()
+#         # Convert rows to a list of dictionaries
+#         questions = [
+#             {"question_id": row[0], "date": row[1], "question": row[2], "category": row[3]}
+#             for row in rows
+#         ]
+#         return questions
+#     except Exception as e:
+#         print(f"Error: {e}")
+#         return []
+    
+# QUESTIONS = load_questions('questions')
+
+
+def load_questions(filename='questions.json'):
+    try:
+        with open(filename, 'r') as file:
+            questions = json.load(file)
+            return questions
+    except FileNotFoundError:
+        print("Error: questions.json not found.")
+QUESTIONS = load_questions('questions.json')
 
 def get_session_list(key):
     """Retrieve a value from the session by key."""

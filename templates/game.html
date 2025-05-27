@@ -6,23 +6,27 @@
 <div class="player_statistics">
   <h3>Stage: {{ session.stage }}</h3>
   <h3>Lives: {{ 3 - session.lifeline_count }}</h3>
-  <h3>Lives: {{ session.score }}</h3>
+  <h3>Score: {{ session.score }}</h3>
 </div>
-<h2 class="question_header">
-  {% if next_question.category == 'Music & Soundbites' %}
-  Guess the year of the song!
-  {% else %}
-  {{ next_question.question }}
-  {% endif %}
-</h2>
-{% if song_embed_url %}
-<div class="spotify-player">
-  <iframe style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
-    allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    loading="lazy">
-  </iframe>
-</div>
+<div class="question_container">
+  <h2 class="question_header" id="dynamic-question">
+    {% if next_question.category == 'Music & Soundbites' %}
+    Guess the year of the song!
+    {% else %}
+    {{ next_question.question }}
+    {% endif %}
+  </h2>
+
+  {% if song_embed_url %}
+  <div class="spotify-player">
+    <iframe style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
+      allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+  </div>
+
 {% endif %}
+</div>
 
 <form method="post">
   <label for="index">Place at index (0–{{ max_index }}):</label>
