@@ -128,18 +128,9 @@ def game():
 
         return redirect(url_for('game'))
 
-    selected = session.get('categories', [])
-    old_questions = session.get('old_questions', [])
-    available = [question for question in QUESTIONS if question['question_id'] not in old_questions and (question['category'] in selected)]
-    if not available:
-        flash("There's no more questions available!")
-        return redirect(url_for('index'))
-
-    if not session.get('current_id'):
-        next_question = random.choice(available)
-        session['current_id'] = next_question['question_id']
-    else:
-        next_question = next((question for question in QUESTIONS if question['question_id'] == session['current_id']), None)
+    next_question = next_question_available()
+    if isinstance(next_question, redirect('').__class__):
+        return next_question
     
     song_embed_url = song_url(next_question)  
 
@@ -227,6 +218,10 @@ def action_place(timeline, next_question, current_id):
 
     returns:
         redirect: game.html or win_screen.html.
+    Args:
+        timeline: The current timeline of questions.
+        next_question: The next question to be displayed.
+        current_id: The ID of the current question.
     """
     user_input = request.form.get('index', -1)
     input_index = int(user_input) if user_input.isdigit() else -1
@@ -260,6 +255,10 @@ def action_buttons(timeline, next_question, current_id):
 
     Returns:
         redirect: game.html.
+    Args:
+        timeline: The current timeline of questions.
+        next_question: The next question to be displayed.
+        current_id: The ID of the current question.
     """
     action = request.form.get('action')
     if action == 'quit':
@@ -276,7 +275,8 @@ def song_url(next_question):
     """
     Extracts the song URL from the next question if the category is 'Music & Soundbites'.
     
-    return: None
+    Return: None
+    Args: next_question (dict): The next question dictionary containing the category and question.
     """
     if next_question["category"] == "Music & Soundbites":
         song_url = next_question["question"]
@@ -290,6 +290,29 @@ def song_url(next_question):
         else:
             return None 
     return None
+
+def next_question_available():
+    """
+    This function checks if there are any available questions left in the game.
+    - no questions left: flash a message and redirect to index
+    - if there are no current questions: select a random question from the available ones
+    
+    Return: next question to be displayed in the game.
+    """
+    selected = session.get('categories', [])
+    old_questions = session.get('old_questions', [])
+    available = [question for question in QUESTIONS if question['question_id'] not in old_questions and (question['category'] in selected)]
+    if not available:
+        flash("There's no more questions available!")
+        return redirect(url_for('index'))
+
+    if not session.get('current_id'):
+        next_question = random.choice(available)
+        session['current_id'] = next_question['question_id']
+    else:
+        next_question = next((question for question in QUESTIONS if question['question_id'] == session['current_id']), None)
+    
+    return next_question
 
 @app.route('/win_screen', methods=['GET', 'POST'])
 def win_screen():
