@@ -116,13 +116,9 @@ def game():
     """
     if request.method == 'POST':
         current_id = session.get('current_id')
-
-        if current_id:
-            next_question = next((question for question in QUESTIONS if question['question_id'] == current_id), None)
-        else:
-            next_question = None
+        next_question = get_current_question(current_id)
         
-        timeline = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
+        timeline = sorted_timeline()
 
         action_buttons(timeline, next_question, current_id)
 
@@ -313,6 +309,33 @@ def next_question_available():
         next_question = next((question for question in QUESTIONS if question['question_id'] == session['current_id']), None)
     
     return next_question
+
+def get_current_question(current_id):
+    """
+    Retrieves the current question from the session.
+    
+    Returns:
+        dict: The current question dictionary if it exists, otherwise None.
+
+    Args:
+        current_id (str): The ID of the current question.
+    """
+    if current_id:
+        next_question = next((question for question in QUESTIONS if question['question_id'] == current_id), None)
+        return next_question
+    else:
+        next_question = None
+    
+    return  next_question
+
+def sorted_timeline():
+    """
+    Returns a sorted timeline of questions based on their date.
+    
+    Returns:
+        list: A sorted list of dictionaries containing locked and unlocked questions.
+    """
+    return sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
 
 @app.route('/win_screen', methods=['GET', 'POST'])
 def win_screen():
