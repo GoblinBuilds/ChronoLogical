@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You Win Screen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #111;
+      overflow: hidden;
+    }
+
+    .win-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #00ff88;
+      z-index: 999;
+      opacity: 0;
+    }
+
+    .win-screen h1 {
+      font-size: 5rem;
+      margin: 0;
+    }
+
+    .win-screen p {
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .play-again-btn {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background: #00ff88;
+      color: black;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="win-screen" id="winScreen">
+    <h1>🎉 YOU WIN! 🎉</h1>
+    <p>Congratulations, champion!</p>
+    <button class="play-again-btn" onclick="playAgain()">Play Again</button>
+  </div>
+
+  <!-- Confetti & GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    // Show win screen with animation
+    gsap.to("#winScreen", {
+      opacity: 1,
+      duration: 1,
+      ease: "power2.out",
+      onStart: launchConfetti
+    });
+
+    function playAgain() {
+      alert("Starting new game...");
+      // Add your own game restart logic
+    }
+
+    function launchConfetti() {
+      const duration = 3 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+</body>
+</html>
