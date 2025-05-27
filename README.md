@@ -11,6 +11,7 @@ https://github.com/GoblinBuilds/ChronoLogical
 
 # to do:
 
+    Får reda på rätt svar när man har fel - Moa
 
     Score - Moa
 
@@ -20,7 +21,7 @@ https://github.com/GoblinBuilds/ChronoLogical
 
         Pop-up window - DONE(Just need to fix some css for it) - Leonard
 
-    Db connection - Moa
+    Db connection - Moa - DONE (needs to create env file and import psycopg2)
 
         More questions - Moa
 
