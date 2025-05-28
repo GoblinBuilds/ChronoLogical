@@ -417,7 +417,7 @@ def validate_drop():
     question_id = data['question_id']
     timeline_ids = data['timeline']
 
-    next_question = next((question for question in QUESTIONS if question['question_id'] == question_id), None)
+    next_question = get_current_question(question_id)
     timeline = [next((question for question in QUESTIONS if question['question_id'] == qid), None) for qid in timeline_ids]
 
     index = timeline_ids.index(question_id)
