@@ -21,6 +21,31 @@ body {
     padding-top: 2%;
 }
 
+.sortable_container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    width: 100%;
+    min-height: 180px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.card.correct {
+  border: 5px solid #4CAF50;
+  background-color: #e6ffea; /* green tint */
+}
+
+.card.unlocked {
+  border: 5px solid #FFA500;
+  background-color: #fff4e6; /* orange tint */
+}
+
+
+
 /* Main Container for content*/
 #container {
     position: fixed;
@@ -38,9 +63,15 @@ body {
     padding-bottom: 20px;
     height: 100vh;
 }
-.spotify-player{
-    width: 30%;
-    margin: auto;
+
+.spotify_player{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    height: 80px;
+    z-index: 1000;
+
 }
 /* Styling for the container box */
 #container::before {
@@ -302,6 +333,19 @@ body {
 
 .modal_footer button:hover {
     background-color: #525252;
+}
+
+#winModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 10001;
 }
 
 

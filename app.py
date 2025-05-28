@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, json
+from flask import Flask, render_template, request, redirect, url_for, session, flash, json, jsonify
 import random
 import psycopg2
 
@@ -79,7 +79,7 @@ def init_session(category):
     if available_questions:
         random_question = random.choice(available_questions)
         session['locked'] = [random_question]
-        # session['old_questions'] = [random_question['question_id']]
+        session['old_questions'] = [random_question['question_id']]
     else:
         flash("No questions available in the selected category. Please select a different category.")
         
@@ -148,36 +148,29 @@ def check_valid_placement(combined_timeline, next_question, index):
     - If the index is at the end of the list: the next_question date must be greater than or equal to the date of the last element.
     - If the index is in the middle of the list: the next_question date must be between the dates surrounding elements.
 
+    Returns:
+        Bool: True if the next_question can be validly placed at the user selected index otherwise False.
+
     Args:
         combined_timeline (list): A list of dictionaries, checks values at date.
         next_question (dict): The new next_question to be placed.
         index (int): The user input index  to check if the next_question can be placed at that index.
-
-    Returns:
-        bool: True if the next_question can be validly placed at the user selected index otherwise False.
     """
-    timeline = combined_timeline
-    input_index = index
+    timeline = combined_timeline[:]
+    timeline.insert(index, next_question)
 
-    valid = False
-    question_date = next_question['date']
-    if len(timeline) == 0:
-        valid = True
-    elif input_index == 0:
-        valid = question_date <= timeline[0]['date']
-    elif input_index == len(timeline):
-        valid = question_date >= timeline[-1]['date']
-    else:
-        valid = timeline[input_index-1]['date'] <= question_date <= timeline[input_index]['date']
-
-    return valid
+    dates = [item['date'] for item in timeline]
+    return dates == sorted(dates)
 
 def action_quit():
     """
     Handles the quit action by clearing the session and redirecting to the index.
 
     returns:
-        redirect: index.html.
+        Redirect: index.html.
+
+    Args:
+        None
     """
     session.clear()
     return redirect(url_for('index'))
@@ -191,6 +184,9 @@ def action_lock():
 
     returns:
         redirect: game.html or index.html.
+
+    Args:
+        None
     """
     if session.get('unlocked'):
         session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
@@ -198,6 +194,7 @@ def action_lock():
         session['lifeline_count'] = session.get('lifeline_count', 0) + 1
         # Update score based on number of locked cards
         session['score'] = len(session['locked'])
+
         lives_left = 3 - session['lifeline_count']
         flash('The timeline is locked!')
         if lives_left > 0:
@@ -207,56 +204,58 @@ def action_lock():
             return redirect(url_for('index'))
     return redirect(url_for('game'))
 
-def action_place(timeline, next_question, current_id):
-    """
-    Handles the placement of a question in the timeline based on user input.
-    The function checks if the placement is valid and updates the session accordingly.
-    - Valid placement: add the question to the unlocked timeline and updates the old questions.
-    - Invalid placement: clear the unlocked timeline and shows an error message.
-    - Placing 5 questions: redirect to the win screen.
-    - Invalid input index: show an error message.
+# def action_place(timeline, next_question, current_id):
+#     """
+#     Handles the placement of a question in the timeline based on user input.
+#     The function checks if the placement is valid and updates the session accordingly.
+#     - Valid placement: add the question to the unlocked timeline and updates the old questions.
+#     - Invalid placement: clear the unlocked timeline and shows an error message.
+#     - Placing 5 questions: redirect to the win screen.
+#     - Invalid input index: show an error message.
 
-    returns:
-        redirect: game.html or win_screen.html.
-    Args:
-        timeline: The current timeline of questions.
-        next_question: The next question to be displayed.
-        current_id: The ID of the current question.
-    """
-    user_input = request.form.get('index', -1)
-    input_index = int(user_input) if user_input.isdigit() else -1
-    if input_index == -1:
-        flash('Invalid action.')
-        return redirect(url_for('game'))
+#     returns:
+#         Redirect: game.html or win_screen.html.
+
+#     Args:
+#         Timeline: The current timeline of questions.
+#         next_question: The next question to be displayed.
+#         current_id: The ID of the current question.
+#     """
+#     user_input = request.form.get('index', -1)
+#     input_index = int(user_input) if user_input.isdigit() else -1
+#     if input_index == -1:
+#         flash('Invalid action.')
+#         return redirect(url_for('game'))
             
-    if 0 <= input_index <= len(timeline):
-        valid_placement = check_valid_placement(timeline, next_question, input_index)
-        if valid_placement:
-            session['unlocked'] = sorted(session.get('unlocked', []) + [next_question], key=lambda e: e['date'])
-            old = session.get('old_questions', [])
-            old.append(current_id)
-            session['old_questions'] = old
-            # Allow new questions to be loaded
-            session.pop('current_id', None) 
-        else:
-            session['unlocked'] = []
-            session.pop('current_id', None)
-            flash('Wrong answer, lost unlocked timeline.')
+#     if 0 <= input_index <= len(timeline):
+#         valid_placement = check_valid_placement(timeline, next_question, input_index)
+#         if valid_placement:
+#             session['unlocked'] = sorted(session.get('unlocked', []) + [next_question], key=lambda e: e['date'])
+#             old = session.get('old_questions', [])
+#             old.append(current_id)
+#             session['old_questions'] = old
+#             # Allow new questions to be loaded
+#             session.pop('current_id', None) 
+#         else:
+#             session['unlocked'] = []
+#             session.pop('current_id', None)
+#             flash('Wrong answer, lost unlocked timeline.')
 
-        if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 5:
-                flash("Congratulations! You've Won!")
-                # session.clear()
-                return redirect(url_for('win_screen'))
-        return redirect(url_for('game'))
+#         if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 2:
+#                 flash("Congratulations! You've Won!")
+#                 # session.clear()
+#                 return redirect(url_for('win_screen'))
+#         return redirect(url_for('game'))
 
 def action_buttons(timeline, next_question, current_id):
     """
     Handles the action buttons in the game.
 
     Returns:
-        redirect: game.html.
+        Redirect: game.html.
+
     Args:
-        timeline: The current timeline of questions.
+        Timeline: The current timeline of questions.
         next_question: The next question to be displayed.
         current_id: The ID of the current question.
     """
@@ -265,8 +264,8 @@ def action_buttons(timeline, next_question, current_id):
         return action_quit()
     elif action == 'lock':
         return action_lock()
-    elif action == 'place':
-        return action_place(timeline, next_question, current_id)
+    # elif action == 'place':
+    #     return action_place(timeline, next_question, current_id)
     else:
         flash('Invalid action.')
     return redirect(url_for('game'))
@@ -275,8 +274,11 @@ def song_url(next_question):
     """
     Extracts the song URL from the next question if the category is 'Music & Soundbites'.
     
-    Return: None
-    Args: next_question (dict): The next question dictionary containing the category and question.
+    Return: 
+        None
+
+    Args: 
+        Next_question (dict): The next question dictionary containing the category and question.
     """
     if next_question["category"] == "Music & Soundbites":
         song_url = next_question["question"]
@@ -297,11 +299,16 @@ def next_question_available():
     - no questions left: flash a message and redirect to index
     - if there are no current questions: select a random question from the available ones
     
-    Return: next question to be displayed in the game.
+    Return: 
+        Next question to be displayed in the game.
+
+    Args: 
+        None
     """
     selected = session.get('categories', [])
     old_questions = session.get('old_questions', [])
-    available = [question for question in QUESTIONS if question['question_id'] not in old_questions and (question['category'] in selected)]
+    available = [question for question in QUESTIONS if question['question_id'] not in old_questions and question['category'] in selected]
+
     if not available:
         flash("There's no more questions available!")
         return redirect(url_for('index'))
@@ -311,7 +318,7 @@ def next_question_available():
         session['current_id'] = next_question['question_id']
     else:
         next_question = next((question for question in QUESTIONS if question['question_id'] == session['current_id']), None)
-    
+
     return next_question
 
 def get_current_question(current_id):
@@ -338,8 +345,12 @@ def sorted_timeline():
     
     Returns:
         list: A sorted list of dictionaries containing locked and unlocked questions.
+
+    Args:
+        None
     """
     return sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
+
 
 @app.route('/win_screen', methods=['GET', 'POST'])
 def win_screen():
@@ -373,20 +384,64 @@ def win_screen():
             score = session.get('score', 0)
             stage = session.get('stage', 1)
 
-            session['unlocked'] = []
-            session['locked'] = []
-            session['lifeline_count'] = 0 
-
-            session['stage'] = stage + 1
-
-            session['old_questions'] = old_questions  
-            session['score'] = score 
-
-            return redirect(url_for('game')) 
-
         elif action == 'restart':
             return redirect(url_for('index'))
     return render_template('win_screen.html')
+#             session['unlocked'] = []
+#             session['locked'] = []
+#             session['lifeline_count'] = 0 
+
+#             session['stage'] = stage + 1
+
+#             session['old_questions'] = old_questions  
+#             session['score'] = score 
+
+#             return redirect(url_for('game')) 
+
+#         elif action == 'restart':
+#             return redirect(url_for('index'))  
+    
+#     return render_template('win_screen.html')
+
+@app.route('/validate_drop', methods=['POST'])
+def validate_drop():
+    """
+    
+    Args:
+        None
+    
+    Returns:
+        
+    """
+    data = request.get_json()
+    question_id = data['question_id']
+    timeline_ids = data['timeline']
+
+    next_question = next((question for question in QUESTIONS if question['question_id'] == question_id), None)
+    timeline = [next((question for question in QUESTIONS if question['question_id'] == qid), None) for qid in timeline_ids]
+
+    index = timeline_ids.index(question_id)
+    valid = check_valid_placement(timeline, next_question, index)
+
+    if valid:
+        session['unlocked'] = sorted(
+            session.get('unlocked', []) + [next_question],
+            key=lambda e: e['date']
+        )
+        session['old_questions'] = session.get('old_questions', []) + [question_id]
+        session.pop('current_id', None)
+
+        total = len(session.get('unlocked', [])) + len(session.get('locked', []))
+        if total == 2:
+            return jsonify({'valid': True, 'win': True})
+        else:
+            return jsonify({'valid': True, 'win': False})
+
+    else:
+        session['unlocked'] = []
+        session.pop('current_id', None)
+        return jsonify({'valid': False, 'win': False})
+
 
 @app.route('/highscores')
 def highscores():
