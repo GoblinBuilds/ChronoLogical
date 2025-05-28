@@ -424,6 +424,8 @@ def validate_drop():
     valid = check_valid_placement(timeline, next_question, index)
 
     if valid:
+        old = session.get('old_questions', [])
+        old.append(question_id)
         session['unlocked'] = sorted(
             session.get('unlocked', []) + [next_question],
             key=lambda e: e['date']
