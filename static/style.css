@@ -298,6 +298,7 @@ body {
     align-items: flex-start;
     margin-bottom: 20px;
     gap: 15px;
+    color: #525252;
 }
 
 .tutorial_step h3 {
@@ -310,6 +311,10 @@ body {
     margin: 0;
     font-size: 1em;
     color: #525252;
+}
+
+.tutorial_step ul {
+    padding-left: 0;
 }
 
 .icon {
