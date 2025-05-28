@@ -31,21 +31,21 @@ setTimeout(() => {
   if (overlay) overlay.remove();
 }, 5000);
 
-function autoResizeFontToHeight(id, maxFontSize = 4, minFontSize = 2.5, step = 1) {
-  const el = document.getElementById(id);
-  if (!el) return;
+// function autoResizeFontToHeight(id, maxFontSize = 4, minFontSize = 2.5, step = 1) {
+//   const el = document.getElementById(id);
+//   if (!el) return;
 
-  const maxHeight = parseFloat(getComputedStyle(el).maxHeight);
-  el.style.fontSize = `${maxFontSize}em`;
+//   const maxHeight = parseFloat(getComputedStyle(el).maxHeight);
+//   el.style.fontSize = `${maxFontSize}em`;
 
-  // Use requestAnimationFrame to ensure layout is stable
-  requestAnimationFrame(() => {
-    while (el.scrollHeight > maxHeight && parseFloat(el.style.fontSize) > minFontSize) {
-      const currentSize = parseFloat(el.style.fontSize);
-      el.style.fontSize = `${currentSize - step}em`;
-    }
-  });
-}
+//   // Use requestAnimationFrame to ensure layout is stable
+//   requestAnimationFrame(() => {
+//     while (el.scrollHeight > maxHeight && parseFloat(el.style.fontSize) > minFontSize) {
+//       const currentSize = parseFloat(el.style.fontSize);
+//       el.style.fontSize = `${currentSize - step}em`;
+//     }
+//   });
+// }
 
 document.addEventListener("DOMContentLoaded", () => {
   autoResizeFontToHeight("dynamic-question");
