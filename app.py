@@ -423,6 +423,9 @@ def validate_drop():
     index = timeline_ids.index(question_id)
     valid = check_valid_placement(timeline, next_question, index)
 
+    old = session.get('old_questions', [])
+    old.append(question_id)
+
     if valid:
         session['unlocked'] = sorted(
             session.get('unlocked', []) + [next_question],
