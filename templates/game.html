@@ -20,9 +20,9 @@
   </ul>
 </div>
 
-<div class="lock-animation-icon" id="lockIcon">
+<!-- <div class="lock-animation-icon" id="lockIcon">
   <i class="fas fa-lock"></i>
-</div>
+</div> -->
 <!-- <div class="question_container">
    <h2 class="question_header" id="dynamic-question">
     {% if next_question.category == 'Music & Soundbites' %}
@@ -89,6 +89,11 @@
   </div>
 </div>
 
+{% with messages = get_flashed_messages() %}
+  {% if 'SHOW_MODAL' in messages %}
+    <div id="showModalTrigger" style="display: none;"></div>
+  {% endif %}
+{% endwith %}
 <div id="winModal" style="display: none;">
   <div class="modal">
     <h2 class="modal_header">🎉 Congratulations!</h2>
@@ -99,4 +104,6 @@
     </form>
   </div>
 </div>
+
 {% endblock %}
+

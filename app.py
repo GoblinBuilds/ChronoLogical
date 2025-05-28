@@ -121,7 +121,7 @@ def game():
         
         timeline = sorted_timeline()
 
-        action_buttons(timeline, next_question, current_id)
+        action_buttons()
 
         return redirect(url_for('game'))
 
@@ -200,8 +200,7 @@ def action_lock():
         if lives_left > 0:
             flash(f'You have {lives_left} life(s) left.')
         else:
-            session.clear()
-            return redirect(url_for('index'))
+            flash('SHOW_MODAL')
     return redirect(url_for('game'))
 
 # def action_place(timeline, next_question, current_id):
@@ -247,7 +246,7 @@ def action_lock():
 #                 return redirect(url_for('win_screen'))
 #         return redirect(url_for('game'))
 
-def action_buttons(timeline, next_question, current_id):
+def action_buttons():
     """
     Handles the action buttons in the game.
 

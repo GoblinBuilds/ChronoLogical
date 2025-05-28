@@ -52,20 +52,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const lockButton = document.querySelector('button[name="action"][value="lock"]');
-  const lockIcon = document.getElementById("lockIcon");
+// document.addEventListener("DOMContentLoaded", function () {
+//   const lockButton = document.querySelector('button[name="action"][value="lock"]');
+//   const lockIcon = document.getElementById("lockIcon");
 
-  if (lockButton && lockIcon) {
-    lockButton.addEventListener("click", function () {
-      // Reset animation
-      lockIcon.classList.remove("animate");
-      void lockIcon.offsetWidth; // Trigger reflow
-      lockIcon.classList.add("animate");
-    });
-  }
-});
+//   if (lockButton && lockIcon) {
+//     lockButton.addEventListener("click", function () {
+//       // Reset animation
+//       lockIcon.classList.remove("animate");
+//       void lockIcon.offsetWidth; // Trigger reflow
+//       lockIcon.classList.add("animate");
+//     });
+//   }
+// });
 
+  document.addEventListener("DOMContentLoaded", function () {
+    if (document.getElementById("showModalTrigger")) {
+      const modal = document.getElementById("winModal");
+      modal.style.display = "block";
+    }
+  });
 document.addEventListener('DOMContentLoaded', () => {
   const timeline = document.getElementById('timeline');
   const palette = document.getElementById('palette');

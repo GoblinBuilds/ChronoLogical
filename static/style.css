@@ -1,5 +1,5 @@
 html {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -33,17 +33,6 @@ body {
     margin-bottom: 20px;
     overflow-x: auto;
 }
-
-.card.correct {
-  border: 5px solid #4CAF50;
-  background-color: #e6ffea; /* green tint */
-}
-
-.card.unlocked {
-  border: 5px solid #FFA500;
-  background-color: #fff4e6; /* orange tint */
-}
-
 
 
 /* Main Container for content*/
@@ -163,18 +152,7 @@ body {
   }
 
 
-.timeline_container {
-    width: 90%;
-    position: relative;
-}
-
-.timeline {
-    border: none;
-    border-top: 10px solid white;
-    width: 100%;
-    margin: 0px 0;
-}
-.lock-animation-icon {
+/* .lock-animation-icon {
     position: fixed;
     bottom: 40%;
     left: 20%;
@@ -199,80 +177,85 @@ body {
       opacity: 0;
       transform: translate(-50%, 50%) scale(1);
     }
-  }
+  } */
 
-  .point_cursor{
+.point_cursor{
     cursor: pointer;
 } 
+
+
+
+
+.section {
+  position: relative;   
+  overflow: visible;      
+  padding: 20px;
+}
+
+.sortable_container {
+  position: relative;
+  overflow: visible;      
+  display: flex;           
+  gap: 10px;               
+}
+
+
+/* Card stylings */
 .card {
-    background-color: #ffffff;
+
     background-image: url(img/white-construction-paper-texture-2496301314.jpg);
-    background-size: cover transparent 40%;
+    background-size: cover;
     color: rgb(0, 0, 0);
     border: 3px solid #838282;
-    z-index: 9999;
     border-radius: 6px;
-    padding: 15px;
+    padding: 10px;
     max-width: 100px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform-style: preserve-3d;
-    perspective: 1000px;
+
     min-height: 150px;
     max-height: 150px;
     overflow-y: hidden;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .card:hover {
-    transform: scale(1) translateY(-2px) rotateZ(1deg);
-    box-shadow: 15px 10px 3px rgb(168, 168, 168);
+    transform: scale(1.15);
+    border: 3px solid #d8d8d8;
+    z-index: 10; 
     overflow-y: scroll;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+
 }
 
-.card:active {
-    transform: perspective(800px) rotateX(5deg) rotateY(-5deg);
+.my-element::-webkit-scrollbar {
+  display: none;            
 }
+
+.card.correct {
+  border: 5px solid #4CAF50;
+
+}
+
+.card.unlocked {
+  border: 5px solid #FFA500;
+  /* box-shadow: 15px 10px 3px rgb(168, 168, 168); */
+
+}
+
 
 .date {
     font-size: 2em;
     color: #000;
     margin-top: 5px;
     margin-bottom: 0;
+    font-weight: 700;
 }
 
-.answered_question {
-    font-family: "Interstate", sans-serif;
-}
 
-.locked_card_container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 20px;
-    justify-content: center;
-    min-height: 190px;
-    padding: 5px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    overflow-x: auto;
-    z-index: 9999;
-}
-
-.unlocked_card_container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 5px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    min-height: 160px;
-    overflow-x: auto;
-    z-index: 9999;
-}
+/* Player stats */
 
 .player_statistics {
     display: flex;
@@ -288,6 +271,9 @@ body {
     padding-top: 1%;
 }
 
+
+
+/* Modal and Modal content */
 .overlay {
     display: none;
     position: fixed;
@@ -370,18 +356,23 @@ body {
 }
 
 #winModal {
-  display: none;
+  display: none; 
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.6);
+  display: flex; 
   justify-content: center;
   align-items: center;
   z-index: 10001;
 }
 
+
+
+
+/* Action history styling */
 #action_history_floating {
   position: fixed;
   top: 20px;
