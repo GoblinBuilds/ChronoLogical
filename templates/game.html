@@ -1,67 +1,73 @@
 {% extends "base.html" %}
 {% block head %}
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 {% endblock %}
 
 {% block body %}
 <div class="player_statistics">
   <h3>Stage: {{ session.stage }}</h3>
-  <h3>Lives: {{ 3 - session.lifeline_count }}</h3>
-  <h3>Lives: {{ session.score }}</h3>
+  <h3>Lock-ins: {{ 3 - session.lifeline_count }}</h3>
+  <h3>Score: {{ session.score }}</h3>
 </div>
-<h2 class="question_header">
-  {% if next_question.category == 'Music & Soundbites' %}
-  Guess the year of the song!
-  {% else %}
-  {{ next_question.question }}
-  {% endif %}
-</h2>
+
 {% if song_embed_url %}
-<div class="spotify-player">
-  <iframe style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
-    allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    loading="lazy">
-  </iframe>
-</div>
+  <div class="spotify_player">
+    <iframe style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
+      allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+  </div>
 {% endif %}
 
 <form method="post">
-  <label for="index">Place at index (0–{{ max_index }}):</label>
-  <input type="number" name="index" id="index" min="0" max="{{ max_index }}">
-  <div class="actions">
-    <button class="post_button" type="submit" name="action" value="place">Place</button>
-    <button class="post_button" type="submit" name="action" value="lock">Lock</button>
-    <button class="post_button" type="submit" name="action" value="quit">End Game</button>
-  </div>
+  <button class="post_button" type="submit" name="action" value="lock">Lock Unlocked Cards</button>
+  <button class="post_button" type="submit" name="action" value="quit">Quit</button>
 </form>
 
-<div class="timeline_container">
-  <div id="unlocked_timeline">
-    <div class="unlocked_card_container">
-      {% for entry in unlocked %}
-
-      <div class="card">
-        <p class="date"><strong>{{ entry.date }}</strong> </p>
-        <p class="answered_question">{{ entry.question }}</p>
-      </div>
-
-      {% endfor %}
+<div class="section">
+  <h2>Next Card</h2>
+  <div class="sortable_container" id="palette">
+    {% if next_question %}
+    <div class="card new" data-id="{{ next_question.date }}" data-qid="{{ next_question.question_id }}" data-date="{{ next_question.date }}">
+      {% if next_question.category == 'Music & Soundbites' %}
+      Guess the year of the song!
+      {% else %}
+      {{ next_question.question }}
+      {% endif %}
     </div>
-  </div>
-
-  <hr class="timeline">
-  </hr>
-
-  <div id="locked_timeline">
-    <div class="locked_card_container">
-      {% for entry in locked %}
-
-      <div class="card">
-        <p class="date"><strong>{{ entry.date }}</strong> </p>
-        <p class="answered_question">{{ entry.question }}</p>
-      </div>
-
-      {% endfor %}
-    </div>
+    {% endif %}
   </div>
 </div>
+
+<div class="section">
+  <h2>Timeline</h2>
+  <div class="sortable_container" id="timeline">
+    {% set combined = locked + unlocked %}
+    {% for entry in combined|sort(attribute='date') %}
+    <div class="card {% if entry in locked %}correct{% else %}unlocked{% endif %}" data-id="{{ entry.date }}" data-qid="{{ entry.question_id }}">
+      <p class="date">{{ entry.date }}</p>
+      <p class="answered_question">
+        {% if entry.category == 'Music & Soundbites' %}
+          Spotify Track
+        {% else %}
+          {{ entry.question }}
+        {% endif %}
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div id="winModal" style="display: none;">
+  <div class="modal">
+    <h2 class="modal_header">🎉 Congratulations!</h2>
+    <p>You’ve successfully completed the timeline!</p>
+    <form method="post">
+      <button class="post_button" type="submit" name="action" value="continue">Continue</button>
+      <button class="post_button" type="submit" name="action" value="restart">Restart</button>
+    </form>
+  </div>
+</div>
+
+<div id="order-display">Aktuell ordning: []</div>
 {% endblock %}
