@@ -174,7 +174,36 @@ body {
     width: 100%;
     margin: 0px 0;
 }
+.lock-animation-icon {
+    position: fixed;
+    bottom: 40%;
+    left: 20%;
+    transform: translate(-50%, 50%);
+    font-size: 5rem;
+    color: white;
+    opacity: 0;
+    z-index: 1000;
+    pointer-events: none;
+  }
+  
+  .lock-animation-icon.animate {
+    animation: fadeLock 1s ease-out forwards;
+  }
+  
+  @keyframes fadeLock {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, 50%) scale(1.5);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, 50%) scale(1);
+    }
+  }
 
+  .point_cursor{
+    cursor: pointer;
+} 
 .card {
     background-color: #ffffff;
     background-image: url(img/white-construction-paper-texture-2496301314.jpg);

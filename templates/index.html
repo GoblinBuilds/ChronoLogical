@@ -9,8 +9,8 @@
 <form method="post">
   <h2 class="question_header" for="category">Category:</h2>
   {% for cat in categories %}
-  <input type="checkbox" name="category" value="{{ cat }}" checked>
-  <label for="{{ cat }}">{{ cat }} </label><br>
+  <input type="checkbox" name="category" value="{{ cat }}" class="point_cursor" id="cat_{{ loop.index }}" checked>
+  <label for="cat_{{ loop.index }}" class="point_cursor" >{{ cat }}</label><br>
   {% endfor %}
   </select>
   <button classi="post_button" type="submit">Start game</button>
