@@ -377,6 +377,47 @@ body {
   z-index: 10001;
 }
 
+#action_history_floating {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 260px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  z-index: 1000;
+  cursor: grab;
+}
+
+#action_history_floating .drag-handle {
+  cursor: move;
+  font-weight: bold;
+  color: #f3f3f3;
+  margin: 0;
+}
+
+#action_history_floating h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #f3f3f3;
+}
+
+#action_history_floating ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#action_history_floating li {
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.3rem;
+}
+
 
 @media only screen and (max-width: 1240px) {
     body {

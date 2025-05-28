@@ -405,42 +405,42 @@ def win_screen():
 
 @app.route('/validate_drop', methods=['POST'])
 def validate_drop():
-    """
-    
-    Args:
-        None
-    
-    Returns:
-        
-    """
     data = request.get_json()
     question_id = data['question_id']
     timeline_ids = data['timeline']
 
     next_question = next((question for question in QUESTIONS if question['question_id'] == question_id), None)
     timeline = [next((question for question in QUESTIONS if question['question_id'] == qid), None) for qid in timeline_ids]
-
     index = timeline_ids.index(question_id)
+
     valid = check_valid_placement(timeline, next_question, index)
 
-    if valid:
-        session['unlocked'] = sorted(
-            session.get('unlocked', []) + [next_question],
-            key=lambda e: e['date']
-        )
-        session['old_questions'] = session.get('old_questions', []) + [question_id]
-        session.pop('current_id', None)
+    question_text = next_question['question']
+    if next_question.get('category') == 'Music & Soundbites':
+        question_text = next_question.get('title', 'Spotify Track')
 
-        total = len(session.get('unlocked', [])) + len(session.get('locked', []))
-        if total == 2:
-            return jsonify({'valid': True, 'win': True})
-        else:
-            return jsonify({'valid': True, 'win': False})
+    history = session.get('history', [])
+
+    if valid:
+        history.append(f"Correctly placed: \"{question_text}\" at {next_question['date']}")
+        session['unlocked'] = sorted(session.get('unlocked', []) + [next_question], key=lambda e: e['date'])
+        
+        if question_id not in session.get('old_questions', []):
+            session['old_questions'] = session.get('old_questions', []) + [question_id]
+
+        session.pop('current_id', None)
 
     else:
+        history.append(f"Incorrect placement: \"{question_text}\" correct date is {next_question['date']}")
         session['unlocked'] = []
         session.pop('current_id', None)
-        return jsonify({'valid': False, 'win': False})
+        if question_id not in session.get('old_questions', []):
+            session['old_questions'] = session.get('old_questions', []) + [question_id]
+
+    session['history'] = history
+    return jsonify({'valid': valid})
+
+
 
 
 @app.route('/highscores')

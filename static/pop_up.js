@@ -108,11 +108,45 @@ document.addEventListener('DOMContentLoaded', () => {
           if (data.win) {
             document.getElementById("winModal").style.display = "flex"; 
           } else {
-            alert("Correct placement! Loading next question...");
             window.location.reload();
           }
         }
       });
+    }
+  });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const panel = document.getElementById("action_history_floating");
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const x = localStorage.getItem("historyPanelX");
+    const y = localStorage.getItem("historyPanelY");
+    if (x !== null && y !== null) {
+      panel.style.transform = `translate(${x}px, ${y}px)`;
+      panel.setAttribute("data-x", x);
+      panel.setAttribute("data-y", y);
+    }
+  });
+
+  interact('.draggable').draggable({
+    allowFrom: '.drag-handle',
+    listeners: {
+      move (event) {
+        const target = event.target;
+        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+        target.style.transform = `translate(${x}px, ${y}px)`;
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
+
+        // ✅ Save to localStorage
+        localStorage.setItem("historyPanelX", x);
+        localStorage.setItem("historyPanelY", y);
+      }
     }
   });
 });
