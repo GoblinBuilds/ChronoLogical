@@ -63,6 +63,7 @@ body {
     padding-bottom: 20px;
     height: 100vh;
 }
+
 .spotify_player{
     position: fixed;
     top: 20px;
@@ -70,6 +71,7 @@ body {
     width: 300px;
     height: 80px;
     z-index: 1000;
+
 }
 /* Styling for the container box */
 #container::before {

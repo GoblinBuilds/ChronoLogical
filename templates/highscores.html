@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>High Scores</h2>
+<table>
+  <tr><th>Name</th><th>Score</th><th>Date</th></tr>
+  {% for name, score, date in scores %}
+    <tr>
+      <td>{{ name }}</td>
+      <td>{{ score }}</td>
+      <td>{{ date.strftime('%Y-%m-%d %H:%M') }}</td>
+    </tr>
+  {% endfor %}
+</table>
+<a href="{{ url_for('index') }}">Back to game</a>
+{% endblock %}

@@ -18,7 +18,7 @@ def load_questions(table_name='questions'):
         list: A list of questions from the database.
     """
     try:
-         # Hardcoded database connection details
+         # Temporary hardcoded database connection details
         conn = psycopg2.connect(
             dbname="aq3524",
             user="aq3524",
@@ -110,6 +110,7 @@ def game():
             'lock' to lock their current timeline. This action decrease a lifeline. No new question can be loaded with this action.
             'quit' to return to the index.
 
+           'score' is updated based on the number of questions placed in the timeline.
             When a question is answered through 'place' or if the timeline is locked the question is added to a list tracking what questions have already been shown
             prevening it from appering several times.
         Renders game.html template
@@ -133,9 +134,9 @@ def game():
     timeline = sorted_timeline()
     locked = session.get('locked', [])
     unlocked = session.get('unlocked', [])
-    score = session.get('score', [])
-
+    score = session.get('score', 0)
     return render_template('game.html', next_question=next_question, song_embed_url=song_embed_url, locked=locked, unlocked=unlocked, score=score, max_index=len(timeline))
+ 
 
 def check_valid_placement(combined_timeline, next_question, index):
     """
@@ -180,6 +181,7 @@ def action_lock():
     If the timeline is already locked, increase the lifeline count and check if the player has lost all lives.
     If the player has no lives left, clear the session and redirect to the index.
 
+
     returns:
         redirect: game.html or index.html.
 
@@ -190,6 +192,9 @@ def action_lock():
         session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
         session['unlocked'] = []
         session['lifeline_count'] = session.get('lifeline_count', 0) + 1
+        # Update score based on number of locked cards
+        session['score'] = len(session['locked'])
+
         lives_left = 3 - session['lifeline_count']
         flash('The timeline is locked!')
         if lives_left > 0:
@@ -346,19 +351,42 @@ def sorted_timeline():
     """
     return sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
 
-# @app.route('/win_screen', methods=['GET', 'POST'])
-# def win_screen():
-#     """This function renders win_screen.html. Actions POST in the HTML-file are:
-#     - continue: continue the game to the next stage.
-#     - restart: restart the game.
-#     """
-#     if request.method == 'POST':
-#         action = request.form.get('action')
-#         if action == 'continue':
-#             old_questions = session.get('old_questions', [])
-#             score = session.get('score', 0)
-#             stage = session.get('stage', 1)
 
+@app.route('/win_screen', methods=['GET', 'POST'])
+def win_screen():
+    if request.method == 'POST':
+        action = request.form.get('action')
+        if action == 'submit_score':
+            player_name = request.form.get('player_name')
+            score = session.get('score', 0)
+            try:
+                conn = psycopg2.connect(
+                    dbname="aq3524",
+                    user="aq3524",
+                    password="abc123",
+                    host="pgserver.mau.se",
+                    port="5432"
+                )
+                cursor = conn.cursor()
+                cursor.execute(
+                    "INSERT INTO highscores (player_name, score) VALUES (%s, %s)",
+                    (player_name, score)
+                )
+                conn.commit()
+                cursor.close()
+                conn.close()
+                flash("Score submitted!")
+            except Exception as e:
+                flash(f"Error saving high score: {e}")
+            return redirect(url_for('highscores'))
+        elif action == 'continue':
+            old_questions = session.get('old_questions', [])
+            score = session.get('score', 0)
+            stage = session.get('stage', 1)
+
+        elif action == 'restart':
+            return redirect(url_for('index'))
+    return render_template('win_screen.html')
 #             session['unlocked'] = []
 #             session['locked'] = []
 #             session['lifeline_count'] = 0 
@@ -415,7 +443,25 @@ def validate_drop():
         return jsonify({'valid': False, 'win': False})
 
 
-
+@app.route('/highscores')
+def highscores():
+    try:
+        conn = psycopg2.connect(
+            dbname="aq3524",
+            user="aq3524",
+            password="abc123",
+            host="pgserver.mau.se",
+            port="5432"
+        )
+        cursor = conn.cursor()
+        cursor.execute("SELECT player_name, score, achieved_at FROM highscores ORDER BY score DESC, achieved_at ASC LIMIT 10")
+        scores = cursor.fetchall()
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        flash(f"Error loading high scores: {e}")
+        scores = []
+    return render_template('highscores.html', scores=scores)
 
 
 if __name__ == '__main__':

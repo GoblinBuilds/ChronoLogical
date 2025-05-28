@@ -3,9 +3,11 @@
 {% endblock %}
 
 {% block body %}
-<h2 class="question_header">Congratulation?</h2>
+<h2 class="question_header">Congratulations!</h2>
 
 <form method="post">
+  <input type="text" name="player_name" placeholder="Enter your name" required>
+  <button class="post_button" type="submit" name="action" value="submit_score">Submit Score</button>
   <button class="post_button" type="submit" name="action" value="continue">Continue</button>
   <button class="post_button" type="submit" name="action" value="restart">Restart</button>
 </form>

@@ -49,6 +49,7 @@ function autoResizeFontToHeight(id, maxFontSize = 4, minFontSize = 2.5, step = 1
 
 document.addEventListener("DOMContentLoaded", () => {
   autoResizeFontToHeight("dynamic-question");
+
 });
 
 
@@ -103,5 +104,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-
