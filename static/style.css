@@ -327,6 +327,11 @@ body {
     align-items: flex-start;
     margin-bottom: 20px;
     gap: 15px;
+    color: #525252;
+}
+
+.tutorial_step ul{
+    padding: 0;
 }
 
 .tutorial_step h3 {

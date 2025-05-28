@@ -415,6 +415,7 @@ def validate_drop():
 
     valid = check_valid_placement(timeline, next_question, index)
 
+
     question_text = next_question['question']
     if next_question.get('category') == 'Music & Soundbites':
         question_text = next_question.get('title', 'Spotify Track')
