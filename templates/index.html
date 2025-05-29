@@ -4,15 +4,89 @@
 {% endblock %}
 
 {% block body %}
-<h1>Choose Category</h1>
+<h1>ChronoLogical</h1>
+<div class="index_container">
+  <div class="categories_container">
+  <!-- <h1>Choose Category</h1> -->
 
-<form method="post">
-  <h2 class="question_header" for="category">Category:</h2>
-  {% for cat in categories %}
-  <input type="checkbox" name="category" value="{{ cat }}" class="point_cursor" id="cat_{{ loop.index }}" checked>
-  <label for="cat_{{ loop.index }}" class="point_cursor" >{{ cat }}</label><br>
-  {% endfor %}
-  </select>
-  <button classi="post_button" type="submit">Start game</button>
-</form>
+  <form method="post" id="form">
+    <h2 class="question_header" for="category">Category:</h2>
+    {% for cat in categories %}
+    <input type="checkbox" name="category" value="{{ cat }}" class="point_cursor custom-checkbox" id="cat_{{ loop.index }}" checked>
+    <label for="cat_{{ loop.index }}" class="point_cursor" >{{ cat }}</label><br>
+    {% endfor %}
+    </select>
+
+  </form>
+  </div>
+
+  <div class="center_button_wrapper">
+    <button class="start_button" type="submit" form="form">Start game!</button>
+  </div>
+  <div class="leaderboard_container"> 
+    <h2 class="question_header"> Leaderboard:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>ZAPMASTER</td>
+          <td>98,420</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>PIXELKID</td>
+          <td>91,750</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>NEONNOVA</td>
+          <td>88,900</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>GL1TCH</td>
+          <td>85,330</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>R3TRO</td>
+          <td>82,000</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>BYTEBLADE</td>
+          <td>78,640</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>HACKSRUS</td>
+          <td>74,290</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>LAGKILLER</td>
+          <td>70,110</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>ARCADEBEAST</td>
+          <td>68,420</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>QU33NPIXEL</td>
+          <td>65,750</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+</div>
 {% endblock %}

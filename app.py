@@ -181,7 +181,6 @@ def action_lock():
     If the timeline is already locked, increase the lifeline count and check if the player has lost all lives.
     If the player has no lives left, clear the session and redirect to the index.
 
-
     returns:
         redirect: game.html or index.html.
 
@@ -350,7 +349,6 @@ def sorted_timeline():
     """
     return sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
 
-
 @app.route('/win_screen', methods=['GET', 'POST'])
 def win_screen():
     if request.method == 'POST':
@@ -439,9 +437,6 @@ def validate_drop():
 
     session['history'] = history
     return jsonify({'valid': valid})
-
-
-
 
 @app.route('/highscores')
 def highscores():
