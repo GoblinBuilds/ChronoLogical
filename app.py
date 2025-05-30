@@ -72,7 +72,7 @@ def init_session(category):
     session['lifeline_count'] = 0
     session['old_questions'] = []
     session['stage'] = 1 
-    session['score'] = 000 
+    session['score'] = 0
 
     available_questions = [question for question in QUESTIONS if question['category'] in category]
 
@@ -82,6 +82,7 @@ def init_session(category):
         session['old_questions'] = [random_question['question_id']]
     else:
         flash("No questions available in the selected category. Please select a different category.")
+        # You should redirect or handle this case in the calling function
         
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -91,12 +92,32 @@ def index():
         if not category_list:
             flash("Please select at least one category.")
             return redirect(url_for('index'))
-        """category = [cat for cat in category_list if cat["category"] in category_list]"""
+        available_questions = [q for q in QUESTIONS if q['category'] in category_list]
+        if not available_questions:
+            flash("No questions available in the selected category. Please select a different category.")
+            return redirect(url_for('index'))
         init_session(category_list)
         return redirect(url_for('game'))
 
     categories = sorted({question['category'] for question in QUESTIONS}, key = str.lower)
-    return render_template('index.html', categories = categories)
+    # Fetch top 10 scores
+    try:
+        conn = psycopg2.connect(
+            dbname="aq3524",
+            user="aq3524",
+            password="abc123",
+            host="pgserver.mau.se",
+            port="5432"
+        )
+        cursor = conn.cursor()
+        cursor.execute("SELECT player_name, score, achieved_at FROM highscores ORDER BY score DESC, achieved_at ASC LIMIT 10")
+        scores = cursor.fetchall()
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        flash(f"Error loading high scores: {e}")
+        scores = []
+    return render_template('index.html', categories=categories, scores=scores)
 
 
 @app.route('/game', methods=['GET', 'POST'])
@@ -425,8 +446,12 @@ def validate_drop():
     session['history'] = history
     return jsonify({'valid': valid})
 
-@app.route('/highscores')
-def highscores():
+
+
+@app.route('/submit_score', methods=['POST'])
+def submit_score():
+    player_name = request.form.get('player_name')
+    score = request.form.get('score', 0)
     try:
         conn = psycopg2.connect(
             dbname="aq3524",
@@ -436,15 +461,38 @@ def highscores():
             port="5432"
         )
         cursor = conn.cursor()
-        cursor.execute("SELECT player_name, score, achieved_at FROM highscores ORDER BY score DESC, achieved_at ASC LIMIT 10")
-        scores = cursor.fetchall()
+        cursor.execute(
+            "INSERT INTO highscores (player_name, score) VALUES (%s, %s)",
+            (player_name, score)
+        )
+        conn.commit()
+        cursor.close()
+        conn.close()
+        flash("Score submitted!")
+        flash("SHOW_HIGHSCORES")  # <--- Add this line
+    except Exception as e:
+        flash(f"Error saving high score: {e}")
+    return redirect(url_for('index'))
+
+@app.context_processor
+def inject_highscores():
+    try:
+        conn = psycopg2.connect(
+            dbname="aq3524",
+            user="aq3524",
+            password="abc123",
+            host="pgserver.mau.se",
+            port="5432"
+        )
+        cursor = conn.cursor()
+        cursor.execute("SELECT player_name, score, achieved_at FROM highscores ORDER BY score DESC, achieved_at ASC LIMIT 20")
+        highscores = cursor.fetchall()
         cursor.close()
         conn.close()
     except Exception as e:
-        flash(f"Error loading high scores: {e}")
-        scores = []
-    return render_template('highscores.html', scores=scores)
-
+        highscores = []
+    return dict(highscores=highscores)
 
 if __name__ == '__main__':
     app.run(debug=False, use_reloader=False, use_debugger=False)
+
