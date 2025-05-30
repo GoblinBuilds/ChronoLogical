@@ -189,11 +189,13 @@ def action_lock():
     """
     if session.get('unlocked'):
         session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
-        session['unlocked'] = []
-        session['lifeline_count'] = session.get('lifeline_count', 0) + 1
+        if len(session['unlocked']) >= 6: 
+            flash(f'You have locked more than 5 at the same time you kept your lock')
+        else: 
+            session['lifeline_count'] = session.get('lifeline_count', 0) + 1
         # Update score based on number of locked cards
         session['score'] = len(session['locked'])
-
+        session['unlocked'] = []
         lives_left = 3 - session['lifeline_count']
         flash('The timeline is locked!')
         if lives_left > 0:
