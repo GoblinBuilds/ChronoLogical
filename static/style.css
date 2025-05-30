@@ -303,13 +303,10 @@ label {
     max-width: 60px;
     max-height: 100px;
     .date {
-        /*font-size: 1.0em;*/
         font-size: 1.0em;
     }
     .answered_question {
-        /* font-size: 0.5em; */
-        /*display: none;*/
-        display: none;
+        font-size: 0.5em;
     }
 }
 
