@@ -63,7 +63,7 @@ def set_session_list(key, value):
     """Set a value in the session for the given key."""
     session[key] = value
 
-def init_session(category):
+def init_session(category, enable_skips=False):
     """Initialize the session with a selected category and clear all previous data."""
     session.clear()
     session['categories'] = category
@@ -73,6 +73,8 @@ def init_session(category):
     session['old_questions'] = []
     session['stage'] = 1 
     session['score'] = 0
+    session['skips'] = 3 if enable_skips else 0
+
 
     available_questions = [question for question in QUESTIONS if question['category'] in category]
 
@@ -82,16 +84,22 @@ def init_session(category):
         session['old_questions'] = [random_question['question_id']]
     else:
         flash("No questions available in the selected category. Please select a different category.")
-        # You should redirect or handle this case in the calling function
         
 @app.route('/', methods=['GET', 'POST'])
 def index():
     """Function to render index.html and allow users to select a desired caregory of questions."""
     if request.method == 'POST':
         category_list = request.form.getlist('category')
+        enable_skips = request.form.get('enable_skips') == 'yes'
         if not category_list:
             flash("Please select at least one category.")
             return redirect(url_for('index'))
+
+        init_session(category_list, enable_skips)
+        return redirect(url_for('game'))
+    categories = sorted({question['category'] for question in QUESTIONS}, key=str.lower)
+    return render_template('index.html', categories=categories)
+
         available_questions = [q for q in QUESTIONS if q['category'] in category_list]
         if not available_questions:
             flash("No questions available in the selected category. Please select a different category.")
@@ -118,7 +126,6 @@ def index():
         flash(f"Error loading high scores: {e}")
         scores = []
     return render_template('index.html', categories=categories, scores=scores)
-
 
 @app.route('/game', methods=['GET', 'POST'])
 
@@ -285,10 +292,28 @@ def action_buttons():
         return action_quit()
     elif action == 'lock':
         return action_lock()
+    elif action == 'skip':
+        return action_skip()
     # elif action == 'place':
     #     return action_place(timeline, next_question, current_id)
     else:
         flash('Invalid action.')
+    return redirect(url_for('game'))
+
+def action_skip():
+    skips = session.get('skips', 0)
+    if skips > 0:
+        session['skips'] = skips - 1
+        # Remove the current question from old_questions so it doesn't repeat
+        current_id = session.get('current_id')
+        if current_id:
+            old = session.get('old_questions', [])
+            old.append(current_id)
+            session['old_questions'] = old
+        session.pop('current_id', None)  # Force a new question to be loaded
+        flash(f"Skipped! You have {session['skips']} skips left.")
+    else:
+        flash("No skips left!")
     return redirect(url_for('game'))
 
 def song_url(next_question):
