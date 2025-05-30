@@ -29,7 +29,8 @@
   <h2>Next Question</h2>
   <div class="sortable_container" id="palette">
     {% if next_question %}
-    <div class="card new" data-id="{{ next_question.date }}" data-qid="{{ next_question.question_id }}" data-date="{{ next_question.date }}">
+    <div class="card" data-id="{{ next_question.date }}" data-qid="{{ next_question.question_id }}"
+      data-date="{{ next_question.date }}">
       {% if next_question.category == 'Music & Soundbites' %}
       Guess the year of the song!
       {% else %}
@@ -39,6 +40,27 @@
     {% endif %}
   </div>
 </div>
+
+<div class="middle_container">
+  <h2>Your Timeline</h2>
+  <div class="square orange">
+    <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+      <path d="M7 11V7a5 5 0 0 1 9.9-1" />
+    </svg>
+    <div class="info_box">While your cards are orange they are unlocked and will be lost if you answer incorrectly</div>
+  </div>
+  <div class="square green">
+    <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
+    <div class="info_box">Your green cards are locked and will not be lost untill the end of the game</div>
+  </div>
+</div>
+
 
 {% if song_embed_url %}
 <div class="spotify-player">
@@ -54,13 +76,14 @@
   <div class="sortable_container" id="timeline">
     {% set combined = locked + unlocked %}
     {% for entry in combined|sort(attribute='date') %}
-    <div class="card {% if entry in locked %}correct{% else %}unlocked{% endif %}" data-id="{{ entry.date }}" data-qid="{{ entry.question_id }}">
+    <div class="card {% if entry in locked %}correct{% else %}unlocked{% endif %}" data-id="{{ entry.date }}"
+      data-qid="{{ entry.question_id }}">
       <p class="date">{{ entry.date }}</p>
       <p class="answered_question">
         {% if entry.category == 'Music & Soundbites' %}
-          Spotify Track
+        Spotify Track
         {% else %}
-          {{ entry.question }}
+        {{ entry.question }}
         {% endif %}
       </p>
     </div>
@@ -69,9 +92,9 @@
 </div>
 
 {% with messages = get_flashed_messages() %}
-  {% if 'SHOW_MODAL' in messages %}
-    <div id="showModalTrigger" style="display: none;"></div>
-  {% endif %}
+{% if 'SHOW_MODAL' in messages %}
+<div id="showModalTrigger" style="display: none;"></div>
+{% endif %}
 {% endwith %}
 <div id="winModal" style="display: none;">
   <div class="modal">
@@ -89,4 +112,3 @@
 </div>
 
 {% endblock %}
-
