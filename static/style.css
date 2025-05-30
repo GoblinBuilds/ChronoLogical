@@ -298,6 +298,21 @@ label {
     border: 5px solid #FFA500;
 }
 
+.card:nth-child(n){
+    min-width: 60px;
+    max-width: 60px;
+    max-height: 100px;
+    .date {
+        /*font-size: 1.0em;*/
+        font-size: 1.0em;
+    }
+    .answered_question {
+        /* font-size: 0.5em; */
+        /*display: none;*/
+        display: none;
+    }
+}
+
 .date {
     font-size: 2em;
     color: #000;
