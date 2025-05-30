@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
           if (!data.valid) {
             alert("Invalid placement! Unlocks cleared.");
-            window.location.reload();
+            window.location.href = window.location.href;
           } else {
             // Show date and update element class
             el.classList.remove('new');
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.win) {
               document.getElementById("winModal").style.display = "flex";
             } else {
-              window.location.reload();
+              window.location.href = window.location.href;
             }
           }
         });
