@@ -2,9 +2,33 @@ html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+:root {
+    --bg-color: #000;
+    --text-color: #fff;
+    --primary-color: #fff;
+    --border-color: #fff;
+    --checkbox-color: #fff;
+    --button-bg: #000;
+    --button-border: #fff;
+    --button-text: #fff;
+    --button-hover: #363636;
+}
+
+body.light-mode {
+    --bg-color: #fff;
+    --text-color: #000;
+    --primary-color: #000;
+    --border-color: #000;
+    --checkbox-color: #000;
+    --button-bg: #fff;
+    --button-border: #000;
+    --button-text: #000;
+    --button-hover: #ddd;
+}
+
 body {
-    background-color: rgb(0, 0, 0);
-    color: #fff;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     position: relative;
     margin: 0;
     height: 100vh;
@@ -22,7 +46,7 @@ h1 {
 
 /* Flash messages styling*/
 .flashes {
-    color: #ffffff;
+    color: var(--text-color);
     z-index: 9999;
     list-style: none;
     text-align: right;
@@ -36,19 +60,19 @@ h1 {
     gap: 20px;
     align-items: flex-start;
     flex-wrap: nowrap;
-  
+
     overflow-x: auto;
     overflow-y: hidden;
-  
+
     width: 100%;
     max-width: 100vw;
     box-sizing: border-box;
     margin: 0 auto;
     padding-bottom: 10px;
     padding: 15px;
-  }
-  
-  
+}
+
+
 
 /* Main Container for content*/
 #container {
@@ -89,15 +113,14 @@ h1 {
 input[type="checkbox"] {
     transform: scale(2);
     margin: 15px;
-    accent-color: rgb(255, 255, 255);
-    border: 1px solid rgb(255, 255, 255);
+    accent-color: var(--checkbox-color);
     width: 15px;
     height: 15px;
 }
 
 input[type="checkbox"]:checked {
-    background-color: black;
-    border-color: rgb(0, 0, 0);
+    background-color: var(--checkbox-checked-bg);
+    border-color: var(--checkbox-checked-border);
 }
 
 label {
@@ -122,7 +145,7 @@ label {
     left: 0;
     width: 20vw;
     height: 2px;
-    background-color: white;
+    background-color: var(--border-color);
 }
 
 #container::after {
@@ -132,7 +155,7 @@ label {
     right: 0;
     width: 20vw;
     height: 2px;
-    background-color: white;
+    background-color: var(--border-color);
 }
 
 .left_edge {
@@ -141,7 +164,7 @@ label {
     left: 0;
     width: 2px;
     height: 10vh;
-    background-color: white;
+    background-color: var(--border-color);
 }
 
 .right_edge {
@@ -150,7 +173,7 @@ label {
     right: 0;
     width: 2px;
     height: 10vh;
-    background-color: white;
+    background-color: var(--border-color);
 }
 
 .bottom_line {
@@ -158,113 +181,106 @@ label {
     bottom: 10%;
     width: 70vw;
     height: 2px;
-    background-color: white;
+    background-color: var(--border-color);
 }
-/* Styling for the game content */
+
+/* Buttons */
 .menu_container {
     position: absolute;
     top: 20px;
     left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .menu_button {
-    background-color: rgb(0, 0, 0);
-    border: solid 1px #fff;
+    background-color: var(--button-bg);
+    border: solid 1px var(--button-border);
     padding: 10px 15px;
-    color: #fff;
+    color: var(--button-text);
     cursor: pointer;
 }
 
-.menu_button:hover {
-    background-color: #363636;
+.toggle_switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle_switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: var(--button-bg);
+    border: solid 1px var(--button-border);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    background-color: var(--button-border);
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    transition: 0.4s;
+}
+
+input:checked+.slider {
+    background-color: var(--button-bg);
+}
+
+input:checked+.slider::before {
+    transform: translateX(26px);
 }
 
 .post_button {
-    background-color: rgb(0, 0, 0);
-    border: solid 1px #fff;
+    background-color: var(--button-bg);
+    border: solid 1px var(--button-border);
     font-size: 1em;
     font-weight: 700;
     padding: 10px 15px;
-    color: #fff;
+    color: var(--button-text);
     cursor: pointer;
 }
 
+.menu_button:hover,
 .post_button:hover,
 .start_button:hover {
-    background-color: #363636;
+    background-color: var(--button-hover);
 }
 
 .start_button {
-    background-color: rgb(0, 0, 0);
-    border: solid 1px #fff;
+    background-color: var(--button-bg);
+    border: solid 1px var(--button-border);
     font-size: 2em;
     font-weight: 700;
     padding: 10px 15px;
-    color: #fff;
+    color: var(--button-text);
     cursor: pointer;
 }
 
-/* .dropdown_menu {
-    display: none;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-} */
-
-/* .question_container {
-    width: 80%;
-    height: 175px;
-    border: 2px solid #555;
-    text-align: center;
-} */
-
-/* .question_header {
-    margin: 0;
-    padding: 10px;
-    font-weight: bold;
-    overflow: hidden;
-    display: block;
-    transition: font-size 0.2s ease;
-    max-height: 3em;
-} */
-
-
-/* .lock-animation-icon {
-    position: fixed;
-    bottom: 40%;
-    left: 20%;
-    transform: translate(-50%, 50%);
-    font-size: 5rem;
-    color: white;
-    opacity: 0;
-    z-index: 1000;
-    pointer-events: none;
-  }
-  
-  .lock-animation-icon.animate {
-    animation: fadeLock 1s ease-out forwards;
-  }
-  
-  @keyframes fadeLock {
-    0% {
-      opacity: 1;
-      transform: translate(-50%, 50%) scale(1.5);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(-50%, 50%) scale(1);
-    }
-  } */
-
+/* Styling for the game content */
 .section {
     position: relative;
     overflow: visible;
     padding: 20px;
-    
+
 }
+
 .section_timeline {
     position: relative;
     padding: 20px;
@@ -272,23 +288,86 @@ label {
     box-sizing: border-box;
 }
 
+.middle_container {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    padding: 4em 0 1em 0;
+}
+
+.middle_container h2 {
+    margin: 0;
+}
+
+.square {
+    width: 2em;
+    height: 2em;
+    position: relative;
+    cursor: pointer;
+    border-radius: 1px;
+}
+
+.square.orange {
+    background-color: #FFA500;
+}
+
+.square.green {
+    background-color: #4CAF50;
+}
+
+.lock_icon {
+    width: 2em;
+    height: 2em;
+    fill: white;
+}
+
+.info_box {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 1em;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.square:hover .info_box {
+    opacity: 1;
+}
+
+.info_box::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
 
 /* Card stylings */
 .card {
     background-image: url(img/white-construction-paper-texture-2496301314.jpg);
     background-size: cover;
     color: rgb(0, 0, 0);
-    border: 3px solid #838282;
+    border: 3px solid #646464;
     border-radius: 6px;
     padding: 10px;
     max-width: 100px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
     min-height: 150px;
     max-height: 150px;
     overflow-y: hidden;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     flex: 0 0 auto;
 }
@@ -315,20 +394,19 @@ label {
 }
 
 /* When the container has at least a 5th .card, apply these styles to all .card elements */
-.section:has(.card:nth-child(8)) .card {
+.section:has(.card:nth-child(5)) .card {
     min-width: 80px;
     max-width: 80px;
     max-height: 100px;
 }
 
-.section:has(.card:nth-child(8)) .card .date {
+.section:has(.card:nth-child(5)) .card .date {
     font-size: 1.0em;
 }
 
-.section:has(.card:nth-child(8)) .card .answered_question {
+.section:has(.card:nth-child(5)) .card .answered_question {
     font-size: 0.8em;
 }
-
 
 .date {
     font-size: 2em;
@@ -348,7 +426,7 @@ label {
 }
 
 .player_statistics h3 {
-    border-top: 2px white solid;
+    border-top: solid 2px var(--button-border);
     margin-top: 0;
     padding-top: 1%;
 }
@@ -433,8 +511,6 @@ label {
 #winModal {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.6);
@@ -455,7 +531,7 @@ label {
     background-color: rgba(0, 0, 0, 0.08);
     padding: 1rem;
     border-radius: 8px;
-    color: #fff;
+    color: var(--text-color);
     font-size: 0.9em;
     z-index: 1000;
 }
@@ -498,7 +574,7 @@ label {
         font-size: 3em;
     }
 
-  }
+}
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     #action_history_floating {
@@ -508,5 +584,4 @@ label {
         background-color: rgba(0, 0, 0, 0.08);
         font-size: 0.8em;
     }
-  }
-  
+}

@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("showModalTrigger")) {
     const modal = document.getElementById("winModal");
-    modal.style.display = "block";
+    modal.style.display = "flex";
   }
 });
 
