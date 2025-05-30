@@ -25,14 +25,6 @@
   <button class="post_button" type="submit" name="action" value="quit">Quit</button>
 </form>
 
-{% if song_embed_url %}
-<div class="spotify-player">
-  <iframe style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
-    allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    loading="lazy">
-  </iframe>
-</div>
-{% endif %}
 <div class="section">
   <h2>Next Question</h2>
   <div class="sortable_container" id="palette">
@@ -48,6 +40,7 @@
     {% endif %}
   </div>
 </div>
+
 <div class="middle_container">
   <h2>Your Timeline</h2>
   <div class="square orange">
@@ -67,6 +60,18 @@
     <div class="info_box">Your green cards are locked and will not be lost untill the end of the game</div>
   </div>
 </div>
+
+
+{% if song_embed_url %}
+<div class="spotify-player">
+  <iframe style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
+    allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy">
+  </iframe>
+</div>
+{% endif %}
+
+<h2>Your Timeline</h2>
 <div class="section_timeline">
   <div class="sortable_container" id="timeline">
     {% set combined = locked + unlocked %}
