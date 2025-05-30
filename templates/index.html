@@ -37,59 +37,15 @@
         </tr>
       </thead>
       <tbody>
+        {% for name, score, date in scores %}
         <tr>
-          <td>1</td>
-          <td>ZAPMASTER</td>
-          <td>98,420</td>
+          <td>{{ loop.index }}</td>
+          <td>{{ name }}</td>
+          <td>{{ score }}</td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>PIXELKID</td>
-          <td>91,750</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>NEONNOVA</td>
-          <td>88,900</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>GL1TCH</td>
-          <td>85,330</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>R3TRO</td>
-          <td>82,000</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>BYTEBLADE</td>
-          <td>78,640</td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>HACKSRUS</td>
-          <td>74,290</td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>LAGKILLER</td>
-          <td>70,110</td>
-        </tr>
-        <tr>
-          <td>9</td>
-          <td>ARCADEBEAST</td>
-          <td>68,420</td>
-        </tr>
-        <tr>
-          <td>10</td>
-          <td>QU33NPIXEL</td>
-          <td>65,750</td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
-    
   </div>
 </div>
 {% endblock %}

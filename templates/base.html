@@ -19,6 +19,7 @@
     <span class="right_edge"></span>
     <div class="menu_container">
       <button class="menu_button" onclick="openModal()">Tutorial</button>
+      <button class="menu_button" onclick="openHighscoresModal()">High Scores</button>
       <label class="toggle_switch">
         <input type="checkbox" id="themeToggleSwitch">
         <span class="slider"></span>
@@ -44,7 +45,6 @@
               </ul>
             </div>
           </div>
-
           <div class="tutorial_step">
             <i class="fas fa-mouse-pointer icon"></i>
             <div>
@@ -75,6 +75,22 @@
           </div>
         </div>
       </div>
+      <div id="highscores_modal" class="overlay" style="display: none;">
+        <div class="modal">
+          <h2 class="modal_header">High Scores</h2>
+          <table class="modal_header">
+            <tr><th>#</th><th>Name</th><th>Score</th></tr>
+            {% for name, score, date in highscores %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ name }}</td>
+              <td>{{ score }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+          <button class="post_button" onclick="closeHighscoresModal()">Close</button>
+        </div>
+      </div>
     </div>
     <span class="bottom_line"></span>
     {% block body %} {% endblock %}
@@ -91,6 +107,15 @@
   </div>
   {% endif %}
   {% endwith %}
+  {% with messages = get_flashed_messages() %}
+  {% if 'SHOW_HIGHSCORES' in messages %}
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        openHighscoresModal();
+      });
+    </script>
+  {% endif %}
+{% endwith %}
 </body>
 
 </html>

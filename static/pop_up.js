@@ -97,4 +97,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Opens the highscores modal by setting its display style to 'flex'
+function openHighscoresModal() {
+    document.getElementById('highscores_modal').style.display = 'flex';
+}
+
+// Closes the highscores modal by setting its display style to 'none'
+function closeHighscoresModal() {
+    document.getElementById('highscores_modal').style.display = 'none';
+}
+
 
