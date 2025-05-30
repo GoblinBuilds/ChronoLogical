@@ -116,7 +116,7 @@ def get_available_questions(all_questions, old_questions, category=True):
         list: A list of available questions.
     """
 
-    filtered_questions = [entry for entry in all_questions if entry["ID"] not in old_questions]
+    filtered_questions = [entry for entry in all_questions if entry["question_id"] not in old_questions]
     
     if category:
         filtered_questions = [entry for entry in filtered_questions if entry.get("category", "").lower()]
@@ -310,7 +310,7 @@ def game_logic_for_categories(available, old_questions):
             break
 
         current_entry = random.choice(available)
-        old_questions.add(current_entry["ID"])
+        old_questions.add(current_entry["question_id"])
 
         combined_timeline = get_combined_timeline_list()
         display_question_and_timeline(current_entry, combined_timeline)
