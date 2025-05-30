@@ -45,6 +45,7 @@ h1 {
     box-sizing: border-box;
     margin: 0 auto;
     padding-bottom: 10px;
+    padding: 15px;
   }
   
   
@@ -267,7 +268,6 @@ label {
 .section_timeline {
     position: relative;
     padding: 20px;
-    width: 100%;
     overflow-x: hidden;
     box-sizing: border-box;
 }
