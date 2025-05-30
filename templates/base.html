@@ -7,6 +7,7 @@
   <title>ChronoLogical</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="{{ url_for('static', filename='pop_up.js') }}"></script>
+  <script src="{{ url_for('static', filename='game_logic.js') }}"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   {% block head %} {% endblock %}
 </head>
@@ -17,7 +18,7 @@
     <span class="right_edge"></span>
     <div class="menu_container">
       <button class="menu_button" onclick="openModal()">Tutorial</button>
-      <div id="modalOverlay" class="overlay" style="display: none;">
+      <div id="modal_overlay" class="overlay" style="display: none;">
         <div class="modal">
           <h2 class="modal_header"><i class="fas fa-book-open"></i> Welcome to the Tutorial</h2>
 
@@ -70,6 +71,7 @@
         </div>
       </div>
     </div>
+    <span class="bottom_line"></span>
     {% block body %} {% endblock %}
   </div>
 
