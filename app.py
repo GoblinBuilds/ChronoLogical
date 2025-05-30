@@ -63,8 +63,7 @@ def set_session_list(key, value):
     """Set a value in the session for the given key."""
     session[key] = value
 
-def init_session(category, enable_skips=False):
-    """Initialize the session with a selected category and clear all previous data."""
+def init_session(category, enable_skips=False, mode='easy'):
     session.clear()
     session['categories'] = category
     session['unlocked'] = []
@@ -74,10 +73,9 @@ def init_session(category, enable_skips=False):
     session['stage'] = 1 
     session['score'] = 0
     session['skips'] = 3 if enable_skips else 0
-
+    session['mode'] = mode
 
     available_questions = [question for question in QUESTIONS if question['category'] in category]
-
     if available_questions:
         random_question = random.choice(available_questions)
         session['locked'] = [random_question]
@@ -91,41 +89,20 @@ def index():
     if request.method == 'POST':
         category_list = request.form.getlist('category')
         enable_skips = request.form.get('enable_skips') == 'yes'
+        mode = request.form.get('mode', 'easy')
         if not category_list:
             flash("Please select at least one category.")
             return redirect(url_for('index'))
-
-        init_session(category_list, enable_skips)
-        return redirect(url_for('game'))
-    categories = sorted({question['category'] for question in QUESTIONS}, key=str.lower)
-    return render_template('index.html', categories=categories)
 
         available_questions = [q for q in QUESTIONS if q['category'] in category_list]
         if not available_questions:
             flash("No questions available in the selected category. Please select a different category.")
             return redirect(url_for('index'))
-        init_session(category_list)
+        init_session(category_list, enable_skips, mode)
         return redirect(url_for('game'))
 
-    categories = sorted({question['category'] for question in QUESTIONS}, key = str.lower)
-    # Fetch top 10 scores
-    try:
-        conn = psycopg2.connect(
-            dbname="aq3524",
-            user="aq3524",
-            password="abc123",
-            host="pgserver.mau.se",
-            port="5432"
-        )
-        cursor = conn.cursor()
-        cursor.execute("SELECT player_name, score, achieved_at FROM highscores ORDER BY score DESC, achieved_at ASC LIMIT 10")
-        scores = cursor.fetchall()
-        cursor.close()
-        conn.close()
-    except Exception as e:
-        flash(f"Error loading high scores: {e}")
-        scores = []
-    return render_template('index.html', categories=categories, scores=scores)
+    categories = sorted({question['category'] for question in QUESTIONS}, key=str.lower)
+    return render_template('index.html', categories=categories)
 
 @app.route('/game', methods=['GET', 'POST'])
 
@@ -274,6 +251,8 @@ def action_lock():
 #                 # session.clear()
 #                 return redirect(url_for('win_screen'))
 #         return redirect(url_for('game'))
+
+
 
 def action_buttons():
     """
@@ -467,6 +446,14 @@ def validate_drop():
         session.pop('current_id', None)
         if question_id not in session.get('old_questions', []):
             session['old_questions'] = session.get('old_questions', []) + [question_id]
+        # HARD MODE: Lose a lock on incorrect placement
+        if session.get('mode', 'easy') == 'hard':
+            session['lifeline_count'] = session.get('lifeline_count', 0) + 1
+            lives_left = 3 - session['lifeline_count']
+            flash(f"You lost a lock! {lives_left} locks left.")
+            if lives_left <= 0:
+                flash('SHOW_MODAL')
+                # Optionally, handle game over here
 
     session['history'] = history
     return jsonify({'valid': valid})
