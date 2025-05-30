@@ -298,6 +298,22 @@ label {
     border: 5px solid #FFA500;
 }
 
+/* When the container has at least a 5th .card, apply these styles to all .card elements */
+.section:has(.card:nth-child(5)) .card {
+    min-width: 80px;
+    max-width: 80px;
+    max-height: 100px;
+}
+
+.section:has(.card:nth-child(5)) .card .date {
+    font-size: 1.0em;
+}
+
+.section:has(.card:nth-child(5)) .card .answered_question {
+    font-size: 0.5em;
+}
+
+
 .date {
     font-size: 2em;
     color: #000;
