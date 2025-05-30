@@ -37,7 +37,7 @@ h1 {
     justify-content: center;
     align-items: flex-start;
     flex-wrap: nowrap;
-    width: 100%;
+    width: 110%;
     min-height: 180px;
     margin-bottom: 20px;
     overflow-x: auto;
@@ -98,10 +98,10 @@ label {
 }
 
 /* Spotify embed styling */
-.spotify_player {
+.spotify-player {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 20%;
+    left: 15%;
     width: 300px;
     height: 80px;
     z-index: 1000;
@@ -146,6 +146,13 @@ label {
     background-color: white;
 }
 
+.bottom_line {
+    position: absolute;
+    bottom: 15%;
+    width: 70vw;
+    height: 2px;
+    background-color: white;
+}
 /* Styling for the game content */
 .menu_container {
     position: absolute;
@@ -298,6 +305,22 @@ label {
     border: 5px solid #FFA500;
 }
 
+/* When the container has at least a 5th .card, apply these styles to all .card elements */
+.section:has(.card:nth-child(8)) .card {
+    min-width: 80px;
+    max-width: 80px;
+    max-height: 100px;
+}
+
+.section:has(.card:nth-child(8)) .card .date {
+    font-size: 1.0em;
+}
+
+.section:has(.card:nth-child(8)) .card .answered_question {
+    font-size: 0.8em;
+}
+
+
 .date {
     font-size: 2em;
     color: #000;
@@ -420,20 +443,22 @@ label {
     width: 260px;
     max-height: 300px;
     overflow-y: auto;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(0, 0, 0, 0.08);
     padding: 1rem;
     border-radius: 8px;
     color: #fff;
     font-size: 0.9rem;
     z-index: 1000;
-    cursor: grab;
 }
 
 #action_history_floating .drag-handle {
     cursor: move;
     font-weight: bold;
-    color: #f3f3f3;
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
     margin: 0;
+    border: #ffffff solid 1px;
+    text-align: center;
 }
 
 #action_history_floating h3 {

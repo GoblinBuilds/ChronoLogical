@@ -308,7 +308,7 @@ def next_question_available():
     available = [question for question in QUESTIONS if question['question_id'] not in old_questions and question['category'] in selected]
 
     if not available:
-        flash("There's no more questions available!")
+        # flash("There's no more questions available!")
         return redirect(url_for('index'))
 
     if not session.get('current_id'):
@@ -384,21 +384,6 @@ def win_screen():
         elif action == 'restart':
             return redirect(url_for('index'))
     return render_template('win_screen.html')
-#             session['unlocked'] = []
-#             session['locked'] = []
-#             session['lifeline_count'] = 0 
-
-#             session['stage'] = stage + 1
-
-#             session['old_questions'] = old_questions  
-#             session['score'] = score 
-
-#             return redirect(url_for('game')) 
-
-#         elif action == 'restart':
-#             return redirect(url_for('index'))  
-    
-#     return render_template('win_screen.html')
 
 @app.route('/validate_drop', methods=['POST'])
 def validate_drop():

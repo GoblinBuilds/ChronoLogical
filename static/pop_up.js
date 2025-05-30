@@ -1,158 +1,99 @@
+// Opens the modal by setting its display style to 'flex'
 function openModal() {
-  document.getElementById('modalOverlay').style.display = 'flex';
+  document.getElementById('modal_overlay').style.display = 'flex';
 }
 
+// Closes the modal by setting its display style to 'none'
 function closeModal() {
-  document.getElementById('modalOverlay').style.display = 'none';
+  document.getElementById('modal_overlay').style.display = 'none';
 }
 
-  function toggleMenu() {
-    var menu = document.getElementById("dropdown_menu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-function toggleMenu() {
-  var menu = document.getElementById("dropdown_menu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
+// Enable clicking outside the modal to close it
+document.addEventListener('DOMContentLoaded', () => {
+  const modalOverlay = document.getElementById('modal_overlay');
+  const modalBox = modalOverlay.querySelector('.modal');
+
+  modalOverlay.addEventListener('click', (event) => {
+    // Only close if clicking directly on the overlay (not inside modal box)
+    if (!modalBox.contains(event.target)) {
+      closeModal();
+    }
+  });
+});
+
+// // Toggles the visibility of the dropdown menu
+// function toggleMenu() {
+//   var menu = document.getElementById("dropdown_menu");
+//   menu.style.display = menu.style.display === "block" ? "none" : "block";
+// }
+
+// Removes the flash message if the user clicks outside of it
 function dismissFlash(event) {
   const flashes = document.querySelector('.flashes');
   if (!flashes.contains(event.target)) {
-  document.getElementById('flash-overlay').remove();
+    document.getElementById('flash-overlay').remove();
   }
 }
+
+// Removes the flash overlay from the DOM if it exists
 function removeFlash() {
   const overlay = document.getElementById('flash-overlay');
   if (overlay) {
-      overlay.remove();
+    overlay.remove();
   }
 }
+
+// Automatically remove the flash overlay after 5 seconds
 setTimeout(() => {
   const overlay = document.getElementById('flash-overlay');
   if (overlay) overlay.remove();
 }, 5000);
 
-// function autoResizeFontToHeight(id, maxFontSize = 4, minFontSize = 2.5, step = 1) {
-//   const el = document.getElementById(id);
-//   if (!el) return;
+/*
+// Automatically resizes the font size of an element to fit within its maximum height
+function autoResizeFontToHeight(id, maxFontSize = 4, minFontSize = 2.5, step = 1) {
+  const el = document.getElementById(id);
+  if (!el) return;
 
-//   const maxHeight = parseFloat(getComputedStyle(el).maxHeight);
-//   el.style.fontSize = `${maxFontSize}em`;
+  const maxHeight = parseFloat(getComputedStyle(el).maxHeight);
+  el.style.fontSize = `${maxFontSize}em`;
 
-//   // Use requestAnimationFrame to ensure layout is stable
-//   requestAnimationFrame(() => {
-//     while (el.scrollHeight > maxHeight && parseFloat(el.style.fontSize) > minFontSize) {
-//       const currentSize = parseFloat(el.style.fontSize);
-//       el.style.fontSize = `${currentSize - step}em`;
-//     }
-//   });
-// }
+  // Use requestAnimationFrame to ensure layout is stable before measuring
+  requestAnimationFrame(() => {
+    while (el.scrollHeight > maxHeight && parseFloat(el.style.fontSize) > minFontSize) {
+      const currentSize = parseFloat(el.style.fontSize);
+      el.style.fontSize = `${currentSize - step}em`;
+    }
+  });
+}
+*/
 
-document.addEventListener("DOMContentLoaded", () => {
-  autoResizeFontToHeight("dynamic-question");
-
-});
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const lockButton = document.querySelector('button[name="action"][value="lock"]');
-//   const lockIcon = document.getElementById("lockIcon");
-
-//   if (lockButton && lockIcon) {
-//     lockButton.addEventListener("click", function () {
-//       // Reset animation
-//       lockIcon.classList.remove("animate");
-//       void lockIcon.offsetWidth; // Trigger reflow
-//       lockIcon.classList.add("animate");
-//     });
-//   }
+// document.addEventListener("DOMContentLoaded", () => {
+//   autoResizeFontToHeight("dynamic-question");
 // });
 
-  document.addEventListener("DOMContentLoaded", function () {
-    if (document.getElementById("showModalTrigger")) {
-      const modal = document.getElementById("winModal");
-      modal.style.display = "block";
-    }
-  });
-document.addEventListener('DOMContentLoaded', () => {
-  const timeline = document.getElementById('timeline');
-  const palette = document.getElementById('palette');
+/*
+document.addEventListener("DOMContentLoaded", function () {
+  // Adds a click animation to the lock icon when the lock button is clicked
+  const lockButton = document.querySelector('button[name="action"][value="lock"]');
+  const lockIcon = document.getElementById("lockIcon");
 
-  Sortable.create(palette, {
-    group: { name: 'shared', pull: 'clone', put: false },
-    sort: false,
-    animation: 150,
-  });
+  if (lockButton && lockIcon) {
+    lockButton.addEventListener("click", function () {
+      // Reset animation
+      lockIcon.classList.remove("animate");
+      void lockIcon.offsetWidth; // Trigger reflow
+      lockIcon.classList.add("animate");
+    });
+  }
+});
+*/
 
-  Sortable.create(timeline, {
-    group: { name: 'shared', pull: false, put: true },
-    animation: 150,
-    onAdd(evt) {
-      const el = evt.item;
-      const questionId = el.getAttribute('data-qid');
-      const date = el.getAttribute('data-date');
-      const siblings = Array.from(timeline.children).map(e => e.getAttribute('data-qid'));
-
-      fetch('/validate_drop', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ question_id: questionId, timeline: siblings })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (!data.valid) {
-          alert("Invalid placement! Unlocks cleared.");
-          window.location.reload();
-        } else {
-          el.classList.remove('new');
-          el.classList.add('correct');
-          const yearElement = document.createElement('p');
-          yearElement.className = 'date';
-          yearElement.innerHTML = `<strong>${date}</strong>`;
-          el.prepend(yearElement);
-
-          if (data.win) {
-            document.getElementById("winModal").style.display = "flex"; 
-          } else {
-            window.location.reload();
-          }
-        }
-      });
-    }
-  });
+// Shows the win modal immediately if the element with ID "showModalTrigger" is present
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.getElementById("showModalTrigger")) {
+    const modal = document.getElementById("winModal");
+    modal.style.display = "block";
+  }
 });
 
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  const panel = document.getElementById("action_history_floating");
-
-  window.addEventListener("DOMContentLoaded", () => {
-    const x = localStorage.getItem("historyPanelX");
-    const y = localStorage.getItem("historyPanelY");
-    if (x !== null && y !== null) {
-      panel.style.transform = `translate(${x}px, ${y}px)`;
-      panel.setAttribute("data-x", x);
-      panel.setAttribute("data-y", y);
-    }
-  });
-
-  interact('.draggable').draggable({
-    allowFrom: '.drag-handle',
-    listeners: {
-      move (event) {
-        const target = event.target;
-        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-        target.style.transform = `translate(${x}px, ${y}px)`;
-        target.setAttribute('data-x', x);
-        target.setAttribute('data-y', y);
-
-        // ✅ Save to localStorage
-        localStorage.setItem("historyPanelX", x);
-        localStorage.setItem("historyPanelY", y);
-      }
-    }
-  });
-});
