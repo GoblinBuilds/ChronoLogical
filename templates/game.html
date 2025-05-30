@@ -6,6 +6,7 @@
 
 {% block body %}
 <div class="player_statistics">
+  <h3>Mode: {{ session.mode|capitalize }}</h3>
   <h3>Skips: {{ session.skips }}</h3>
   <h3>Lock-ins: {{ 3 - session.lifeline_count }}</h3>
   <h3>Score: {{ session.score }}</h3>
