@@ -644,3 +644,9 @@ input:checked+.slider::before {
         font-size: 0.8em;
     }
 }
+
+@media screen and (min-width: 300px) and (max-width: 767px) {
+    #action_history_floating {
+        display: none;
+    }  
+}
