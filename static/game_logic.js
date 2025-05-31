@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then(data => {
           if (!data.valid) {
-            alert("Invalid placement! Unlocks cleared.");
+            // alert("Invalid placement! Unlocks cleared.");
             window.location.href = window.location.href;
           } else {
             // Show date and update element class
