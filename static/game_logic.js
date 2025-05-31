@@ -62,10 +62,20 @@ function sendDropData(questionId, timelineOrder) {
       }
 
       if (data.song_embed_url) {
-        const player = document.getElementById("spotify-frame");
-        if (player) {
-          player.src = data.song_embed_url + "?t=" + new Date().getTime();
-        }
+        const container = document.querySelector(".spotify-player");
+        container.innerHTML = ''; // Clear old iframe
+
+        const iframe = document.createElement("iframe");
+        iframe.style.borderRadius = "12px";
+        iframe.src = data.song_embed_url + "?t=" + new Date().getTime(); // Prevent caching
+        iframe.width = "100%";
+        iframe.height = "80";
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("allowtransparency", "true");
+        iframe.setAttribute("allow", "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture");
+        iframe.loading = "lazy";
+
+        container.appendChild(iframe);
       }
   });
 }

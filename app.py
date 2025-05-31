@@ -482,6 +482,8 @@ def validate_drop():
 
     next_question = next_question_available()
 
+    song_url_embed = song_url(next_question) if next_question else None
+
     return jsonify({
         'valid': valid,
         'score': session.get('score'),
@@ -490,7 +492,8 @@ def validate_drop():
         'unlocked': session.get('unlocked'),
         'locked': session.get('locked'),
         'history': session.get('history', []),
-        'next_question': next_question
+        'next_question': next_question,
+        'song_embed_url': song_url_embed
     })
 
 
