@@ -127,11 +127,17 @@ def game():
     if request.method == 'POST':
         current_id = session.get('current_id')
         next_question = get_current_question(current_id)
-        
         timeline = sorted_timeline()
-
         action_buttons()
 
+        if request.is_json:
+            return jsonify({
+                'score': session.get('score'),
+                'lifeline_count': session.get('lifeline_count'),
+                'skips': session.get('skips'),
+                'locked': session.get('locked'),
+                'unlocked': session.get('unlocked'),
+            })
         return redirect(url_for('game'))
 
     next_question = next_question_available()
@@ -473,8 +479,19 @@ def validate_drop():
                 # Optionally, handle game over here
 
     session['history'] = history
-    return jsonify({'valid': valid})
 
+    next_question = next_question_available()
+
+    return jsonify({
+        'valid': valid,
+        'score': session.get('score'),
+        'lifeline_count': session.get('lifeline_count'),
+        'skips': session.get('skips'),
+        'unlocked': session.get('unlocked'),
+        'locked': session.get('locked'),
+        'history': session.get('history', []),
+        'next_question': next_question
+    })
 
 
 @app.route('/submit_score', methods=['POST'])

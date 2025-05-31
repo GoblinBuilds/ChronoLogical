@@ -1,61 +1,74 @@
-
-
-// Enables drag-and-drop functionality using Sortable.js
 document.addEventListener('DOMContentLoaded', () => {
   const timeline = document.getElementById('timeline');
   const palette = document.getElementById('palette');
 
-  // Set up the palette as a source of draggable elements
   Sortable.create(palette, {
     group: { name: 'shared', pull: 'clone', put: false },
     sort: false,
-    animation: 150,
+    animation: 150
   });
 
-  // Set up the timeline to accept drops from the palette
   Sortable.create(timeline, {
-    group: { name: 'shared', pull: false, put: true },
+    group: 'shared',
     animation: 150,
-    onAdd(evt) {
-      const el = evt.item;
-      const questionId = el.getAttribute('data-qid');
-      const date = el.getAttribute('data-date');
-      const siblings = Array.from(timeline.children).map(e => e.getAttribute('data-qid'));
-
-      // Validate the drop with the server
-      fetch('/validate_drop', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ question_id: questionId, timeline: siblings })
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (!data.valid) {
-            // alert("Invalid placement! Unlocks cleared.");
-            loseCards(); 
-            window.location.href = window.location.href;
-          } else {
-            // Show date and update element class
-            el.classList.remove('new');
-            el.classList.add('correct');
-            const yearElement = document.createElement('p');
-            yearElement.className = 'date';
-            yearElement.innerHTML = `<strong>${date}</strong>`;
-            el.prepend(yearElement);
-
-            // Show win modal or reload based on result
-            if (data.win) {
-              document.getElementById("winModal").style.display = "flex";
-            } else {
-              window.location.href = window.location.href;
-            }
-          }
-        });
+    onAdd: function (evt) {
+      handleDrop(evt);
     }
   });
 });
+
+function handleDrop(evt) {
+  const questionId = evt.item.dataset.qid;
+  const timeline = document.getElementById('timeline');
+  const timelineOrder = [...timeline.children].map(card => card.dataset.qid);
+  sendDropData(questionId, timelineOrder);
+}
+
+
+function sendDropData(questionId, timelineOrder) {
+  fetch('/validate_drop', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      question_id: questionId,
+      timeline: timelineOrder
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.valid) {
+      updateTimeline(data.unlocked, data.locked);
+      updateStats(data.score, data.lifeline_count, data.skips);
+      updateHistory(data.history);
+    } else {
+        loseCards()
+        // Optional: add animation before clearing
+        document.querySelectorAll('.card.unlocked').forEach(card => {
+          card.classList.add('lost');
+        });
+
+        // After animation, update DOM
+        setTimeout(() => {
+          updateTimeline(data.unlocked, data.locked);
+        }, 1200); // Matches your card loss animation duration
+      }
+
+      if (data.next_question) {
+        updatePaletteCard(data.next_question);
+      }
+
+      if (data.win) {
+        document.getElementById("winModal").style.display = "flex";
+      }
+
+      if (data.song_embed_url) {
+        const player = document.getElementById("spotify-frame");
+        if (player) {
+          player.src = data.song_embed_url + "?t=" + new Date().getTime();
+        }
+      }
+  });
+}
 
 // Makes the action history panel draggable and saves its position using localstorage
 document.addEventListener('DOMContentLoaded', () => {
@@ -136,3 +149,63 @@ fetch('/check_answer', {
     'Content-Type': 'application/json'
   }
 })
+
+function updateTimeline(unlocked, locked) {
+  const timeline = document.getElementById('timeline');
+  timeline.innerHTML = '';
+
+  const combined = [...locked, ...unlocked].sort((a, b) => parseInt(a.date) - parseInt(b.date))
+  for (const card of combined) {
+    const cardDiv = document.createElement('div');
+    cardDiv.className = `card ${locked.some(l => l.question_id === card.question_id) ? 'correct' : 'unlocked'}`;
+    cardDiv.dataset.id = card.date;
+    cardDiv.dataset.qid = card.question_id;
+
+    cardDiv.innerHTML = `
+      <p class="date">${card.date}</p>
+      <p class="answered_question">${card.category === "Music & Soundbites" ? "Spotify Track" : card.question}</p>
+    `;
+    timeline.appendChild(cardDiv);
+  }
+}
+
+function updateStats(score, lifelines, skips) {
+  document.getElementById('score').textContent = score.toString().padStart(5, '0');
+  document.querySelector('.hover_info:nth-child(2) h3').innerHTML = `Skips: ${skips}`;
+  document.querySelector('.hover_info:nth-child(3) h3').innerHTML = `Lock-ins: ${3 - lifelines}`;
+}
+
+function updateHistory(history) {
+  const list = document.querySelector('#action_history_floating ul');
+  list.innerHTML = '';
+  [...history].reverse().forEach(line => {
+    const li = document.createElement('li');
+    li.textContent = line;
+    list.appendChild(li);
+  });
+}
+
+function updatePaletteCard(card) {
+  const palette = document.getElementById('palette');
+  palette.innerHTML = ''; // Remove old card
+
+  const cardDiv = document.createElement('div');
+  cardDiv.className = 'card';
+  cardDiv.dataset.id = card.date;
+  cardDiv.dataset.qid = card.question_id;
+  cardDiv.dataset.date = card.date;
+
+  cardDiv.innerHTML = `
+    <p class="answered_question">
+      ${card.category === "Music & Soundbites" ? "Guess the year of the song!" : card.question}
+    </p>
+  `;
+
+  palette.appendChild(cardDiv);
+
+  Sortable.create(document.getElementById('palette'), {
+  group: { name: 'shared', pull: 'clone', put: false },
+  sort: false,
+  animation: 150
+});
+}

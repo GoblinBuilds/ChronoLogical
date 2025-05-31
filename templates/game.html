@@ -95,7 +95,7 @@
 {% endif %}
 {% if song_embed_url %}
 <div class="spotify-player">
-  <iframe style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
+  <iframe id="spotify-frame" style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
     allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
     loading="lazy">
   </iframe>
