@@ -99,15 +99,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const duration = 1000; 
   const frameRate = 30;
   const steps = duration / frameRate;
-  const increment = Math.ceil(finalScore / steps);
+  const increment = Math.ceil(Math.abs(finalScore) / steps);
+  const padLength = 5;
+
+  function formatScore(score, padLength = 5) {
+    const absStr = Math.abs(score).toString().padStart(padLength, '0');
+    return score < 0 ? `-${absStr}` : absStr;
+  }
 
   const counter = setInterval(() => {
-    current += increment;
-    if (current >= finalScore) {
-      scoreEl.textContent = finalScore;
-      clearInterval(counter);
+    if (finalScore >= 0) {
+      current += increment;
+      if (current >= finalScore) {
+        current = finalScore;
+        clearInterval(counter);
+      }
     } else {
-      scoreEl.textContent = current;
+      current -= increment;
+      if (current <= finalScore) {
+        current = finalScore;
+        clearInterval(counter);
+      }
     }
+
+    scoreEl.textContent = formatScore(current, padLength);
   }, frameRate);
 });
