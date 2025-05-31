@@ -649,4 +649,7 @@ input:checked+.slider::before {
     #action_history_floating {
         display: none;
     }  
+    .answered_question {
+        font-size: 0.8em;
+    }
 }
