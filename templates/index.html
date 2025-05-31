@@ -16,8 +16,22 @@
     <label for="cat_{{ loop.index }}" class="point_cursor" >{{ cat }}</label><br>
     {% endfor %}
     </select>
-
+    <!-- ...category selection... -->
+    <label>
+      <input type="checkbox" name="enable_skips" value="yes">
+      Enable 3 skips
+    </label>
+    <div>
+      <label>
+        <input type="radio" name="mode" value="easy" checked>
+        Easy Mode
+      </label>
+      <label>
+        <input type="radio" name="mode" value="hard">
+        Hard Mode
+      </label>
   </form>
+   </div>
   </div>
 
   <div class="center_button_wrapper">

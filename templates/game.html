@@ -6,7 +6,8 @@
 
 {% block body %}
 <div class="player_statistics">
-  <h3>Stage: {{ session.stage }}</h3>
+  <h3>Mode: {{ session.mode|capitalize }}</h3>
+  <h3>Skips: {{ session.skips }}</h3>
   <h3>Lock-ins: {{ 3 - session.lifeline_count }}</h3>
   <h3>Score: <span id="score" data-score="{{ session.score }}">0</span></h3>
 </div>
@@ -22,6 +23,9 @@
 
 <form method="post">
   <button class="post_button" type="submit" name="action" value="lock">Lock Unlocked Cards</button>
+  {% if session.skips > 0 %}
+  <button class="post_button" type="submit" name="action" value="skip">Skip</button>
+  {% endif %}
   <button class="post_button" type="submit" name="action" value="quit">Quit</button>
 </form>
 
