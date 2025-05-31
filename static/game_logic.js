@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
           if (!data.valid) {
             // alert("Invalid placement! Unlocks cleared.");
+            loseCards(); 
             window.location.href = window.location.href;
           } else {
             // Show date and update element class
@@ -125,3 +126,13 @@ document.addEventListener("DOMContentLoaded", () => {
     scoreEl.textContent = formatScore(current, padLength);
   }, frameRate);
 });
+fetch('/check_answer', {
+  method: 'POST',
+  body: JSON.stringify({
+    question_id: qid,
+    user_date: selectedDate
+  }),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})

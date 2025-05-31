@@ -63,16 +63,29 @@ h1 {
 
     overflow-x: auto;
     overflow-y: hidden;
-
+    scroll-behavior: smooth;
     width: 100%;
-    max-width: 100vw;
+    max-width: 90vw;
     box-sizing: border-box;
     margin: 0 auto;
     padding-bottom: 10px;
     padding: 15px;
 }
 
+@keyframes cardLoss {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x, 100px), var(--y, -80px)) rotate(var(--angle, 15deg));
+  }
+}
 
+.card.lost {
+  animation: cardLoss 1.2s ease-out forwards;
+}
 
 /* Main Container for content*/
 #container {
@@ -449,19 +462,23 @@ input:checked+.slider::before {
     border: 5px solid #FFA500;
 }
 
-/* When the container has at least a 5th .card, apply these styles to all .card elements */
-.section_timeline:has(.card:nth-child(5)) .card {
-    min-width: 80px;
-    max-width: 80px;
+/* When the container has at least a 8th .card, apply these styles to all .card elements */
+.section_timeline:has(.card:nth-child(8)) .card {
+    min-width: 70px;
+    max-width: 70px;
     max-height: 100px;
 }
 
-.section_timeline:has(.card:nth-child(5)) .card .date {
-    font-size: 1.0em;
+.section_timeline:has(.card:nth-child(8)) .card .date {
+    font-size: 1.3em;
 }
 
-.section_timeline:has(.card:nth-child(5)) .card .answered_question {
-    font-size: 0.8em;
+.section_timeline:has(.card:nth-child(8)) .card .answered_question {
+    font-size: 0.6em;
+}
+.section_timeline:has(.card:nth-child(12)) .card {
+    min-width: 50px;
+    max-width: 50px;
 }
 
 .date {
@@ -486,7 +503,13 @@ input:checked+.slider::before {
     margin-top: 0;
     padding-top: 10px;
 }
-
+#score {
+  display: inline-block;
+  width: 5ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
 /* Modal and Modal content */
 .overlay {
     display: none;
@@ -689,16 +712,20 @@ input:checked+.slider::before {
     .question_header {
         font-size: 3em;
     }
-
+    /* .card{
+        transform: scale(0.8);
+    } */
     #container {
         height: 95vh;
     }
-
+    #action_history_floating {
+        width: 200px;
+        max-height: 250px;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     #action_history_floating {
-        width: 200px;
         max-height: 200px;
         overflow-y: auto;
         background-color: rgba(0, 0, 0, 0.08);

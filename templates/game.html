@@ -101,22 +101,24 @@
   </iframe>
 </div>
 {% endif %}
-
+<button onclick="loseCards()">Fail Question</button>
+<button onclick="checkAnswer('Q123', '1950')">Submit Answer</button>
 <div class="section_timeline">
   <div class="sortable_container" id="timeline">
     {% set combined = locked + unlocked %}
     {% for entry in combined|sort(attribute='date') %}
-    <div class="card {% if entry in locked %}correct{% else %}unlocked{% endif %}" data-id="{{ entry.date }}"
-      data-qid="{{ entry.question_id }}">
-      <p class="date">{{ entry.date }}</p>
-      <p class="answered_question">
-        {% if entry.category == 'Music & Soundbites' %}
-        Spotify Track
-        {% else %}
-        {{ entry.question }}
-        {% endif %}
-      </p>
-    </div>
+<div class="card {% if entry in locked %}correct{% else %}unlocked{% endif %}" 
+     data-id="{{ entry.date }}" 
+     data-qid="{{ entry.question_id }}">
+  <p class="date">{{ entry.date }}</p>
+  <p class="answered_question">
+    {% if entry.category == 'Music & Soundbites' %}
+    Spotify Track
+    {% else %}
+    {{ entry.question }}
+    {% endif %}
+  </p>
+</div>
     {% endfor %}
   </div>
 </div>
