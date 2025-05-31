@@ -1,7 +1,34 @@
 html {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Press Start 2P", system-ui;
+}
+.chromatic {
+  position: relative;
+  display: inline-block;
+  color: white;
+  font-size: 4rem;
+  font-weight: bold;
 }
 
+.chromatic::before,
+.chromatic::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.chromatic::before {
+  color: red;
+  transform: translate(2px, 0);
+  mix-blend-mode: screen;
+}
+
+.chromatic::after {
+  color: blue;
+  transform: translate(-2px, 0);
+  mix-blend-mode: screen;
+}
 :root {
     --bg-color: #000;
     --text-color: #fff;
