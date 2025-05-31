@@ -91,3 +91,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+// script animates a numerical score count-up effect on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const scoreEl = document.getElementById("score");
+  const finalScore = parseInt(scoreEl.dataset.score);
+  let current = 0;
+  const duration = 1000; 
+  const frameRate = 30;
+  const steps = duration / frameRate;
+  const increment = Math.ceil(finalScore / steps);
+
+  const counter = setInterval(() => {
+    current += increment;
+    if (current >= finalScore) {
+      scoreEl.textContent = finalScore;
+      clearInterval(counter);
+    } else {
+      scoreEl.textContent = current;
+    }
+  }, frameRate);
+});

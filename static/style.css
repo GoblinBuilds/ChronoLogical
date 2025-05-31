@@ -564,6 +564,65 @@ input:checked+.slider::before {
     padding-bottom: 0.3rem;
 }
 
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.regain-lock {
+    border: none;
+    background-color: var(--bg-color);;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    animation: pulse 1s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+
+.regain-lock-icon .fa-lock:hover {
+    color: #c4c4c4;
+    animation-play-state: paused;
+}
+
+.regain-lock-btn-wrapper {
+    position: fixed;
+    top: 30%;
+    right: 40%;
+    z-index: 1000;
+    background-color: #000;
+}
+
+.regain-lock-icon .fa-lock {
+    font-size: 2em;
+    color: var(--text-color);
+}
+
+.regain-lock-icon .fa-plus {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: 0.6rem;
+    background: #28a745;
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    padding: 1px 1px;
+}
 
 @media screen and (min-width: 1024px) and (max-width: 1440px) {
     body {

@@ -73,7 +73,8 @@ def init_session(category):
     session['old_questions'] = []
     session['stage'] = 1 
     session['score'] = 0
-
+    session['show_special_button'] = False
+    session['special_used'] = False
     available_questions = [question for question in QUESTIONS if question['category'] in category]
 
     if available_questions:
@@ -151,12 +152,12 @@ def game():
         return next_question
     
     song_embed_url = song_url(next_question)  
-
+    show_special_button = session.pop('show_special_button', False)
     timeline = sorted_timeline()
     locked = session.get('locked', [])
     unlocked = session.get('unlocked', [])
     score = session.get('score', 0)
-    return render_template('game.html', next_question=next_question, song_embed_url=song_embed_url, locked=locked, unlocked=unlocked, score=score, max_index=len(timeline))
+    return render_template('game.html', show_special_button=show_special_button, next_question=next_question, song_embed_url=song_embed_url, locked=locked, unlocked=unlocked, score=score, max_index=len(timeline))
  
 
 def check_valid_placement(combined_timeline, next_question, index):
@@ -211,11 +212,12 @@ def action_lock():
     if session.get('unlocked'):
         session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
         if len(session['unlocked']) >= 6: 
-            flash(f'You have locked more than 5 at the same time you kept your lock')
-        else: 
-            session['lifeline_count'] = session.get('lifeline_count', 0) + 1
-        # Update score based on number of locked cards
-        session['score'] = len(session['locked'])
+            flash(f'You have locked more than 5 at the same time you kept your lock well done you')
+            session['show_special_button'] = True
+ 
+        session['lifeline_count'] = session.get('lifeline_count', 0) + 1
+        score_amount = sum((i + 1) * 100 for i in range(len(session['unlocked'])))
+        session['score'] += score_amount
         session['unlocked'] = []
         lives_left = 3 - session['lifeline_count']
         flash('The timeline is locked!')
@@ -223,6 +225,16 @@ def action_lock():
             flash(f'You have {lives_left} life(s) left.')
         else:
             flash('SHOW_MODAL')
+    return redirect(url_for('game'))
+
+@app.route('/regain_lock', methods=['POST'])
+def regain_lock():
+    if not session.get('special_used', True):
+        session['lifeline_count'] = max(session.get('lifeline_count', 0) - 1, 0)
+        session['special_used'] = True
+        flash('You regained a lock!')
+    else:
+        flash('You already used your special regain!')
     return redirect(url_for('game'))
 
 # def action_place(timeline, next_question, current_id):
@@ -438,6 +450,8 @@ def validate_drop():
 
     else:
         history.append(f"Incorrect placement: \"{question_text}\" correct date is {next_question['date']}")
+        score_loss = 100 * len(session['unlocked']) + 1
+        session['score'] -= score_loss
         session['unlocked'] = []
         session.pop('current_id', None)
         if question_id not in session.get('old_questions', []):

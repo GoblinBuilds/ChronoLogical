@@ -28,26 +28,26 @@ document.addEventListener('DOMContentLoaded', () => {
 // }
 
 // Removes the flash message if the user clicks outside of it
-function dismissFlash(event) {
-  const flashes = document.querySelector('.flashes');
-  if (!flashes.contains(event.target)) {
-    document.getElementById('flash-overlay').remove();
-  }
-}
+// function dismissFlash(event) {
+//   const flashes = document.querySelector('.flashes');
+//   if (!flashes.contains(event.target)) {
+//     document.getElementById('flash-overlay').remove();
+//   }
+// }
 
 // Removes the flash overlay from the DOM if it exists
-function removeFlash() {
-  const overlay = document.getElementById('flash-overlay');
-  if (overlay) {
-    overlay.remove();
-  }
-}
+// function removeFlash() {
+//   const overlay = document.getElementById('flash-overlay');
+//   if (overlay) {
+//     overlay.remove();
+//   }
+// }
 
-// Automatically remove the flash overlay after 5 seconds
-setTimeout(() => {
-  const overlay = document.getElementById('flash-overlay');
-  if (overlay) overlay.remove();
-}, 5000);
+// // Automatically remove the flash overlay after 5 seconds
+// setTimeout(() => {
+//   const overlay = document.getElementById('flash-overlay');
+//   if (overlay) overlay.remove();
+// }, 5000);
 
 /*
 // Automatically resizes the font size of an element to fit within its maximum height
@@ -107,4 +107,10 @@ function closeHighscoresModal() {
     document.getElementById('highscores_modal').style.display = 'none';
 }
 
-
+function restoreLock() {
+  fetch('/restore-lock', { method: 'POST' })
+    .then(res => {
+      if (res.ok) location.reload();
+      else alert("Could not restore a lock.");
+    });
+}

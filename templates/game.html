@@ -8,7 +8,7 @@
 <div class="player_statistics">
   <h3>Stage: {{ session.stage }}</h3>
   <h3>Lock-ins: {{ 3 - session.lifeline_count }}</h3>
-  <h3>Score: {{ session.score }}</h3>
+  <h3>Score: <span id="score" data-score="{{ session.score }}">0</span></h3>
 </div>
 
 <div id="action_history_floating" class="draggable">
@@ -61,7 +61,21 @@
   </div>
 </div>
 
-
+{% if show_special_button %}
+<div class="regain-lock-btn-wrapper">
+  <form action="{{ url_for('regain_lock') }}" method="post">
+    <div class="square">
+      <button type="submit" class="regain-lock">
+        <span class="regain-lock-icon">
+          <i class="fas fa-lock"></i>
+          <i class="fas fa-plus"></i>
+        </span>
+      </button>
+      <div class="info_box">Restore a lock</div>
+    </div>
+  </form>
+</div>
+{% endif %}
 {% if song_embed_url %}
 <div class="spotify-player">
   <iframe style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
@@ -71,7 +85,6 @@
 </div>
 {% endif %}
 
-<h2>Your Timeline</h2>
 <div class="section_timeline">
   <div class="sortable_container" id="timeline">
     {% set combined = locked + unlocked %}
