@@ -15,7 +15,7 @@ html {
 }
 
 body.light-mode {
-    --bg-color: #fff;
+    --bg-color: #d4d4d4;
     --text-color: #000;
     --primary-color: #000;
     --border-color: #000;
@@ -64,6 +64,8 @@ button {
 /* Flash messages styling*/
 .flashes {
     position: absolute;
+    top: 1%;
+    right: 1%;
     color: var(--text-color);
     z-index: 9999;
     list-style: none;
@@ -71,9 +73,7 @@ button {
     padding-right: 3%;
     padding-top: 2%;
 }
-.flash_overlay{
-    position: relative;
-}
+
 
 .sortable_container {
     display: flex;
@@ -319,7 +319,7 @@ input:checked+.slider::before {
 .start_button {
     background-color: var(--button-bg);
     border: 0px;
-    margin-top: 60%;
+    margin-top: 57%;
     font-size: 3em;
     padding: 10px 15px;
     color: var(--button-text);
@@ -362,7 +362,7 @@ input:checked+.slider::before {
 
 .middle_container h2 {
     margin: 0;
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px var(--text-color);;
 }
 
 .square {
@@ -384,6 +384,7 @@ input:checked+.slider::before {
 }
 
 .info_box {
+    font-family: "Share Tech Mono", monospace;
     position: absolute;
     bottom: 110%;
     left: 50%;
@@ -584,16 +585,42 @@ input:checked+.slider::before {
     display: flex;
     flex-direction: column;
 }
+.win_modal {
+    width: 30vw;
+    height: 40vh;
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
-.modal_header {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    color: #525252;
+    text-align: center;
 }
 
+.modal_header {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #2e2e2e;
+}
+
+.win_modal p {
+    font-size: 1.1em;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+}
+
+.win_modal h3 {
+    font-size: 1.8em;
+    margin: 0;
+}
+.win_modal .player_score {
+    color: #cc00ff; 
+    font-size: 2.2em;
+}
 .tutorial_step {
     display: flex;
     align-items: flex-start;
@@ -637,6 +664,7 @@ input:checked+.slider::before {
 }
 
 #winModal {
+    color: #000;
     display: none;
     position: fixed;
     height: 100vh;
@@ -674,9 +702,10 @@ input:checked+.slider::before {
 }
 
 #action_history_floating h3 {
-    margin-top: 0;
+    padding: 4px 3px 3px 3px;
     font-size: 1.1em;
     color: #f3f3f3;
+    margin: 0;
 }
 
 #action_history_floating ul {

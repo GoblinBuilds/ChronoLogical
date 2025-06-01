@@ -43,7 +43,6 @@ function sendDropData(questionId, timelineOrder) {
     } else {
         loseCards()
         // Optional: add animation before clearing
-        updateStats(data.score, data.lifeline_count, data.skips);
         document.querySelectorAll('.card.unlocked').forEach(card => {
           card.classList.add('lost');
         });
@@ -52,6 +51,7 @@ function sendDropData(questionId, timelineOrder) {
         setTimeout(() => {
           updateTimeline(data.unlocked, data.locked);
         }, 500); // Matches your card loss animation duration
+        updateStats(data.score, data.lifeline_count, data.skips);
       }
 
       if (data.next_question) {
@@ -150,6 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scoreEl.textContent = formatScore(current, padLength);
   }, frameRate);
 });
+
 fetch('/check_answer', {
   method: 'POST',
   body: JSON.stringify({

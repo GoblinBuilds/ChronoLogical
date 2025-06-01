@@ -209,12 +209,6 @@ def action_lock():
     if session.get('unlocked'):
         session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
         if len(session['unlocked']) >= 6: 
-
-            flash(f'You have locked more than 5 at the same time you kept your lock')
-        else: 
-            session['lifeline_count'] = session.get('lifeline_count', 0) + 1
-        # Update score: 100 points per locked card
-        session['score'] = len(session['locked']) * 100
             flash(f'You have locked more than 5 at the same time you kept your lock well done you')
             session['show_special_button'] = True
  
@@ -446,7 +440,7 @@ def submit_score():
         cursor.close()
         conn.close()
         flash("Score submitted!")
-        flash("SHOW_HIGHSCORES")  # <--- Add this line
+        flash("SHOW_HIGHSCORES")
     except Exception as e:
         flash(f"Error saving high score: {e}")
     return redirect(url_for('index'))
