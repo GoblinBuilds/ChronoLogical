@@ -1,31 +1,3 @@
-/* .chromatic {
-    position: relative;
-    display: inline-block;
-    color: white;
-    font-size: 4rem;
-    font-weight: bold;
-}
-
-.chromatic::before,
-.chromatic::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
-
-.chromatic::before {
-    color: red;
-    transform: translate(2px, 0);
-    mix-blend-mode: screen;
-}
-
-.chromatic::after {
-    color: blue;
-    transform: translate(-2px, 0);
-    mix-blend-mode: screen;
-} */
 
 
 @keyframes cardLoss {
@@ -40,23 +12,8 @@
     }
 }
 
-/* Flicker animation */
-/* @keyframes crt-flicker {
-    0% {
-        opacity: 0.92;
-    }
-
-    50% {
-        opacity: 0.96;
-    }
-
-    100% {
-        opacity: 0.90;
-    }
-} */
-
 .card.lost {
-    animation: cardLoss 1.2s ease-out forwards;
+    animation: cardLoss 0.5s ease-out forwards;
 }
 
 .crt {

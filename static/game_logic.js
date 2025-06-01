@@ -43,6 +43,7 @@ function sendDropData(questionId, timelineOrder) {
     } else {
         loseCards()
         // Optional: add animation before clearing
+        updateStats(data.score, data.lifeline_count, data.skips);
         document.querySelectorAll('.card.unlocked').forEach(card => {
           card.classList.add('lost');
         });
@@ -50,7 +51,7 @@ function sendDropData(questionId, timelineOrder) {
         // After animation, update DOM
         setTimeout(() => {
           updateTimeline(data.unlocked, data.locked);
-        }, 1200); // Matches your card loss animation duration
+        }, 500); // Matches your card loss animation duration
       }
 
       if (data.next_question) {
@@ -197,7 +198,7 @@ function updateHistory(history) {
 
 function updatePaletteCard(card) {
   const palette = document.getElementById('palette');
-  palette.innerHTML = ''; // Remove old card
+  palette.innerHTML = ''; 
 
   const cardDiv = document.createElement('div');
   cardDiv.className = 'card';

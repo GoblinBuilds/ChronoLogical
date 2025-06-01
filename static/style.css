@@ -1,6 +1,7 @@
 html {
     font-family: "Press Start 2P", system-ui;
 }
+
 :root {
     --bg-color: #000;
     --text-color: #fff;
@@ -38,9 +39,13 @@ body {
 h1 {
     font-size: 6em;
 }
-p, li, button{
+
+p,
+li,
+button {
     font-family: "Share Tech Mono", monospace;
 }
+
 .point_cursor {
     cursor: pointer;
 }
@@ -55,14 +60,19 @@ p, li, button{
         0 0 100px rgba(192, 64, 255, 0.5),
         0 0 160px rgba(192, 64, 255, 0.6);
 }
+
 /* Flash messages styling*/
 .flashes {
+    position: absolute;
     color: var(--text-color);
     z-index: 9999;
     list-style: none;
     text-align: right;
     padding-right: 3%;
     padding-top: 2%;
+}
+.flash_overlay{
+    position: relative;
 }
 
 .sortable_container {
@@ -230,6 +240,7 @@ label {
     cursor: pointer;
     background-color: var(--button-bg);
     border: solid 1px var(--button-border);
+    height: 34px;
     top: 0;
     left: 0;
     right: 0;
@@ -266,11 +277,12 @@ input:checked+.slider::before {
     color: var(--button-text);
     cursor: pointer;
 }
-.purple_boarder{
+
+.purple_boarder {
     border: solid 1px #cc00ff;
-      box-shadow:
-    0 0 20px rgba(255, 165, 0, 0.1),
-    0 0 60px rgba(255, 165, 0, 0.2);
+    box-shadow:
+        0 0 20px rgba(255, 165, 0, 0.1),
+        0 0 60px rgba(255, 165, 0, 0.2);
 }
 
 .quit_button {
@@ -288,32 +300,35 @@ input:checked+.slider::before {
 }
 
 @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0px rgba(255, 255, 255, 0.5);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-    transform: scale(1.05);
-  }
-  100% {
-    box-shadow: 0 0 0px rgba(255, 255, 255, 0.5);
-    transform: scale(1);
-  }
+    0% {
+        box-shadow: 0 0 0px rgba(255, 255, 255, 0.5);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        transform: scale(1.05);
+    }
+
+    100% {
+        box-shadow: 0 0 0px rgba(255, 255, 255, 0.5);
+        transform: scale(1);
+    }
 }
 
 .start_button {
-  background-color: var(--button-bg);
-  border: 0px;
-  margin-top: 60%;
-  font-size: 3em;
-  padding: 10px 15px;
-  color: var(--button-text);
-  cursor: pointer;
-  animation: pulse 2s infinite;
-  transition: transform 0.2s ease-in-out;
-  font-family: "Press Start 2P", system-ui;
+    background-color: var(--button-bg);
+    border: 0px;
+    margin-top: 60%;
+    font-size: 3em;
+    padding: 10px 15px;
+    color: var(--button-text);
+    cursor: pointer;
+    animation: pulse 2s infinite;
+    transition: transform 0.2s ease-in-out;
+    font-family: "Press Start 2P", system-ui;
 }
+
 /* Styling for the game content */
 .section {
     position: relative;
@@ -323,9 +338,11 @@ input:checked+.slider::before {
     margin-bottom: 5%;
 
 }
-.question_section_header{
+
+.question_section_header {
     font-size: 12px;
 }
+
 .section_timeline {
     position: relative;
     padding: 30px;
@@ -334,14 +351,15 @@ input:checked+.slider::before {
 }
 
 .middle_container {
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  transform: translateX(-14%);
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform: translateX(-14%);
 }
+
 .middle_container h2 {
     margin: 0;
     border-bottom: solid 1px white;
@@ -355,32 +373,15 @@ input:checked+.slider::before {
     border-radius: 1px;
 }
 
-/* .square.orange {
-    background-color: #FFA500;
-}
-
-.square.green {
-    background-color: #4CAF50;
-} */
-
 .orange .lock-icon {
     stroke: #FFA500;
-    /* orange */
+
 }
 
 .green .lock-icon {
     stroke: #cc00ff;
-    
-    /* green or any you like */
+
 }
-
-
-/* .lock_icon {
-    width: 2em;
-    height: 2em;
-    fill: white;
-} */
-
 
 .info_box {
     position: absolute;
@@ -436,16 +437,18 @@ input:checked+.slider::before {
     width: 200px;
     z-index: 100;
 }
+
 .hover_popup::after {
     content: "";
     position: absolute;
-    bottom: 100%; 
+    bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
     border-width: 6px;
     border-style: solid;
-    border-color: transparent transparent #333 transparent; 
+    border-color: transparent transparent #333 transparent;
 }
+
 .hover_info:hover .hover_popup {
     display: block;
 }
@@ -469,23 +472,25 @@ input:checked+.slider::before {
     flex: 0 0 auto;
     font-family: "Share Tech Mono", monospace;
 
-  box-shadow:
-    0 0 20px rgba(255, 255, 255, 0.3),
-    0 0 60px rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 60px rgba(255, 255, 255, 0.3);
 }
+
 .card.correct {
-  border: 5px solid #cc00ff;
-  box-shadow:
-    0 0 20px rgba(76, 175, 80, 0.3),
-    0 0 60px rgba(76, 175, 80, 0.3);
+    border: 5px solid #cc00ff;
+    box-shadow:
+        0 0 20px rgba(76, 175, 80, 0.3),
+        0 0 60px rgba(76, 175, 80, 0.3);
 }
 
 .card.unlocked {
-  border: 5px solid #FFA500;
-  box-shadow:
-    0 0 20px rgba(255, 165, 0, 0.3),
-    0 0 60px rgba(255, 165, 0, 0.3);
+    border: 5px solid #FFA500;
+    box-shadow:
+        0 0 20px rgba(255, 165, 0, 0.3),
+        0 0 60px rgba(255, 165, 0, 0.3);
 }
+
 .card:hover {
     transform: scale(1.15);
     border: 3px solid #d8d8d8;
@@ -494,9 +499,9 @@ input:checked+.slider::before {
     scrollbar-width: none;
     -ms-overflow-style: none;
 
-      box-shadow:
-    0 0 8px rgba(255, 255, 255, 0.4),
-    0 0 24px rgba(255, 255, 255, 0.25);
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.4),
+        0 0 24px rgba(255, 255, 255, 0.25);
 }
 
 .my-element::-webkit-scrollbar {
@@ -517,6 +522,7 @@ input:checked+.slider::before {
 .section_timeline:has(.card:nth-child(8)) .card .answered_question {
     font-size: 0.6em;
 }
+
 .section_timeline:has(.card:nth-child(12)) .card {
     min-width: 50px;
     max-width: 50px;
@@ -544,13 +550,15 @@ input:checked+.slider::before {
     margin-top: 0;
     padding-top: 10px;
 }
+
 #score {
-  display: inline-block;
-  width: 5ch;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+    display: inline-block;
+    width: 5ch;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
 }
+
 /* Modal and Modal content */
 .overlay {
     display: none;
@@ -692,12 +700,14 @@ input:checked+.slider::before {
     .question_header {
         font-size: 3em;
     }
+
     /* .card{
         transform: scale(0.8);
     } */
     #container {
         height: 95vh;
     }
+
     #action_history_floating {
         width: 200px;
         max-height: 250px;
