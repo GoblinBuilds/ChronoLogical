@@ -882,7 +882,7 @@ input:checked+.slider::before {
         max-width: 50px;
         min-height: 80px;
         max-height: 80px;
-        font-size: 0.8em;
+        font-size: 0.6em;
     }
 
     .card .date {
