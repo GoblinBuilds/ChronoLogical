@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then(data => {
           if (!data.valid) {
-            alert("Invalid placement! Unlocks cleared.");
+            // alert("Invalid placement! Unlocks cleared.");
             window.location.href = window.location.href;
           } else {
             // Show date and update element class
@@ -90,4 +90,38 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+});
+// script animates a numerical score count-up effect on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const scoreEl = document.getElementById("score");
+  const finalScore = parseInt(scoreEl.dataset.score);
+  let current = 0;
+  const duration = 1000; 
+  const frameRate = 30;
+  const steps = duration / frameRate;
+  const increment = Math.ceil(Math.abs(finalScore) / steps);
+  const padLength = 5;
+
+  function formatScore(score, padLength = 5) {
+    const absStr = Math.abs(score).toString().padStart(padLength, '0');
+    return score < 0 ? `-${absStr}` : absStr;
+  }
+
+  const counter = setInterval(() => {
+    if (finalScore >= 0) {
+      current += increment;
+      if (current >= finalScore) {
+        current = finalScore;
+        clearInterval(counter);
+      }
+    } else {
+      current -= increment;
+      if (current <= finalScore) {
+        current = finalScore;
+        clearInterval(counter);
+      }
+    }
+
+    scoreEl.textContent = formatScore(current, padLength);
+  }, frameRate);
 });

@@ -6,12 +6,26 @@
 
 {% block body %}
 <div class="player_statistics">
+<div class="hover_info">
   <h3>Mode: {{ session.mode|capitalize }}</h3>
-  <h3>Skips: {{ session.skips }}</h3>
-  <h3>Lock-ins: {{ 3 - session.lifeline_count }}</h3>
-  <h3>Score: {{ session.score }}</h3>
+  <div class="hover_popup">While your cards are orange they are unlocked and will be lost if you answer incorrectly</div>
 </div>
-
+<div class="hover_info">
+  <h3>Skips: {{ session.skips }}</h3>
+  <div class="hover_popup">While your cards are orange they are unlocked and will be lost if you answer incorrectly</div>
+</div>
+<div class="hover_info">
+  <h3>Lock-ins: {{ 3 - session.lifeline_count }}</h3>
+  <div class="hover_popup">While your cards are orange they are unlocked and will be lost if you answer incorrectly</div>
+</div>
+<div class="hover_info">
+  <h3>Score: <span id="score" data-score="{{ session.score }}">{{ "%05d" | format(session.score) }}</span></h3>
+  <div class="hover_popup">While your cards are orange they are unlocked and will be lost if you answer incorrectly</div>
+</div>
+</div>
+<form method="post">
+  <button class="quit_button" type="submit" name="action" value="quit">Quit</button>
+</form>
 <div id="action_history_floating" class="draggable">
   <h3 class="drag-handle">Action History</h3>
   <ul>
@@ -21,13 +35,6 @@
   </ul>
 </div>
 
-<form method="post">
-  <button class="post_button" type="submit" name="action" value="lock">Lock Unlocked Cards</button>
-  {% if session.skips > 0 %}
-  <button class="post_button" type="submit" name="action" value="skip">Skip</button>
-  {% endif %}
-  <button class="post_button" type="submit" name="action" value="quit">Quit</button>
-</form>
 
 <div class="section">
   <h2>Next Question</h2>
@@ -57,6 +64,12 @@
 
 <div class="middle_container">
   <h2>Your Timeline</h2>
+  <form method="post">
+  <button class="post_button" type="submit" name="action" value="lock">Lock Unlocked Cards</button>
+  {% if session.skips > 0 %}
+  <button class="post_button" type="submit" name="action" value="skip">Skip</button>
+  {% endif %}
+</form>
   <div class="square orange">
     <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white"
       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -75,7 +88,21 @@
   </div>
 </div>
 
-
+{% if show_special_button %}
+<div class="regain-lock-btn-wrapper">
+  <form action="{{ url_for('regain_lock') }}" method="post">
+    <div class="square">
+      <button type="submit" class="regain-lock">
+        <span class="regain-lock-icon">
+          <i class="fas fa-lock"></i>
+          <i class="fas fa-plus"></i>
+        </span>
+      </button>
+      <div class="info_box">Restore a lock</div>
+    </div>
+  </form>
+</div>
+{% endif %}
 {% if song_embed_url %}
 <div class="spotify-player">
   <iframe style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
@@ -85,7 +112,6 @@
 </div>
 {% endif %}
 
-<h2>Your Timeline</h2>
 <div class="section_timeline">
   <div class="sortable_container" id="timeline">
     {% set combined = locked + unlocked %}

@@ -247,16 +247,26 @@ input:checked+.slider::before {
     transform: translateX(26px);
 }
 
-.post_button {
+.post_button,
+.quit_button {
     background-color: var(--button-bg);
     border: solid 1px var(--button-border);
     font-size: 1em;
     font-weight: 700;
-    padding: 10px 15px;
+    padding: 11px 10px 11px 10px;
     color: var(--button-text);
     cursor: pointer;
 }
 
+.quit_button {
+    position: absolute;
+    padding-left: 25px;
+    padding-right: 25px;
+    top: 20px;
+    left: 130px;
+}
+
+.quit_button:hover,
 .menu_button:hover,
 .post_button:hover,
 .start_button:hover {
@@ -307,19 +317,31 @@ input:checked+.slider::before {
     border-radius: 1px;
 }
 
-.square.orange {
+/* .square.orange {
     background-color: #FFA500;
 }
 
 .square.green {
     background-color: #4CAF50;
+} */
+
+.orange .lock-icon {
+    stroke: #FFA500;
+    /* orange */
 }
 
-.lock_icon {
+.green .lock-icon {
+    stroke: #4CAF50;
+    /* green or any you like */
+}
+
+
+/* .lock_icon {
     width: 2em;
     height: 2em;
     fill: white;
-}
+} */
+
 
 .info_box {
     position: absolute;
@@ -351,6 +373,40 @@ input:checked+.slider::before {
     border-width: 6px;
     border-style: solid;
     border-color: #333 transparent transparent transparent;
+}
+
+
+.hover_info {
+    position: relative;
+    display: inline-block;
+}
+
+.hover_popup {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    margin-top: 8px;
+    background-color: #222;
+    color: #fff;
+    padding: 8px 12px;
+    font-size: 1em;
+    white-space: normal;
+    width: 200px;
+    z-index: 100;
+}
+.hover_popup::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent; 
+}
+.hover_info:hover .hover_popup {
+    display: block;
 }
 
 /* Card stylings */
@@ -394,17 +450,17 @@ input:checked+.slider::before {
 }
 
 /* When the container has at least a 5th .card, apply these styles to all .card elements */
-.section:has(.card:nth-child(5)) .card {
+.section_timeline:has(.card:nth-child(5)) .card {
     min-width: 80px;
     max-width: 80px;
     max-height: 100px;
 }
 
-.section:has(.card:nth-child(5)) .card .date {
+.section_timeline:has(.card:nth-child(5)) .card .date {
     font-size: 1.0em;
 }
 
-.section:has(.card:nth-child(5)) .card .answered_question {
+.section_timeline:has(.card:nth-child(5)) .card .answered_question {
     font-size: 0.8em;
 }
 
@@ -428,7 +484,7 @@ input:checked+.slider::before {
 .player_statistics h3 {
     border-top: solid 2px var(--button-border);
     margin-top: 0;
-    padding-top: 1%;
+    padding-top: 10px;
 }
 
 /* Modal and Modal content */
@@ -564,6 +620,66 @@ input:checked+.slider::before {
     padding-bottom: 0.3rem;
 }
 
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.regain-lock {
+    border: none;
+    background-color: var(--bg-color);
+    ;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    animation: pulse 1s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+
+.regain-lock-icon .fa-lock:hover {
+    color: #c4c4c4;
+    animation-play-state: paused;
+}
+
+.regain-lock-btn-wrapper {
+    position: fixed;
+    top: 30%;
+    right: 40%;
+    z-index: 1000;
+    background-color: #000;
+}
+
+.regain-lock-icon .fa-lock {
+    font-size: 2em;
+    color: var(--text-color);
+}
+
+.regain-lock-icon .fa-plus {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: 0.6rem;
+    background: #28a745;
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    padding: 1px 1px;
+}
 
 @media screen and (min-width: 1024px) and (max-width: 1440px) {
     body {
@@ -572,6 +688,10 @@ input:checked+.slider::before {
 
     .question_header {
         font-size: 3em;
+    }
+
+    #container {
+        height: 95vh;
     }
 
 }
