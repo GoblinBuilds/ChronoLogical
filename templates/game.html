@@ -37,7 +37,7 @@
 
 
 <div class="section">
-  <h2 class="question_section_header glow_text">Next Question</h2>
+  <h2 class="question_section_header">Next Question</h2>
   <div class="sortable_container" id="palette">
     {% if next_question %}
     <div class="card" data-id="{{ next_question.date }}" data-qid="{{ next_question.question_id }}"
@@ -79,11 +79,11 @@
 </div>
 
 {% if show_special_button %}
-<div class="regain-lock-btn-wrapper">
+<div class="regain_lock-btn-wrapper">
   <form action="{{ url_for('regain_lock') }}" method="post">
     <div class="square">
-      <button type="submit" class="regain-lock">
-        <span class="regain-lock-icon">
+      <button type="submit" class="regain_lock">
+        <span class="regain_lock-icon">
           <i class="fas fa-lock"></i>
           <i class="fas fa-plus"></i>
         </span>

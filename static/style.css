@@ -318,7 +318,7 @@ input:checked+.slider::before {
 
 }
 .question_section_header{
-    font-size: 8px;
+    font-size: 12px;
 }
 .section_timeline {
     position: relative;
@@ -413,10 +413,12 @@ input:checked+.slider::before {
 }
 
 .hover_popup {
+    font-family: "Share Tech Mono", monospace;
     display: none;
     position: absolute;
     top: 100%;
-    right: -100%;
+    /* right: -100%; */
+    left: -60%;
     margin-top: 8px;
     background-color: #222;
     color: #fff;
@@ -530,6 +532,7 @@ input:checked+.slider::before {
 
 .player_statistics h3 {
     border-top: solid 2px var(--button-border);
+    font-size: 10px;
     margin-top: 0;
     padding-top: 10px;
 }

@@ -126,45 +126,43 @@
     }
 }
 
-.crt-text {
-    position: relative;
-    z-index: 3;
-    text-shadow: 0 0 2px #0f0, 0 0 5px #0f0;
-    text-align: center;
+
+#crt_flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    background: transparent;
+    pointer-events: none;
+    z-index: 9999;
 }
 
-    #crt-flash {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      opacity: 0;
-      background: transparent;
-      pointer-events: none;
-      z-index: 9999;
+@keyframes crt_flash_out {
+    0% {
+        opacity: 0;
     }
 
-    @keyframes crt-flash-out {
-      0% {
-        opacity: 0;
-      }
-      10% {
+    10% {
         opacity: 0.9;
         background: radial-gradient(ellipse at center, white 0%, transparent 80%);
-      }
-      50% {
+    }
+
+    50% {
         opacity: 1;
         background: linear-gradient(to bottom, transparent 48%, white 50%, transparent 52%);
-      }
-      100% {
+    }
+
+    100% {
         opacity: 0;
         background: transparent;
-      }
     }
-    button:hover {
-      background: #0f02;
-    }
+}
+
+button:hover {
+    background: #0f02;
+}
 
 
 @keyframes pulse {
@@ -184,7 +182,7 @@
     }
 }
 
-.regain-lock {
+.regain_lock {
     border: none;
     background-color: var(--bg-color);
     ;
@@ -199,12 +197,12 @@
     animation-delay: 0.5s;
 }
 
-.regain-lock-icon .fa-lock:hover {
+.regain_lock-icon .fa-lock:hover {
     color: #c4c4c4;
     animation-play-state: paused;
 }
 
-.regain-lock-btn-wrapper {
+.regain_lock-btn-wrapper {
     position: fixed;
     top: 30%;
     right: 40%;
@@ -212,12 +210,12 @@
     background-color: #000;
 }
 
-.regain-lock-icon .fa-lock {
+.regain_lock-icon .fa-lock {
     font-size: 2em;
     color: var(--text-color);
 }
 
-.regain-lock-icon .fa-plus {
+.regain_lock-icon .fa-plus {
     position: absolute;
     top: -4px;
     right: -4px;

@@ -19,15 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-    function triggerCRTFlash() {
-      const flash = document.getElementById("crt-flash");
+//Function to trigger a css flash animation 
+function triggerCRTFlash() {
+  const flash = document.getElementById("crt_flash");
+  flash.style.animation = "none";
 
-      // Remove old animation
-      flash.style.animation = "none";
-
-      // Force reflow to restart animation
-      void flash.offsetWidth;
-
-      // Apply new animation
-      flash.style.animation = "crt-flash-out 0.6s ease-out";
-    }
+  void flash.offsetWidth;
+  flash.style.animation = "crt_flash_out 0.6s ease-out";
+}
