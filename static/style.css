@@ -727,6 +727,10 @@ input:checked+.slider::before {
         display: none;
     }
 
+    .flashes {
+        display: none;
+    }
+
     .menu_button {
         padding: 5px 10px;
         font-size: 0.5em;
@@ -820,6 +824,7 @@ input:checked+.slider::before {
     .card{
         min-width: 50px;
         max-width: 50px;
+        min-height: 70px;
         max-height: 70px;
         font-size: 0.8em;
     }
