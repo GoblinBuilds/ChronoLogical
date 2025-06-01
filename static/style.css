@@ -828,6 +828,20 @@ input:checked+.slider::before {
         font-size: 1.5em;
     }
 
+    .section_timeline:has(.card:nth-child(5)) .card {
+        min-width: 50px;
+        max-width: 50px;
+        max-height: 70px;
+    }
+
+    .section_timeline:has(.card:nth-child(5)) .card .date {
+        font-size: 0.8em;
+    }
+
+    .section_timeline:has(.card:nth-child(5)) .card .answered_question {
+        font-size: 0.5em;
+    }
+
     .middle_container {
         gap: 20px;
         padding: 10px 0 1em 0;
