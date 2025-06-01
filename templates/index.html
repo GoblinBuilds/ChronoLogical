@@ -10,7 +10,7 @@
   <!-- <h1>Choose Category</h1> -->
 
   <form method="post" id="form">
-    <h2 class="question_header" for="category">Category:</h2>
+    <h2 class="question_header" for="category">Categories:</h2>
     {% for cat in categories %}
     <input type="checkbox" name="category" value="{{ cat }}" class="point_cursor custom-checkbox" id="cat_{{ loop.index }}" checked>
     <label for="cat_{{ loop.index }}" class="point_cursor"  >{{ cat }}</label><br>
