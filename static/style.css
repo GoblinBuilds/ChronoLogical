@@ -890,8 +890,8 @@ input:checked+.slider::before {
     }
 
     .section_timeline:has(.card:nth-child(5)) .card {
-        min-width: 50px;
-        max-width: 50px;
+        min-width: 40px;
+        max-width: 40px;
         max-height: 70px;
     }
 
