@@ -886,7 +886,7 @@ input:checked+.slider::before {
     }
 
     .card .date {
-        font-size: 2em;
+        font-size: 1.5em;
     }
 
     .section_timeline:has(.card:nth-child(5)) .card {
