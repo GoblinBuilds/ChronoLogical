@@ -689,6 +689,7 @@ input:checked+.slider::before {
     input:checked+.slider::before {
         transform: translateX(12px);
     }
+
     .post_button {
         padding: 7px 13px;
         font-size: 0.8em;
@@ -744,24 +745,30 @@ input:checked+.slider::before {
         min-height: 80px;
         max-height: 80px;
         font-size: 0.8em;
+        padding-top: 2px;
     }
 
     .card .date {
-        font-size: 1.5em;
+        font-size: 0.9em;
+    }
+
+    .card .answered_question {
+        font-size: 0.8em;
+        margin-top: 1px;
     }
 
     .section_timeline:has(.card:nth-child(5)) .card {
-        min-width: 50px;
-        max-width: 50px;
+        min-width: 40px;
+        max-width: 40px;
         max-height: 70px;
     }
 
     .section_timeline:has(.card:nth-child(5)) .card .date {
-        font-size: 0.8em;
+        font-size: 1.5em;
     }
 
     .section_timeline:has(.card:nth-child(5)) .card .answered_question {
-        font-size: 0.5em;
+        font-size: 1.3em;
     }
 
     .modal_header {
@@ -883,10 +890,16 @@ input:checked+.slider::before {
         min-height: 80px;
         max-height: 80px;
         font-size: 0.6em;
+        padding-top: 0px;
     }
 
     .card .date {
         font-size: 1.5em;
+    }
+
+    .card .answered_question {
+        font-size: 1em;
+        margin-top: 1px;
     }
 
     .section_timeline:has(.card:nth-child(5)) .card {
