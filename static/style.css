@@ -635,7 +635,7 @@ input:checked+.slider::before {
 
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 800px) and (max-width: 1023px) {
     #action_history_floating {
         width: 200px;
         max-height: 200px;
@@ -645,11 +645,33 @@ input:checked+.slider::before {
     }
 }
 
-@media screen and (min-width: 300px) and (max-width: 767px) {
+@media screen and (max-width: 799px) {
     #action_history_floating {
         display: none;
     }  
+
     .answered_question {
         font-size: 0.8em;
     }
+
+    .menu_button {
+    padding: 5px 10px;
+    font-size: 0.8em;
+    }
+
+    .toggle_switch {
+    width: 30px;
+    height: 17px;
+}
+
+.slider::before{
+    height: 15px;
+    width: 15px;
+    left: 2px;
+    bottom: 1px;
+}
+
+input:checked+.slider::before {
+    transform: translateX(12px);
+}
 }
