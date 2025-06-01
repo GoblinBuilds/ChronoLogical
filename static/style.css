@@ -698,4 +698,11 @@ input:checked+.slider::before {
     lable {
         font-size: 0.8em;
     }
+
+    .spotify-player {
+        width: 25vw;
+        height: 60px;
+        top: 25%;
+        left: 10%;
+    }
 }
