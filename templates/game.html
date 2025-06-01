@@ -7,19 +7,19 @@
 {% block body %}
 <div class="player_statistics">
 <div class="hover_info">
-  <h3>Mode: {{ session.mode|capitalize }}</h3>
+  <h3 class="glow_text">Mode: {{ session.mode|capitalize }}</h3>
   <div class="hover_popup">While your cards are orange they are unlocked and will be lost if you answer incorrectly</div>
 </div>
 <div class="hover_info">
-  <h3>Skips: {{ session.skips }}</h3>
+  <h3 class="glow_text">Skips: {{ session.skips }}</h3>
   <div class="hover_popup">While your cards are orange they are unlocked and will be lost if you answer incorrectly</div>
 </div>
 <div class="hover_info">
-  <h3>Lock-ins: {{ 3 - session.lifeline_count }}</h3>
+  <h3 class="glow_text">Lock-ins: {{ 3 - session.lifeline_count }}</h3>
   <div class="hover_popup">While your cards are orange they are unlocked and will be lost if you answer incorrectly</div>
 </div>
 <div class="hover_info">
-  <h3>Score: <span id="score" data-score="{{ session.score }}">{{ "%05d" | format(session.score) }}</span></h3>
+  <h3 class="glow_text">Score: <span id="score" data-score="{{ session.score }}">{{ "%05d" | format(session.score) }}</span></h3>
   <div class="hover_popup">While your cards are orange they are unlocked and will be lost if you answer incorrectly</div>
 </div>
 </div>
@@ -37,7 +37,7 @@
 
 
 <div class="section">
-  <h2>Next Question</h2>
+  <h2 class="question_section_header">Next Question</h2>
   <div class="sortable_container" id="palette">
     {% if next_question %}
     <div class="card" data-id="{{ next_question.date }}" data-qid="{{ next_question.question_id }}"
@@ -63,9 +63,9 @@
 </div>
 
 <div class="middle_container">
-  <h2>Your Timeline</h2>
+  <h2 class="glow_text">Your Timeline</h2>
   <form method="post">
-  <button class="post_button" type="submit" name="action" value="lock">Lock Unlocked Cards</button>
+  <button class="post_button purple_boarder" type="submit" name="action" value="lock">Lock Unlocked Cards</button>
   {% if session.skips > 0 %}
   <button class="post_button" type="submit" name="action" value="skip">Skip</button>
   {% endif %}
@@ -89,11 +89,11 @@
 </div>
 
 {% if show_special_button %}
-<div class="regain-lock-btn-wrapper">
+<div class="regain_lock-btn-wrapper">
   <form action="{{ url_for('regain_lock') }}" method="post">
     <div class="square">
-      <button type="submit" class="regain-lock">
-        <span class="regain-lock-icon">
+      <button type="submit" class="regain_lock">
+        <span class="regain_lock-icon">
           <i class="fas fa-lock"></i>
           <i class="fas fa-plus"></i>
         </span>
@@ -105,29 +105,30 @@
 {% endif %}
 {% if song_embed_url %}
 <div class="spotify-player">
-  <iframe style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
+  <iframe id="spotify-frame" style="border-radius:12px" src="{{ song_embed_url }}" width="100%" height="80" frameborder="0"
     allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
     loading="lazy">
   </iframe>
 </div>
 {% endif %}
-
 <div class="section_timeline">
   <div class="sortable_container" id="timeline">
     {% set combined = locked + unlocked %}
     {% for entry in combined|sort(attribute='date') %}
-    <div class="card {% if entry in locked %}correct{% else %}unlocked{% endif %}" data-id="{{ entry.date }}"
-      data-qid="{{ entry.question_id }}">
-      <p class="date">{{ entry.date }}</p>
-      <p class="answered_question">
-        {% if entry.category == 'Music & Soundbites' %}
-        Music & Soundbites
-        {% elif entry.category == 'History' %}
-        {% else %}
-        {{ entry.question }}
-        {% endif %}
-      </p>
-    </div>
+
+<div class="card {% if entry in locked %}correct{% else %}unlocked{% endif %}" 
+     data-id="{{ entry.date }}" 
+     data-qid="{{ entry.question_id }}">
+  <p class="date">{{ entry.date }}</p>
+  <p class="answered_question">
+    {% if entry.category == 'Music & Soundbites' %}
+    Spotify Track
+    {% else %}
+    {{ entry.question }}
+    {% endif %}
+  </p>
+</div>
+
     {% endfor %}
   </div>
 </div>

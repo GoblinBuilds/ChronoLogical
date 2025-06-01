@@ -131,11 +131,17 @@ def game():
     if request.method == 'POST':
         current_id = session.get('current_id')
         next_question = get_current_question(current_id)
-        
         timeline = sorted_timeline()
-
         action_buttons()
 
+        if request.is_json:
+            return jsonify({
+                'score': session.get('score'),
+                'lifeline_count': session.get('lifeline_count'),
+                'skips': session.get('skips'),
+                'locked': session.get('locked'),
+                'unlocked': session.get('unlocked'),
+            })
         return redirect(url_for('game'))
 
     next_question = next_question_available()
@@ -233,51 +239,6 @@ def regain_lock():
     else:
         flash('You already used your special regain!')
     return redirect(url_for('game'))
-
-# def action_place(timeline, next_question, current_id):
-#     """
-#     Handles the placement of a question in the timeline based on user input.
-#     The function checks if the placement is valid and updates the session accordingly.
-#     - Valid placement: add the question to the unlocked timeline and updates the old questions.
-#     - Invalid placement: clear the unlocked timeline and shows an error message.
-#     - Placing 5 questions: redirect to the win screen.
-#     - Invalid input index: show an error message.
-
-#     returns:
-#         Redirect: game.html or win_screen.html.
-
-#     Args:
-#         Timeline: The current timeline of questions.
-#         next_question: The next question to be displayed.
-#         current_id: The ID of the current question.
-#     """
-#     user_input = request.form.get('index', -1)
-#     input_index = int(user_input) if user_input.isdigit() else -1
-#     if input_index == -1:
-#         flash('Invalid action.')
-#         return redirect(url_for('game'))
-            
-#     if 0 <= input_index <= len(timeline):
-#         valid_placement = check_valid_placement(timeline, next_question, input_index)
-#         if valid_placement:
-#             session['unlocked'] = sorted(session.get('unlocked', []) + [next_question], key=lambda e: e['date'])
-#             old = session.get('old_questions', [])
-#             old.append(current_id)
-#             session['old_questions'] = old
-#             # Allow new questions to be loaded
-#             session.pop('current_id', None) 
-#         else:
-#             session['unlocked'] = []
-#             session.pop('current_id', None)
-#             flash('Wrong answer, lost unlocked timeline.')
-
-#         if len(session.get('unlocked', [])) + len(session.get('locked', [])) == 2:
-#                 flash("Congratulations! You've Won!")
-#                 # session.clear()
-#                 return redirect(url_for('win_screen'))
-#         return redirect(url_for('game'))
-
-
 
 def action_buttons():
     """
@@ -401,42 +362,6 @@ def sorted_timeline():
     """
     return sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
 
-@app.route('/win_screen', methods=['GET', 'POST'])
-def win_screen():
-    if request.method == 'POST':
-        action = request.form.get('action')
-        if action == 'submit_score':
-            player_name = request.form.get('player_name')
-            score = session.get('score', 0)
-            try:
-                conn = psycopg2.connect(
-                    dbname=os.environ.get("DB_NAME"),
-                    user=os.environ.get("DB_USER"),
-                    password=os.environ.get("DB_PASSWORD"),
-                    host=os.environ.get("DB_HOST"),
-                    port=os.environ.get("DB_PORT")
-                )
-                cursor = conn.cursor()
-                cursor.execute(
-                    "INSERT INTO highscores (player_name, score) VALUES (%s, %s)",
-                    (player_name, score)
-                )
-                conn.commit()
-                cursor.close()
-                conn.close()
-                flash("Score submitted!")
-            except Exception as e:
-                flash(f"Error saving high score: {e}")
-            return redirect(url_for('highscores'))
-        elif action == 'continue':
-            old_questions = session.get('old_questions', [])
-            score = session.get('score', 0)
-            stage = session.get('stage', 1)
-
-        elif action == 'restart':
-            return redirect(url_for('index'))
-    return render_template('win_screen.html')
-
 @app.route('/validate_drop', methods=['POST'])
 def validate_drop():
     data = request.get_json()
@@ -483,9 +408,22 @@ def validate_drop():
                 # Optionally, handle game over here
 
     session['history'] = history
-    return jsonify({'valid': valid})
 
+    next_question = next_question_available()
 
+    song_url_embed = song_url(next_question) if next_question else None
+
+    return jsonify({
+        'valid': valid,
+        'score': session.get('score'),
+        'lifeline_count': session.get('lifeline_count'),
+        'skips': session.get('skips'),
+        'unlocked': session.get('unlocked'),
+        'locked': session.get('locked'),
+        'history': session.get('history', []),
+        'next_question': next_question,
+        'song_embed_url': song_url_embed
+    })
 
 @app.route('/submit_score', methods=['POST'])
 def submit_score():
@@ -534,4 +472,3 @@ def inject_highscores():
 
 if __name__ == '__main__':
     app.run(debug=False, use_reloader=False, use_debugger=False)
-

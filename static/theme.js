@@ -19,3 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+//Function to trigger a css flash animation 
+function triggerCRTFlash() {
+  const flash = document.getElementById("crt_flash");
+  flash.style.animation = "none";
+
+  void flash.offsetWidth;
+  flash.style.animation = "crt_flash_out 0.6s ease-out";
+}

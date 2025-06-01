@@ -6,123 +6,142 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ChronoLogical</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='animations.css') }}">
   <script src="{{ url_for('static', filename='pop_up.js') }}"></script>
   <script src="{{ url_for('static', filename='game_logic.js') }}"></script>
   <script src="{{ url_for('static', filename='theme.js') }}"></script>
+  <script src="{{ url_for('static', filename='animation.js') }}"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-  {% block head %} {% endblock %}
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Press+Start+2P&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+{% block head %} {% endblock %}
 </head>
 
 <body>
-  <div id="container">
-    <span class="left_edge"></span>
-    <span class="right_edge"></span>
-    <div class="menu_container">
-      <button class="menu_button" onclick="openModal()">Tutorial</button>
-      <button class="menu_button" onclick="openHighscoresModal()">High Scores</button>
-      <label class="toggle_switch">
-        <input type="checkbox" id="themeToggleSwitch">
-        <span class="slider"></span>
-      </label>
-      <div id="modal_overlay" class="overlay" style="display: none;">
-        <div class="modal">
-          <h2 class="modal_header"><i class="fas fa-book-open"></i> Welcome to the Tutorial</h2>
+  <div class="crt">
+    <div id="container">
+      <span class="left_edge"></span>
+      <span class="right_edge"></span>
+      <div class="menu_container">
+        <button class="menu_button" onclick="openModal()">Tutorial</button>
+        <button class="menu_button" onclick="openHighscoresModal()">High Scores</button>
+        <label class="toggle_switch">
+          <input type="checkbox" id="themeToggleSwitch">
+          <span class="slider"></span>
+        </label>
+        <div id="modal_overlay" class="overlay" style="display: none;">
+          <div class="modal">
+            <h2 class="modal_header"><i class="fas fa-book-open"></i> Welcome to the Tutorial</h2>
 
-          <div class="tutorial_step">
-            <i class="fas fa-lightbulb icon fas"></i>
-            <div>
-              <h3>Game Mechaniques</h3>
-              <p>
-              Player starts the with a locked card as a starting point in the timeline
-              and a question card to be placed chronologically in the timeline.
-              </p>
-              <ul>
-                <li><strong>Question card</strong>: A question card to be placed chronologically in the timeline.</li>
-                <br>
-                <li><strong>Unlocked cards</strong>: Displayed as cards with orange borders. These cards are lost when player answers incorrectly.</li>
-                <br>
-                <li><strong>Locked cards</strong>: Displayed as cards with green borders. These cards are NOT lost when player answer incorrectly. </li>
-              </ul>
-            </div>
-          </div>
-          <div class="tutorial_step">
-            <i class="fas fa-mouse-pointer icon"></i>
-            <div>
-              <h3>Buttons</h3>
-              <ul>
-                <li><strong>Lock Unlocked Cards</strong>: This action decrease lock-ins and lock the unlocked cards.</li>
-                <br>
-                <li><strong>Quit</strong>: End the game session and return to homepage.</li>
-                <br>
-                <li><strong>Skip</strong>: Player can skip a question up to 3 times.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="tutorial_step">
-            <i class="fas fa-hourglass-half icon"></i>
-            <div>
-              <h3>Statistics</h3>
-              <ul>
-                <li><strong>Mode</strong>: Easy and Hard modes</li>
+            <div class="tutorial_step">
+              <i class="fas fa-lightbulb icon fas"></i>
+              <div>
+                <h3>Game Mechaniques</h3>
+                <p>
+                  Player starts the with a locked card as a starting point in the timeline
+                  and a question card to be placed chronologically in the timeline.
+                </p>
                 <ul>
-                  <li><strong>Easy Mode</strong>: Player has 3 lock-ins that only decrease when locked the card(s).</li>
-                  <li><strong>Hard Mode</strong>: Player has 3 lock-ins and lock-ins decrease when locked the card(s) AND placed a card chronologically incorrect.</li>
+                  <li><strong>Question card</strong>: A question card to be placed chronologically in the timeline.</li>
+                  <br>
+                  <li><strong>Lock cards</strong>: Displayed as cards with orange borders. These cards are lost when
+                    player answered incorrectly.</li>
+                  <br>
+                  <li><strong>Unlocked cards</strong>: Displayed as cards with green borders. These cards are NOT lost
+                    when player answered incorrectly. </li>
                 </ul>
-                <br>
-                <li><strong>Lock-ins</strong>: Player gets 3 lock-ins per game. When all lock-ins are used, end the game session and return to homepage.</li>
-                <br>
-                <li><strong>Score</strong>: A correctly placed card rewards 100 points and an incorrectly placed card decrease 1 point.</li>
-              </ul>
+              </div>
+            </div>
+            <div class="tutorial_step">
+              <i class="fas fa-mouse-pointer icon"></i>
+              <div>
+                <h3>Buttons</h3>
+                <ul>
+                  <li><strong>Lock Unlocked Cards</strong>: This action decrease lock-ins and lock the unlocked cards.
+                  </li>
+                  <br>
+                  <li><strong>Quit</strong>: End the game session and return to homepage.</li>
+                  <br>
+                  <li><strong>Skip</strong>: Player can skip a question up to 3 times.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tutorial_step">
+              <i class="fas fa-hourglass-half icon"></i>
+              <div>
+                <h3>Statistics</h3>
+                <ul>
+                  <li><strong>Mode</strong>: Easy and Hard modes</li>
+                  <ul>
+                    <li><strong>Easy Mode</strong>: Player has 3 lock-ins that only decrease when locked the card(s).
+                    </li>
+                    <li><strong>Hard Mode</strong>: Player has 3 lock-ins and lock-ins decrease when locked the card(s)
+                      AND placed a card chronologically incorrect.</li>
+                  </ul>
+                  <br>
+                  <li><strong>Lock-ins</strong>: Player gets 3 lock-ins per game. When all lock-ins are used, end the
+                    game session and return to homepage.</li>
+                  <br>
+                  <li><strong>Score</strong>: A correctly placed card rewards 100 points and an incorrectly placed card
+                    decrease 1 point.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="modal_footer">
+              <button onclick="closeModal()">Got it!</button>
             </div>
           </div>
-          <div class="modal_footer">
-            <button onclick="closeModal()">Got it!</button>
+        </div>
+        <div id="highscores_modal" class="overlay" style="display: none;">
+          <div class="modal">
+            <h2 class="modal_header">High Scores</h2>
+            <table class="modal_header">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+              {% for name, score, date in highscores %}
+              <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ name }}</td>
+                <td>{{ score }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+            <button class="post_button" onclick="closeHighscoresModal()">Close</button>
           </div>
         </div>
       </div>
-      <div id="highscores_modal" class="overlay" style="display: none;">
-        <div class="modal">
-          <h2 class="modal_header">High Scores</h2>
-          <table class="modal_header">
-            <tr><th>#</th><th>Name</th><th>Score</th></tr>
-            {% for name, score, date in highscores %}
-            <tr>
-              <td>{{ loop.index }}</td>
-              <td>{{ name }}</td>
-              <td>{{ score }}</td>
-            </tr>
-            {% endfor %}
-          </table>
-          <button class="post_button" onclick="closeHighscoresModal()">Close</button>
-        </div>
-      </div>
+      <span class="bottom_line"></span>
+      {% block body %} {% endblock %}
     </div>
-    <span class="bottom_line"></span>
-    {% block body %} {% endblock %}
-  </div>
 
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <div id="flash-overlay">
-    <ul class="flashes">
-      {% for msg in messages %}
-      <li>{{ msg }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-  {% endif %}
-  {% endwith %}
-  {% with messages = get_flashed_messages() %}
-  {% if 'SHOW_HIGHSCORES' in messages %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div id="flash_overlay">
+      <ul class="flashes">
+        {% for msg in messages %}
+        <li>{{ msg }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages() %}
+    {% if 'SHOW_HIGHSCORES' in messages %}
     <script>
-      window.addEventListener('DOMContentLoaded', function() {
+      window.addEventListener('DOMContentLoaded', function () {
         openHighscoresModal();
       });
     </script>
-  {% endif %}
-{% endwith %}
+    {% endif %}
+    {% endwith %}
+  </div>
 </body>
 
 </html>
