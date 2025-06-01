@@ -661,6 +661,7 @@ input:checked+.slider::before {
     }
 
     .menu_button {
+        top: 10%;
         padding: 5px 10px;
         font-size: 0.8em;
     }
@@ -710,5 +711,9 @@ input:checked+.slider::before {
         height: 60px;
         top: 25%;
         left: 10%;
+    }
+
+    h1 {
+        font-size: 3.5em;
     }
 }
