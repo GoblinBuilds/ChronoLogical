@@ -643,6 +643,12 @@ input:checked+.slider::before {
         background-color: rgba(0, 0, 0, 0.08);
         font-size: 0.8em;
     }
+    .spotify-player {
+        width: 30vw;
+        height: 60px;
+        top: 35%;
+        left: 10%;
+    }
 }
 
 @media screen and (max-width: 799px) {
