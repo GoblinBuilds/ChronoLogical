@@ -801,4 +801,31 @@ input:checked+.slider::before {
     h1 {
         font-size: 2em;
     }
+
+    h2 {
+        font-size: 1em;
+    }
+
+    .player_statistics {
+        width: 40%;
+        gap: 15%;
+        font-size: 0.8em;
+        padding-left: 30px;
+    }
+
+    .section {
+        padding-bottom: 0px;
+    }
+
+    .card{
+        min-width: 60px;
+        max-width: 60px;
+        max-height: 80px;
+        font-size: 12px;
+    }
+
+    .middle_container {
+        gap: 20px;
+        padding: 10px 0 1em 0;
+    }
 }
