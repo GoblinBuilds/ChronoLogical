@@ -655,23 +655,47 @@ input:checked+.slider::before {
     }
 
     .menu_button {
-    padding: 5px 10px;
-    font-size: 0.8em;
+        padding: 5px 10px;
+        font-size: 0.8em;
     }
 
     .toggle_switch {
-    width: 30px;
-    height: 17px;
-}
+        width: 30px;
+        height: 17px;
+    }
 
-.slider::before{
-    height: 15px;
-    width: 15px;
-    left: 2px;
-    bottom: 1px;
-}
+    .slider::before{
+        height: 15px;
+        width: 15px;
+        left: 2px;
+        bottom: 1px;
+    }
 
-input:checked+.slider::before {
-    transform: translateX(12px);
-}
+    input:checked+.slider::before {
+        transform: translateX(12px);
+    }
+    .post_button {
+        padding: 7px 13px;
+        font-size: 0.8em;
+    }
+
+    .start_button {
+        font-size: 1.0em;
+        padding: 7px 13px;
+    }  
+    
+    .categories_container{
+        padding: 10px;
+    }
+
+    input[type="checkbox"] {
+        transform: scale(1.0);
+        margin: 7px;
+        width: 10px;
+        height: 10px;
+    }
+
+    lable {
+        font-size: 0.8em;
+    }
 }
