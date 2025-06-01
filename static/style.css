@@ -266,6 +266,12 @@ input:checked+.slider::before {
     color: var(--button-text);
     cursor: pointer;
 }
+.purple_boarder{
+    border: solid 1px #cc00ff;
+      box-shadow:
+    0 0 20px rgba(255, 165, 0, 0.1),
+    0 0 60px rgba(255, 165, 0, 0.2);
+}
 
 .quit_button {
     position: absolute;
@@ -338,6 +344,7 @@ input:checked+.slider::before {
 }
 .middle_container h2 {
     margin: 0;
+    border-bottom: solid 1px white;
 }
 
 .square {
@@ -362,7 +369,8 @@ input:checked+.slider::before {
 }
 
 .green .lock-icon {
-    stroke: #4CAF50;
+    stroke: #cc00ff;
+    
     /* green or any you like */
 }
 
@@ -466,7 +474,7 @@ input:checked+.slider::before {
     0 0 60px rgba(255, 255, 255, 0.3);
 }
 .card.correct {
-  border: 5px solid #4CAF50;
+  border: 5px solid #cc00ff;
   box-shadow:
     0 0 20px rgba(76, 175, 80, 0.3),
     0 0 60px rgba(76, 175, 80, 0.3);
