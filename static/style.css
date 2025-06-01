@@ -656,6 +656,14 @@ input:checked+.slider::before {
         display: none;
     }  
 
+    .leaderboard_container {
+        display: none;
+    }
+
+    .flashes {
+        display: none;
+    }
+
     .answered_question {
         font-size: 0.8em;
     }
@@ -695,6 +703,19 @@ input:checked+.slider::before {
         padding: 10px;
     }
 
+    .index_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+    }
+
+    .center_button_wrapper {
+        margin-top: 10px; 
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
     input[type="checkbox"] {
         transform: scale(1.0);
         margin: 7px;
@@ -716,6 +737,7 @@ input:checked+.slider::before {
     h1 {
         font-size: 2.5em;
     }
+
     .card{
         min-width: 50px;
         max-width: 50px;
@@ -740,6 +762,15 @@ input:checked+.slider::before {
 
     .section_timeline:has(.card:nth-child(5)) .card .answered_question {
         font-size: 0.5em;
+    }
+
+    .modal_header {
+        font-size: 1em;
+    }
+
+    .middle_container {
+        gap: 20px;
+        padding: 10px 0 1em 0;
     }
 }
 
