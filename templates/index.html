@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% block head %}
-
 {% endblock %}
 
 {% block body %}
-<div class="chromatic" data-text="Chromatic">Chromatic</div>
-<h1 class="chromatic" data-text="ChronoLogical" >ChronoLogical</h1>
+<h1 class="glow_text " data-text="ChronoLogical" >ChronoLogical</h1>
+<div id="crt-flash"></div>
 <div class="index_container">
   <div class="categories_container">
   <!-- <h1>Choose Category</h1> -->
@@ -14,7 +13,7 @@
     <h2 class="question_header" for="category">Category:</h2>
     {% for cat in categories %}
     <input type="checkbox" name="category" value="{{ cat }}" class="point_cursor custom-checkbox" id="cat_{{ loop.index }}" checked>
-    <label for="cat_{{ loop.index }}" class="point_cursor chromatic"  data-text="{{ cat }}" >{{ cat }}</label><br>
+    <label for="cat_{{ loop.index }}" class="point_cursor"  >{{ cat }}</label><br>
     {% endfor %}
     </select>
     <!-- ...category selection... -->
@@ -36,7 +35,7 @@
   </div>
 
   <div class="center_button_wrapper">
-    <button class="start_button" type="submit" form="form">Start game!</button>
+    <button  onclick="triggerCRTFlash()" class="start_button" type="submit" form="form">Start game!</button>
   </div>
   <div class="leaderboard_container"> 
     <h2 class="question_header"> Leaderboard:</h2>
