@@ -886,7 +886,7 @@ input:checked+.slider::before {
     }
 
     .card .date {
-        font-size: 1.5em;
+        font-size: 2em;
     }
 
     .section_timeline:has(.card:nth-child(5)) .card {
@@ -896,11 +896,11 @@ input:checked+.slider::before {
     }
 
     .section_timeline:has(.card:nth-child(5)) .card .date {
-        font-size: 0.8em;
+        font-size: 1em;
     }
 
     .section_timeline:has(.card:nth-child(5)) .card .answered_question {
-        font-size: 0.5em;
+        font-size: 0.8em;
     }
 
     .middle_container {
