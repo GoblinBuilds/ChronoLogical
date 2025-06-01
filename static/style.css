@@ -818,10 +818,14 @@ input:checked+.slider::before {
     }
 
     .card{
-        min-width: 60px;
-        max-width: 60px;
-        max-height: 80px;
-        font-size: 12px;
+        min-width: 50px;
+        max-width: 50px;
+        max-height: 70px;
+        font-size: 0.8em;
+    }
+
+    .card .date {
+        font-size: 1.5em;
     }
 
     .middle_container {
