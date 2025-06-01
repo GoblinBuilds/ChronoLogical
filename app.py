@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, json, jsonify
 import random
 import psycopg2
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = 'dev'
+app.secret_key = os.environ.get("SECRET_KEY", "dev")
 
 
 def load_questions(table_name='questions'):
@@ -18,13 +22,12 @@ def load_questions(table_name='questions'):
         list: A list of questions from the database.
     """
     try:
-         # Temporary hardcoded database connection details
         conn = psycopg2.connect(
-            dbname="aq3524",
-            user="aq3524",
-            password="abc123",
-            host="pgserver.mau.se",
-            port="5432"
+            dbname=os.environ.get("DB_NAME"),
+            user=os.environ.get("DB_USER"),
+            password=os.environ.get("DB_PASSWORD"),
+            host=os.environ.get("DB_HOST"),
+            port=os.environ.get("DB_PORT")
         )
         cursor = conn.cursor()
         # Dynamically query the specified table
@@ -106,7 +109,8 @@ def index():
         return redirect(url_for('game'))
 
     categories = sorted({question['category'] for question in QUESTIONS}, key=str.lower)
-    return render_template('index.html', categories=categories)
+    highscores = inject_highscores()['highscores']  # Get highscores from the context processor
+    return render_template('index.html', categories=categories, scores=highscores)
 
 @app.route('/game', methods=['GET', 'POST'])
 
@@ -199,6 +203,12 @@ def action_lock():
     if session.get('unlocked'):
         session['locked'] = sorted(session.get('locked', []) + session.get('unlocked', []), key=lambda e: e['date'])
         if len(session['unlocked']) >= 6: 
+
+            flash(f'You have locked more than 5 at the same time you kept your lock')
+        else: 
+            session['lifeline_count'] = session.get('lifeline_count', 0) + 1
+        # Update score: 100 points per locked card
+        session['score'] = len(session['locked']) * 100
             flash(f'You have locked more than 5 at the same time you kept your lock well done you')
             session['show_special_button'] = True
  
@@ -400,11 +410,11 @@ def win_screen():
             score = session.get('score', 0)
             try:
                 conn = psycopg2.connect(
-                    dbname="aq3524",
-                    user="aq3524",
-                    password="abc123",
-                    host="pgserver.mau.se",
-                    port="5432"
+                    dbname=os.environ.get("DB_NAME"),
+                    user=os.environ.get("DB_USER"),
+                    password=os.environ.get("DB_PASSWORD"),
+                    host=os.environ.get("DB_HOST"),
+                    port=os.environ.get("DB_PORT")
                 )
                 cursor = conn.cursor()
                 cursor.execute(
@@ -483,11 +493,11 @@ def submit_score():
     score = request.form.get('score', 0)
     try:
         conn = psycopg2.connect(
-            dbname="aq3524",
-            user="aq3524",
-            password="abc123",
-            host="pgserver.mau.se",
-            port="5432"
+            dbname=os.environ.get("DB_NAME"),
+            user=os.environ.get("DB_USER"),
+            password=os.environ.get("DB_PASSWORD"),
+            host=os.environ.get("DB_HOST"),
+            port=os.environ.get("DB_PORT")
         )
         cursor = conn.cursor()
         cursor.execute(
@@ -507,14 +517,14 @@ def submit_score():
 def inject_highscores():
     try:
         conn = psycopg2.connect(
-            dbname="aq3524",
-            user="aq3524",
-            password="abc123",
-            host="pgserver.mau.se",
-            port="5432"
+            dbname=os.environ.get("DB_NAME"),
+            user=os.environ.get("DB_USER"),
+            password=os.environ.get("DB_PASSWORD"),
+            host=os.environ.get("DB_HOST"),
+            port=os.environ.get("DB_PORT")
         )
         cursor = conn.cursor()
-        cursor.execute("SELECT player_name, score, achieved_at FROM highscores ORDER BY score DESC, achieved_at ASC LIMIT 20")
+        cursor.execute("SELECT player_name, score, achieved_at FROM highscores ORDER BY score DESC, achieved_at ASC LIMIT 10")
         highscores = cursor.fetchall()
         cursor.close()
         conn.close()
