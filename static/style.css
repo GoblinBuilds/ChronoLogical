@@ -725,7 +725,7 @@ input:checked+.slider::before {
 }
 
 
-@media screen and (min-width: 1024px) and (max-width: 1440px) {
+@media screen and (min-width: 1291px) and (max-width: 1440px) {
     body {
         font-size: 12px;
     }
@@ -746,8 +746,60 @@ input:checked+.slider::before {
         max-height: 250px;
     }
 }
+@media screen and (min-width: 1024px) and (max-width: 1290px) {
+    body {
+        font-size: 10px;
+    }
+    h1{
+        font-size: 5em;
+    }
+    .question_header {
+        font-size: 3em;
+    }
+    input[type="checkbox"] {
+        transform: scale(1.5);
+        margin: 10px;
+    }
+    .menu_button{
+        padding: 3px 9px;
+    }
+    /* .card{
+        transform: scale(0.8);
+    } */
+    #container {
+        height: 95vh;
+    }
+
+    #action_history_floating {
+        width: 200px;
+        max-height: 250px;
+    }
+}
+
 
 @media screen and (min-width: 800px) and (max-width: 1023px) {
+    body {
+        font-size: 8px;
+    }
+    h1{
+        font-size: 4em;
+    }
+    input[type="checkbox"] {
+        transform: scale(1.5);
+        margin: 10px;
+    }
+    .menu_button{
+        padding: 3px 9px;
+    }
+    .player_statistics{
+        gap: 5%;
+    }
+    label{
+        font-size: 1em;
+    }
+    button{
+        padding: 5px 5px 5px 5px;
+    }
     #action_history_floating {
         max-height: 200px;
         overflow-y: auto;
