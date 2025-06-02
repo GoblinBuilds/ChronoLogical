@@ -924,4 +924,21 @@ input:checked+.slider::before {
     .modal_header {
         font-size: 1em;
     }
+
+    #winModal {
+        height: 40vh;
+        min-height: 100px;
+        width: 50vw;
+        top: 35%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 }
