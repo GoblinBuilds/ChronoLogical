@@ -22,7 +22,7 @@ body.light-mode {
     --primary-color: #000;
     --border-color: #000;
     --checkbox-color: #000;
-    --button-bg: #fff;
+    --button-bg: #d4d4d4;
     --button-border: #000;
     --button-text: #000;
     --button-hover: #ddd;
@@ -746,7 +746,7 @@ input:checked+.slider::before {
         max-height: 250px;
     }
 }
-@media screen and (min-width: 1024px) and (max-width: 1290px) {
+@media screen and (min-width: 1124px) and (max-width: 1290px) {
     body {
         font-size: 10px;
     }
@@ -763,9 +763,6 @@ input:checked+.slider::before {
     .menu_button{
         padding: 3px 9px;
     }
-    /* .card{
-        transform: scale(0.8);
-    } */
     #container {
         height: 95vh;
     }
@@ -777,16 +774,36 @@ input:checked+.slider::before {
 }
 
 
-@media screen and (min-width: 800px) and (max-width: 1023px) {
+@media screen and (min-width: 800px) and (max-width: 1123px) {
     body {
         font-size: 8px;
+    }
+    .section{
+        margin-bottom: 1%;
     }
     h1{
         font-size: 4em;
     }
+    .card{
+        transform: scale(0.7);
+    } 
     input[type="checkbox"] {
         transform: scale(1.5);
         margin: 10px;
+    }
+    .slider {
+        width: 30px;
+        height: 17px;
+    }
+
+    .slider::before{
+        height: 15px;
+        width: 15px;
+        left: 2px;
+        bottom: 1px;
+    }
+    input:checked+.slider::before {
+    transform: translateX(12px);
     }
     .menu_button{
         padding: 3px 9px;
@@ -837,7 +854,7 @@ input:checked+.slider::before {
         font-size: 0.8em;
     }
 
-    .toggle_switch {
+    .slider {
         width: 30px;
         height: 17px;
     }
