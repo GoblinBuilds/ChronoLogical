@@ -3,12 +3,14 @@ html {
 }
 
 :root {
-    --bg-color: #000;
+    /* --bg-color: #000;
+    --button-bg: #000; */
+    --bg-color: #00021b;
+    --button-bg: #00021b;
     --text-color: #fff;
     --primary-color: #fff;
     --border-color: #fff;
     --checkbox-color: #fff;
-    --button-bg: #000;
     --button-border: #fff;
     --button-text: #fff;
     --button-hover: #363636;
@@ -32,8 +34,8 @@ body {
     position: relative;
     margin: 0;
     height: 100vh;
-    overflow: scroll;
     font-size: 12px;
+    
 }
 
 h1 {
@@ -52,6 +54,7 @@ button {
 
 .glow_text {
     color: var(--text-color);
+    overflow: visible;
     text-shadow:
         0 0 2px var(--text-color),
         0 0 10px rgba(255, 255, 255, 0.2),
@@ -102,7 +105,7 @@ button {
     right: 2%;
     box-sizing: border-box;
     background-color: transparent;
-    overflow: auto;
+    overflow: visible;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -481,8 +484,9 @@ input:checked+.slider::before {
 .card.correct {
     border: 5px solid #cc00ff;
     box-shadow:
-        0 0 20px rgba(76, 175, 80, 0.3),
-        0 0 60px rgba(76, 175, 80, 0.3);
+        0 0 20px rgba(204, 0, 255, 0.4),
+        0 0 40px rgba(204, 0, 255, 0.2),
+        0 0 80px rgba(204, 0, 255, 0.1);
 }
 
 .card.unlocked {
