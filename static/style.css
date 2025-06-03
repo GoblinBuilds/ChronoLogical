@@ -878,6 +878,7 @@ input:checked+.slider::before {
     .start_button {
         font-size: 1.0em;
         padding: 7px 13px;
+        margin-top: 0;
     }  
     
     .categories_container{
