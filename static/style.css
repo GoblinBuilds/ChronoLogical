@@ -975,6 +975,10 @@ input:checked+.slider::before {
         display: none;
     }
 
+    .menu_container {
+        margin-top: 20px;
+    }
+
     .menu_button {
         padding: 5px 10px;
         font-size: 0.5em;
@@ -983,6 +987,11 @@ input:checked+.slider::before {
     .toggle_switch {
         width: 30px;
         height: 17px;
+    }
+
+    .slider {
+        height: 17px;
+        width: 40px;
     }
 
     .slider::before{
