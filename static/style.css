@@ -1163,3 +1163,47 @@ input:checked+.slider::before {
         text-align: center;
     }
 }
+
+@media screen and (orientation: landscape) {
+    #action_history_floating {
+        display: none;
+    } 
+
+    .leaderboard_container {
+        display: none;
+    }
+
+    .flashes {
+        display: none;
+    }
+
+    h1 {
+        margin-bottom: 1px;
+    }
+
+    .menu_container {
+        margin-top: 30px;
+    }
+
+    .index_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+    }
+
+    .categories_container{
+        padding: 0;
+        padding-left: 80px;
+        width: 50%;
+        height: 40%;
+        max-height: 90px;
+        font-size: 0.3em;
+    }
+
+    .center_button_wrapper {
+        margin-top: 70px; 
+        display: flex;
+        justify-content: left;
+        width: 100%;
+    }
+}
