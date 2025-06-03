@@ -1140,6 +1140,22 @@ input:checked+.slider::before {
         align-items: center;
     }
 
+    #winModal h2 {
+        font-size: 0.8em;
+        padding-left: 5px;
+    }
+
+    #winModal h3 {
+        font-size: 1.2em;
+    }
+
+    #winModal input {
+        margin-left: 40px;
+        max-width: 60%;
+        display: flex;
+        flex-direction: column;
+    }
+
     .modal {
         display: flex;
         flex-direction: column;
