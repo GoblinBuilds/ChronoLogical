@@ -1098,6 +1098,10 @@ input:checked+.slider::before {
         margin-top: 1px;
     }
 
+    .section_timeline {
+        margin-right: 25px;
+    }
+
     .section_timeline:has(.card:nth-child(5)) .card {
         min-width: 40px;
         max-width: 40px;
