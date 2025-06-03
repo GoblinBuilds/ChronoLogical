@@ -831,7 +831,7 @@ input:checked+.slider::before {
     }
 }
 
-@media screen and (min-width: 440px) and (max-width: 799px) {
+@media screen and (min-width: 440px) and (max-width: 799px) and (orientation: landscape) {
     #action_history_floating {
         display: none;
     }  
