@@ -1004,6 +1004,11 @@ input:checked+.slider::before {
     input:checked+.slider::before {
         transform: translateX(12px);
     }
+
+    .quit_button{
+        margin-top: 20px;
+        padding: 5px 20px;
+    }
     
     .post_button {
         padding: 7px 13px;
