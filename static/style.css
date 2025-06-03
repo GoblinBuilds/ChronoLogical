@@ -1057,7 +1057,7 @@ input:checked+.slider::before {
         width: 25vw;
         height: 60px;
         top: 25%;
-        left: 10%;
+        left: 5%;
     }
 
     h1 {
@@ -1076,6 +1076,7 @@ input:checked+.slider::before {
     }
 
     .section {
+        margin-left: 30px;
         padding-bottom: 0px;
     }
 
@@ -1114,6 +1115,11 @@ input:checked+.slider::before {
     .middle_container {
         gap: 20px;
         padding: 10px 0 1em 0;
+        margin-left: 50px;
+    }
+
+    .middle_container h2 {
+        font-size: 0.6em;
     }
 
     .modal_header {
