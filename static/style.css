@@ -1206,4 +1206,22 @@ input:checked+.slider::before {
         justify-content: left;
         width: 100%;
     }
+
+    .player_statistics h3 {
+        font-size: 0.5em;
+    }
+
+    .quit_button {
+        margin-top: 5px;
+        margin-left: 105px;
+        padding: 3px 10px;
+    }
+
+    .section {
+        margin: 0;
+    }
+
+    .sortable_container {
+        padding-top: 0;
+    }
 }
