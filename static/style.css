@@ -1099,20 +1099,21 @@ input:checked+.slider::before {
     }
 
     .section_timeline {
-        margin-right: 25px;
+        width: 100%;
+        padding: 0;
     }
 
-    .section_timeline:has(.card:nth-child(5)) .card {
+    .section_timeline:has(.card:nth-child(3)) .card {
         min-width: 40px;
         max-width: 40px;
         max-height: 70px;
     }
 
-    .section_timeline:has(.card:nth-child(5)) .card .date {
+    .section_timeline:has(.card:nth-child(3)) .card .date {
         font-size: 1em;
     }
 
-    .section_timeline:has(.card:nth-child(5)) .card .answered_question {
+    .section_timeline:has(.card:nth-child(3)) .card .answered_question {
         font-size: 0.8em;
     }
 
@@ -1164,7 +1165,7 @@ input:checked+.slider::before {
     }
 }
 
-@media screen and (orientation: landscape) {
+@media screen and (orientation: landscape) and (max-width: 600px) {
     #action_history_floating {
         display: none;
     } 
