@@ -421,7 +421,7 @@ def validate_drop():
 
 @app.route('/submit_score', methods=['POST'])
 def submit_score():
-    player_name = request.form.get('player_name')
+    player_name = request.form.get('player_name', '').upper()[:3]  # All caps, max 3 chars
     score = request.form.get('score', 0)
     try:
         conn = psycopg2.connect(
