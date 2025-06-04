@@ -394,12 +394,14 @@ def validate_drop():
             session['old_questions'] = session.get('old_questions', []) + [question_id]
         # HARD MODE: Lose a lock on incorrect placement
         if session.get('mode', 'easy') == 'hard':
-            session['lifeline_count'] = session.get('lifeline_count', 0) + 1
-            lives_left = 3 - session['lifeline_count']
+            # Increment, but never above 3
+            session['lifeline_count'] = min(session.get('lifeline_count', 0) + 1, 3)
+            # Calculate lives left, never below 0
+            lives_left = max(0, 3 - session['lifeline_count'])
             flash(f"You lost a lock! {lives_left} locks left.")
             if lives_left <= 0:
+                session['lifeline_count'] = 3  # Ensure it doesn't go above 3
                 flash('SHOW_MODAL')
-                # Optionally, handle game over here
 
     session['history'] = history
 

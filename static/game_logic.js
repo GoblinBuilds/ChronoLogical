@@ -42,6 +42,7 @@ function sendDropData(questionId, timelineOrder) {
       updateHistory(data.history);
     } else {
         loseCards()
+        updateHistory(data.history);
         // Optional: add animation before clearing
         document.querySelectorAll('.card.unlocked').forEach(card => {
           card.classList.add('lost');
