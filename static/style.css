@@ -122,8 +122,7 @@ button {
     height: 100vh;
 }
 
-.categories_container,
-.leaderboard_container {
+.categories_container,.leaderboard_container {
     width: 50%;
     box-sizing: border-box;
     padding: 20px;
@@ -131,6 +130,16 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.leaderboard_container table, .leaderboard_container th,.leaderboard_container td {
+    border: 1px solid #ddd;      /* Subtle borders for table and cells */
+    border-collapse: collapse;
+}
+
+.leaderboard_container th, .leaderboard_container td {
+    padding: 0.5em 0.75em; /* 8px ≈ 0.5em, 12px ≈ 0.75em */
+    text-align: center;
 }
 
 input[type="checkbox"] {
@@ -589,6 +598,15 @@ input:checked+.slider::before {
     display: flex;
     flex-direction: column;
 }
+
+#highscores_modal {
+    text-align: left;
+}
+
+#highscores_modal h2 {
+    text-align: center;
+}
+
 .win_modal {
     width: 30vw;
     height: 40vh;
