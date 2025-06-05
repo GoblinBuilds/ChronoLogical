@@ -3,8 +3,6 @@ html {
 }
 
 :root {
-    /* --bg-color: #000;
-    --button-bg: #000; */
     --bg-color: #00021b;
     --button-bg: #00021b;
     --text-color: #fff;
@@ -84,7 +82,6 @@ button {
     gap: 20px;
     align-items: flex-start;
     flex-wrap: nowrap;
-    /* overflow-x: auto;   */
     scroll-behavior: smooth;
     width: 100%;
     max-width: 90vw;
@@ -137,7 +134,7 @@ button {
 }
 
 .leaderboard_container th, .leaderboard_container td {
-    padding: 0.5em 0.75em; /* 8px ≈ 0.5em, 12px ≈ 0.75em */
+    padding: 0.5em 0.75em; 
     text-align: center;
 }
 
@@ -438,7 +435,6 @@ input:checked+.slider::before {
     display: none;
     position: absolute;
     top: 100%;
-    /* right: -100%; */
     left: -60%;
     margin-top: 8px;
     background-color: #222;
@@ -751,9 +747,6 @@ input:checked+.slider::before {
         font-size: 3em;
     }
 
-    /* .card{
-        transform: scale(0.8);
-    } */
     #container {
         height: 95vh;
     }
