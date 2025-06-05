@@ -48,16 +48,6 @@ def load_questions(table_name='questions'):
     
 QUESTIONS = load_questions('questions')
 
-
-# def load_questions(filename='questions.json'):
-#     try:
-#         with open(filename, 'r') as file:
-#             questions = json.load(file)
-#             return questions
-#     except FileNotFoundError:
-#         print("Error: questions.json not found.")
-# QUESTIONS = load_questions('questions.json')
-
 def get_session_list(key):
     """Retrieve a value from the session by key."""
     return session.get(key)
@@ -253,8 +243,6 @@ def action_buttons():
         return action_lock()
     elif action == 'skip':
         return action_skip()
-    # elif action == 'place':
-    #     return action_place(timeline, next_question, current_id)
     else:
         flash('Invalid action.')
     return redirect(url_for('game'))
@@ -291,7 +279,6 @@ def song_url(next_question):
             try:
                 track_id = song_url.split("/track/")[1].split("?")[0]
                 return f"https://open.spotify.com/embed/track/{track_id}"
-                # next_question["question"] = "Guess the year of this song!"
             except IndexError:
                 return None  
         else:
@@ -315,7 +302,6 @@ def next_question_available():
     available = [question for question in QUESTIONS if question['question_id'] not in old_questions and question['category'] in selected]
 
     if not available:
-        # flash("There's no more questions available!")
         return redirect(url_for('index'))
 
     if not session.get('current_id'):
