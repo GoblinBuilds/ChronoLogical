@@ -1,3 +1,5 @@
+// This script handles the drag and drop functionality for the timeline and palette,
+// as well as the interaction with the server to validate drops and update the game state.
 document.addEventListener('DOMContentLoaded', () => {
   const timeline = document.getElementById('timeline');
   const palette = document.getElementById('palette');
@@ -7,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     sort: false,
     animation: 150
   });
-
+  // Create the timeline as a sortable list using Sortable.js
+  // This allows users to drag and drop cards from the palette to the timeline
   Sortable.create(timeline, {
     group: 'shared',
     animation: 150,
@@ -16,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
+// Handle the drop event
 function handleDrop(evt) {
   const questionId = evt.item.dataset.qid;
   const timeline = document.getElementById('timeline');
@@ -24,7 +27,7 @@ function handleDrop(evt) {
   sendDropData(questionId, timelineOrder);
 }
 
-
+// Send the drop data to the python for validation
 function sendDropData(questionId, timelineOrder) {
   fetch('/validate_drop', {
     method: 'POST',
@@ -34,42 +37,43 @@ function sendDropData(questionId, timelineOrder) {
       timeline: timelineOrder
     })
   })
+  // Handle the python response
   .then(res => res.json())
   .then(data => {
+    // Update the timeline and stats based on the python response
     if (data.valid) {
       updateTimeline(data.unlocked, data.locked);
       updateStats(data.score, data.lifeline_count, data.skips);
       updateHistory(data.history);
     } else {
-        loseCards()
-        updateHistory(data.history);
-        // Optional: add animation before clearing
+        loseCards() 
+        updateHistory(data.history); 
+        // Add the 'lost' class to the cards that were not correctly placed
         document.querySelectorAll('.card.unlocked').forEach(card => {
           card.classList.add('lost');
         });
-
-        // After animation, update DOM
+        // Remove the lost cards after a short delay
         setTimeout(() => {
           updateTimeline(data.unlocked, data.locked);
-        }, 500); // Matches your card loss animation duration
+        }, 500);
         updateStats(data.score, data.lifeline_count, data.skips);
       }
-
+      // Update the palette card if there's a next question
       if (data.next_question) {
         updatePaletteCard(data.next_question);
       }
-
+      // Show the win modal if 'win' is achieved
       if (data.win) {
         document.getElementById("winModal").style.display = "flex";
       }
-
+      // If theres a song embed URL, update the Spotify player
       if (data.song_embed_url) {
         const container = document.querySelector(".spotify-player");
-        container.innerHTML = ''; // Clear old iframe
+        container.innerHTML = '';
 
         const iframe = document.createElement("iframe");
         iframe.style.borderRadius = "12px";
-        iframe.src = data.song_embed_url + "?t=" + new Date().getTime(); // Prevent caching
+        iframe.src = data.song_embed_url + "?t=" + new Date().getTime();
         iframe.width = "100%";
         iframe.height = "80";
         iframe.setAttribute("frameborder", "0");
@@ -152,17 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, frameRate);
 });
 
-fetch('/check_answer', {
-  method: 'POST',
-  body: JSON.stringify({
-    question_id: qid,
-    user_date: selectedDate
-  }),
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
-
+// This function updates the timeline with the new cards
 function updateTimeline(unlocked, locked) {
   const timeline = document.getElementById('timeline');
   timeline.innerHTML = '';
@@ -182,12 +176,14 @@ function updateTimeline(unlocked, locked) {
   }
 }
 
+// This function updates the game stats displayed on the page
 function updateStats(score, lifelines, skips) {
   document.getElementById('score').textContent = score.toString().padStart(5, '0');
   document.querySelector('.hover_info:nth-child(2) h3').innerHTML = `Skips: ${skips}`;
   document.querySelector('.hover_info:nth-child(3) h3').innerHTML = `Lock-ins: ${3 - lifelines}`;
 }
 
+// This function updates the action history displayed on the page
 function updateHistory(history) {
   const list = document.querySelector('#action_history_floating ul');
   list.innerHTML = '';
@@ -198,6 +194,7 @@ function updateHistory(history) {
   });
 }
 
+// This function handles the loss of cards when a drop is invalid
 function updatePaletteCard(card) {
   const palette = document.getElementById('palette');
   palette.innerHTML = ''; 

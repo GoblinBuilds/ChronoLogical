@@ -49,11 +49,25 @@ def load_questions(table_name='questions'):
 QUESTIONS = load_questions('questions')
 
 def get_session_list(key):
-    """Retrieve a value from the session by key."""
+    """
+    Retrieves a value from the session storage.
+
+    Args:
+        key (str): The key for the session variable to retrieve.
+
+    Returns:
+        Any: The value stored in the session under the given key, or None if not set.
+    """
     return session.get(key)
 
 def set_session_list(key, value):
-    """Set a value in the session for the given key."""
+    """
+    Stores a value in the session storage under the specified key.
+
+    Args:
+        key (str): The session key.
+        value (Any): The value to store under the session key.
+    """
     session[key] = value
 
 def init_session(category, enable_skips=False, mode='easy'):
@@ -175,7 +189,7 @@ def action_quit():
     """
     Handles the quit action by clearing the session and redirecting to the index.
 
-    returns:
+    Returns:
         Redirect: index.html.
 
     Args:
@@ -190,7 +204,7 @@ def action_lock():
     If the timeline is already locked, increase the lifeline count and check if the player has lost all lives.
     If the player has no lives left, clear the session and redirect to the index.
 
-    returns:
+    Returns:
         redirect: game.html or index.html.
 
     Args:
@@ -216,6 +230,13 @@ def action_lock():
 
 @app.route('/regain_lock', methods=['POST'])
 def regain_lock():
+    """
+    Allows the player to regain one lifeline (lock) using a one-time special ability.
+    Prevents multiple uses through the 'special_used' session flag.
+
+    Returns:
+        Redirect: Redirects the player back to the game screen.
+    """
     if not session.get('special_used', True):
         session['lifeline_count'] = max(session.get('lifeline_count', 0) - 1, 0)
         session['special_used'] = True
