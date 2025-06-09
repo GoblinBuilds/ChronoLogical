@@ -96,7 +96,15 @@ def init_session(category, enable_skips=False, mode='easy'):
         
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    """Function to render index.html and allow users to select a desired caregory of questions."""
+    """
+    Function to render index.html and allow users to select a desired caregory of questions.
+    
+    Returns:
+        Rendered template: index.html with categories and highscores   
+
+    Args:
+        None
+    """
     if request.method == 'POST':
         category_list = request.form.getlist('category')
         enable_skips = request.form.get('enable_skips') == 'yes'
@@ -269,6 +277,14 @@ def action_buttons():
     return redirect(url_for('game'))
 
 def action_skip():
+    """
+    Handles the skip action and decreases the number of skips left in the session.
+
+    Returns:   
+        Redirect: game.html if skips are available, otherwise flash a message and redirect to index.
+    Args:
+        None
+    """
     skips = session.get('skips', 0)
     if skips > 0:
         session['skips'] = skips - 1
@@ -430,6 +446,15 @@ def validate_drop():
 
 @app.route('/submit_score', methods=['POST'])
 def submit_score():
+    """
+    Handles the submission of a player's score to the database.
+
+    Returns:
+        Redirect: Redirects to the index page after score submission.
+        
+    Args:
+        None
+    """
     player_name = request.form.get('player_name', '').upper()[:3]  # All caps, max 3 chars
     score = request.form.get('score', 0)
     try:
@@ -456,6 +481,15 @@ def submit_score():
 
 @app.context_processor
 def inject_highscores():
+    """
+    Context processor to implement the highscore data into the highscores SQL table.
+
+    Returns:
+        dict: containing the highscores.
+    
+    Args:
+        None
+    """
     try:
         conn = psycopg2.connect(
             dbname=os.environ.get("DB_NAME"),
