@@ -1,0 +1,542 @@
+[
+  {
+    "question_id": "GSH-1",
+    "date": 1896,
+    "question": "The first modern Olympic Games are held in Athens, Greece.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-2",
+    "date": 1949,
+    "question": "LEGO releases its very first plastic brick.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-3",
+    "date": 1935,
+    "question": "The board game Monopoly is first published by Parker Brothers.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-4",
+    "date": 1999,
+    "question": "Serena Williams wins her first Grand Slam singles title at the US Open.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-5",
+    "date": 1989,
+    "question": "Nintendo releases the Game Boy in Japan.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-6",
+    "date": 1974,
+    "question": "The Rubik’s Cube is invented by Ernő Rubik in Hungary.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-7",
+    "date": 1997,
+    "question": "Tiger Woods becomes the youngest golfer to win the Masters Tournament.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-8",
+    "date": 1974,
+    "question": "Gary Gygax and Dave Arneson publishes the first edition of Dungeons & Dragons.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-9",
+    "date": 1930,
+    "question": "The first ever FIFA World Cup is held in Uruguay.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-10",
+    "date": 1996,
+    "question": "The popular Tamagotchi virtual pets are released in Japan.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-11",
+    "date": 1954,
+    "question": "Scrabble is released in Sweden, though renamed as Alfapet.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-12",
+    "date": 1965,
+    "question": "Cassius Clay changes his name to Muhammad Ali.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "GSH-13",
+    "date": 1994,
+    "question": "The FIFA World cup is hosted in the US, and Sweden is awarded bronze.",
+    "category": "Games, Sports & Hobbies"
+  },
+  {
+    "question_id": "SB-1",
+    "date": 2020,
+    "question": "Parasite wins an Oscar for Best Picture.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-2",
+    "date": 1929,
+    "question": "At the Hollywood Roosevelt Hotel, the Academy Awards ceremony is held for the first time.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-3",
+    "date": 1927,
+    "question": "The Jazz Singer, the first feature-length film with synchronized dialogue, is released.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-4",
+    "date": 2007,
+    "question": "Netflix launches its streaming service, changing how movies are distributed and watched.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-5",
+    "date": 2006,
+    "question": "Disney acquires Pixar, marking a major shift in the animation industry.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-6",
+    "date": 1962,
+    "question": "The record company Decca turns down the offer to sign a record deal with the Beatles.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-7",
+    "date": 1975,
+    "question": "The skit show Saturday Night Live premieres on american television.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-8",
+    "date": 1984,
+    "question": "Johnny Depp has his feature film debut with the cult horror classic Nightmare on Elm Street.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-9",
+    "date": 1911,
+    "question": "Sweden becomes the first country in the world with a state mandated film censorship.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-10",
+    "date": 1985,
+    "question": "The two-venue benefit concert and music-based fundraising initiative Live Aid aired around the world.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-11",
+    "date": 1962,
+    "question": "The iconic Marilyn Monroe passes away.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-12",
+    "date": 1970,
+    "question": "Both Janis Joplin and Jimi Hendrix passes away.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-13",
+    "date": 1993,
+    "question": "Beavis and Butt-head premieres on MTV.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-14",
+    "date": 1908,
+    "question": "The literary adventures of Robin Hood is adapted to film for the very first time.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "SB-15",
+    "date": 1981,
+    "question": "Video Killed the Radio Star becomes the first music video to air on MTV.",
+    "category": "Showbiz"
+  },
+  {
+    "question_id": "MS-1",
+    "date": 1985,
+    "question": "https://open.spotify.com/track/2WfaOiMkCvy7F5fcp2zZ8L?si=Oe6j3DsyR96a-lx8Mnfx2A",
+    "category": "Music & Soundbites",
+    "title": "Music Track (1985)"
+  },
+  {
+    "question_id": "MS-2",
+    "date": 1967,
+    "question": "https://open.spotify.com/track/4vpeKl0vMGdAXpZiQB2Dtd?si=g5qkbY7WQi-HEDpeWQMI5g",
+    "category": "Music & Soundbites",
+    "title": "Music Track (1967)"
+  },
+  {
+    "question_id": "MS-3",
+    "date": 2013,
+    "question": "https://open.spotify.com/track/69kOkLUCkxIZYexIgSG8rq?si=Yt7-PWDQSaqovHh6QrywJg",
+    "category": "Music & Soundbites",
+    "title": "Music Track (2013)"
+  },
+  {
+    "question_id": "MS-4",
+    "date": 1991,
+    "question": "https://open.spotify.com/track/4CeeEOM32jQcH3eN9Q2dGj?si=1IKQ9yw3R_GxDPnzynMY7A",
+    "category": "Music & Soundbites",
+    "title": "Music Track (1991)"
+  },
+  {
+    "question_id": "MS-5",
+    "date": 1801,
+    "question": "https://open.spotify.com/track/3ilnnpmMMpp863r2X0EHQK?si=oSOYL3iUQ8egbzBhV6DAJQ",
+    "category": "Music & Soundbites",
+    "title": "Music Track (1801)"
+  },
+  {
+    "question_id": "MS-6",
+    "date": 1974,
+    "question": "https://open.spotify.com/track/6Ac4NVYYl2U73QiTt11ZKd?si=JCbkAqozTMG1f7pB1y2yjA",
+    "category": "Music & Soundbites",
+    "title": "Music Track (1974)"
+  },
+  {
+    "question_id": "MS-7",
+    "date": 1962,
+    "question": "https://open.spotify.com/track/5gBWGTO2prExy9yVwhUbOU?si=_5dD6t5sSSOLeCyzwgD2pg",
+    "category": "Music & Soundbites",
+    "title": "Music Track (1962)"
+  },
+  {
+    "question_id": "MS-8",
+    "date": 2009,
+    "question": "https://open.spotify.com/track/2F79HavLHwJlfvvJOkkIQD?si=hJC56bEKRsWAKhA8v1pCRQ",
+    "category": "Music & Soundbites",
+    "title": "Music Track (2009)"
+  },
+  {
+    "question_id": "MS-9",
+    "date": 2024,
+    "question": "https://open.spotify.com/track/5RX8T3EoTuXcybAxe6oPAw?si=xGgEX2XkT0-0BoNI2HQmHQ",
+    "category": "Music & Soundbites",
+    "title": "Music Track (2024)"
+  },
+  {
+    "question_id": "MS-10",
+    "date": 1931,
+    "question": "https://open.spotify.com/track/3zlqUu9yK7fsefGsSAa86e?si=SKyOTrMtREWzXhZwVDyPmA",
+    "category": "Music & Soundbites",
+    "title": "Music Track (1931)"
+  },
+  {
+    "question_id": "MS-11",
+    "date": 1994,
+    "question": "https://open.spotify.com/track/3YKptz29AsOlm7WAVnztBh?si=BF6kiqMoSmCXJjJcrdN4aQ",
+    "category": "Music & Soundbites",
+    "title": "Music Track (1994)"
+  },
+  {
+    "question_id": "MS-12",
+    "date": 2010,
+    "question": "https://open.spotify.com/track/0BfySEp4LJTvZfxxlfaaOU?si=046NmfemTROhYStsZH3LaA",
+    "category": "Music & Soundbites",
+    "title": "Music Track (2010)"
+  },
+  {
+    "question_id": "AL-1",
+    "date": 1888,
+    "question": "The artist Vincent van Gogh slices off his ear.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-2",
+    "date": 1300,
+    "question": "Dante begins his descent into hell and purgatory.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-3",
+    "date": 1893,
+    "question": "The artist Edvard Munch finishes “The Scream”, which becomes one of his most prolific paintings.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-4",
+    "date": 1952,
+    "question": "Ian Fleming writes the first book about international spy James Bond.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-5",
+    "date": 1920,
+    "question": "Agatha Christie has her debut.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-6",
+    "date": 1476,
+    "question": "Vlad III, famous for being the inspiration for Dracula, dies.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-7",
+    "date": 1503,
+    "question": "Leonardo da Vinci finishes The Mona Lisa.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-8",
+    "date": 1812,
+    "question": "The Brothers Grimm publish a collection of their fairy tales for the first time.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-9",
+    "date": 1841,
+    "question": "The Murders in the Rue Morgue by Edgar Allan Poe, a predecessor to the detective fiction genre, was released.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-10",
+    "date": 1892,
+    "question": "The first issue of the American fashion magazine Vogue is published.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-11",
+    "date": 1948,
+    "question": "George Orwell releases his dystopian novel and cautionary tale Nineteen Eighty-Four.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-12",
+    "date": 1937,
+    "question": "Tolkien's book about Bilbo, The Hobbit, is published in England.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "AL-13",
+    "date": 1885,
+    "question": "Oscar Wilde is sentenced to two years in prison for “gross indecency”.",
+    "category": "Art & Literature"
+  },
+  {
+    "question_id": "ST-1",
+    "date": 1967,
+    "question": "Dr. Christiaan Barnard performs the first successful heart transplant.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-2",
+    "date": 1990,
+    "question": "The Hubble Space Telescope is successfully launched into orbit.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-3",
+    "date": 1911,
+    "question": "Marie Curie is awarded the Nobel Prize in Chemistry following her discovery of radium and polonium.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-4",
+    "date": 1991,
+    "question": "The first website goes live on the World Wide Web.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-5",
+    "date": 1996,
+    "question": "Dolly the sheep is born, making her the first mammal to be cloned from an adult somatic cell.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-6",
+    "date": 1687,
+    "question": "Isaac Newton publishes Philosophiæ Naturalis Principia Mathematica, laying the groundwork for classical mechanics.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-7",
+    "date": 1928,
+    "question": "An accident in Alexander Fleming’s lab causes him to discover penicillin.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-8",
+    "date": 1949,
+    "question": "Egas Moniz, who introduced the world to the lobotomy, is awarded the Nobel Prize in Medicine.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-9",
+    "date": 2007,
+    "question": "Apple introduces the first iPhone.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-10",
+    "date": 1610,
+    "question": "Galileo Galilei turns his telescope to the night sky for the first time and observes Jupiter’s moons.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-11",
+    "date": 1957,
+    "question": "Russia beats USA to space by successfully launching their satellite Sputnik.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-12",
+    "date": 1968,
+    "question": "Douglas Engelbart proudly presents his new invention; the computer mouse.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-13",
+    "date": 1984,
+    "question": "Mobira Talkman, the clunky predecessor to the modern mobile phone, is launched by Nokia.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-14",
+    "date": 1925,
+    "question": "A norwegian carpenter invents the cheese slicer (aka osthyvel).",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "ST-15",
+    "date": 1610,
+    "question": "The first well-documented caesarean section was performed on a live woman.",
+    "category": "Science & Technology"
+  },
+  {
+    "question_id": "MH-1",
+    "date": 1582,
+    "question": "William Shakespeare gets married to Anne Hathaway.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-2",
+    "date": 1939,
+    "question": "Two years after disappearing during a solo flight across the Pacific Ocean, Amelia Earhart is declared dead.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-3",
+    "date": 1973,
+    "question": "Hostages during a bank robbery start sympathizing with their captor Janne Olsson, generating the term “Stockholm Syndrome”.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-4",
+    "date": 1990,
+    "question": "Nelson Mandela is freed from prison after 27 years.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-5",
+    "date": 1770,
+    "question": "Marie Antoinette marries Ludvig XVI.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-6",
+    "date": 1980,
+    "question": "John Lennon is fatally shot outside of his home by Mark Chapman.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-7",
+    "date": 1762,
+    "question": "Six-year-old Mozart performs for the Austrian Emperor.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-8",
+    "date": 1324,
+    "question": "Famed explorer Marco Polo dies.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-9",
+    "date": 1888,
+    "question": "Jack the Ripper murders at least five women.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-10",
+    "date": 1970,
+    "question": "Divorce becomes legal in Italy.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-11",
+    "date": 1961,
+    "question": "The construction of the Berlin wall begins.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-12",
+    "date": 79,
+    "question": "Pompei is buried as a result of the volcano Vesuvius erupting.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-13",
+    "date": 622,
+    "question": "The beginning of the Islamic Calendar.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-14",
+    "date": 2000,
+    "question": "The meaning behind the abbreviation “Y2K”.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-15",
+    "date": 565,
+    "question": "The first documented sighting of the Loch Ness Monster.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-16",
+    "date": 1907,
+    "question": "The first gas station in the US is built.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-17",
+    "date": 2005,
+    "question": "The video hosting website Youtube is launched.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-18",
+    "date": 1477,
+    "question": "The Nordics’ first university is founded in Uppsala.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-19",
+    "date": 1986,
+    "question": "The No. 4 reactor of the Chernobyl Nuclear Power Plant explodes.",
+    "category": "Moments in History"
+  },
+  {
+    "question_id": "MH-20",
+    "date": 1933,
+    "question": "Alcohol is no longer illegal to imbibe or sell, as the prohibition era in the US finally ends.",
+    "category": "Moments in History"
+  }
+]

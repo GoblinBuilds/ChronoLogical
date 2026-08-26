@@ -22,26 +22,8 @@ def load_questions(table_name='questions'):
         list: A list of questions from the database.
     """
     try:
-        conn = psycopg2.connect(
-            dbname=os.environ.get("DB_NAME"),
-            user=os.environ.get("DB_USER"),
-            password=os.environ.get("DB_PASSWORD"),
-            host=os.environ.get("DB_HOST"),
-            port=os.environ.get("DB_PORT")
-        )
-        cursor = conn.cursor()
-        # Dynamically query the specified table
-        query = f"SELECT question_id, date, question, category FROM {table_name}"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        cursor.close()
-        conn.close()
-        # Convert rows to a list of dictionaries
-        questions = [
-            {"question_id": row[0], "date": row[1], "question": row[2], "category": row[3]}
-            for row in rows
-        ]
-        return questions
+        with open('questions.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
     except Exception as e:
         print(f"Error: {e}")
         return []
